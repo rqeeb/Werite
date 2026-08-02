@@ -1,9 +1,10 @@
 import "./index.css";
+import { HeadingTextArea } from "./components/headingTextArea.tsx";
 
 export function App() {
   return (
     <div>
-      hi there!
+      <HeadingTextArea/>
     </div>
   );
 }
