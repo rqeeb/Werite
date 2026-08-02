@@ -1,0 +1,7 @@
+textarea {
+    background-color: black;
+    border: none;
+    color: white;
+    resize: none;
+    outline: none;
+}
