@@ -1,9 +1,16 @@
+
+
 export function RightNavBar() {
-  return <div style={{border:"2px solid red",display:"flex",gap:110}}>
+
+  function clicekdk(){
+    console.log("HELLO")
+  }
+
+  return <div style={{border:"2px solid red",display:"flex",gap:"20px"}}>
     <div>
-      ONE
+      <button style={{backgroundColor:"transparent",color:"white"}}>HELLO</button>
     </div>
-    <div>
+    <div onClick={clicekdk} style={{cursor:"pointer"}}>
       TWO
     </div>
     <div>

@@ -2,5 +2,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10%;
+  height: 55px;
+  
+  
+  padding: 0 99px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+
 }
+
+
+
