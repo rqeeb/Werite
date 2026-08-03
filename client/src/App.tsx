@@ -1,4 +1,4 @@
-import { NavBar } from "./components/NavBar";
+import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
 
