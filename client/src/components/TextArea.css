@@ -9,8 +9,9 @@
   display: flex;
   flex-direction: column;
 
-  /* border-left: 2px solid grey;
-  border-right: 2px solid grey; */
+  /* /* border-left: 2px solid grey; */
+
+  border-right: 2px dotted grey; 
 
 
 }
@@ -18,7 +19,7 @@
 #HeadingTextArea {
   width: 100%;
   background: transparent;
-  border: none;
+  border:none;
   outline: none;
 
   color: white;
@@ -32,7 +33,7 @@
 }
 
 #ParagraphTextArea {
-  flex: 1;
+  flex: 100;
 
   width: 100%;
 
@@ -46,5 +47,5 @@
   
   
   color: white;
-  font-size: 20px;
+  font-size: 30px;
 }

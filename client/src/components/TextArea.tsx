@@ -6,7 +6,7 @@ export function TextArea() {
   return (
     <div id="TextAreaContainer" >
       <HeadingTextArea />
-      <ParagraphTextArea />
+      <ParagraphTextArea  />
     </div>
   );
 }
