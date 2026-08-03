@@ -1,12 +1,11 @@
+import { TextArea } from "./components/TextArea";
 import "./index.css";
-import { HeadingTextArea } from "./components/HeadingTextArea.tsx";
+
 
 export function App() {
-  return (
-    <div className="container" style={{marginLeft:"70px"}}>
-      <HeadingTextArea />
-    </div>
-  );
+  return <div>
+    <TextArea/>
+  </div>;
 }
 
 export default App;

@@ -4,4 +4,6 @@ textarea {
     color: white;
     resize: none;
     outline: none;
+    font-size: 30px;
+    font-weight: bold;
 }

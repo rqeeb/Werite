@@ -8,12 +8,3 @@ body {
     color: white;
 }
 
-.container {
-    padding-top: 80px;  
-    padding-left: 10%;  
-    padding-right: 10%;  
-
-  
-    max-width: 800px;    
-    box-sizing: border-box; 
-}
