@@ -1,5 +1,11 @@
-export function ParagraphTextArea(){
-    return <div style={{border:"2px dotted red"}}>
-        <textarea name="" id="">Pargraph text area</textarea>
-    </div>
+export function ParagraphTextArea() {
+  return (
+    <>
+      <textarea
+        name="ParagraphTextArea"
+        id="ParagraphTextArea"
+        placeholder="Type it out loud.."
+      ></textarea>
+    </>
+  );
 }
