@@ -3,11 +3,6 @@ export function LeftNavBar() {
     <div style={{ border: "2px solid white", display: "flex", gap: "20px" }}>
       <div>ONE</div>
       <div>TWO</div>
-      <div>THREE</div>
-      <div>THREE</div>
-      <div>THREE</div>
-      <div>THREE</div>
-      <div>THREE</div>
     </div>
   );
 }

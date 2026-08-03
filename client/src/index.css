@@ -13,4 +13,6 @@ body {
 ::selection {
     background-color: grey;
 }
-
+::-moz-selection {
+    background-color: grey;
+}

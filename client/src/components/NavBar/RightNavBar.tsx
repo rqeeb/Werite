@@ -11,10 +11,10 @@ export function RightNavBar() {
       <button style={{backgroundColor:"transparent",color:"white"}}>HELLO</button>
     </div>
     <div onClick={clicekdk} style={{cursor:"pointer"}}>
-      TWO
+      THREE
     </div>
     <div>
-      THREE
+      FOUR
     </div>
   </div>;
 }
