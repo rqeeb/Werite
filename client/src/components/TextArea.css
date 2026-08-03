@@ -1,20 +1,29 @@
 #TextAreaContainer {
   max-width: 850px;
-  margin: 80px auto;
+  margin: 80px auto 0;
   padding: 0 24px;
+
+  
+
+  border-left: 2px solid grey;
+  border-right: 2px solid grey;
+  
 }
 
 #HeadingTextArea {
   width: 100%;
   background: transparent;
-  
   border: none;
-  color: white;
-  resize: none;
   outline: none;
-  font-size: 30px;
+  
+  color: white;
+  font-size: 40px;
   font-weight: bold;
-  margin-bottom: 40px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  margin-bottom: 3%;
 }
 
 #ParagraphTextArea {
