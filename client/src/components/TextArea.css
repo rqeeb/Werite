@@ -31,6 +31,7 @@
   margin-bottom: 6%;
 
   color:inherit;
+  transition: font-size 0.3s ease;
 }
 
 #ParagraphTextArea {
@@ -48,6 +49,7 @@
   scrollbar-color: #666 transparent;
 
   color:inherit;
+  transition: font-size 0.3s ease;
   /* font-size: 30px; */
 }
 

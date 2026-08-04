@@ -6,13 +6,15 @@ import "./index.css";
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(30);
-  const [bgColor, setBgColor] = useState("rgb(10, 10, 10)");
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    document.body.style.backgroundColor = bgColor;
-    document.body.style.color =
-      bgColor === "rgb(10, 10, 10)" ? "white" : "black";
-  }, [bgColor]);
+    document.body.style.backgroundColor = isDark
+      ? "rgb(10, 10, 10)"
+      : "rgb(242, 239, 233)";
+
+    document.body.style.color = isDark ? "white" : "black";
+  }, [isDark]);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
@@ -25,11 +27,7 @@ export function App() {
   }
 
   function toggleTheme() {
-    if (bgColor == "rgb(10, 10, 10)") {
-      setBgColor("rgb(242, 239, 233)");
-    } else {
-      setBgColor("rgb(10, 10, 10)");
-    }
+    setIsDark((prev: boolean) => !prev);
   }
 
   return (

@@ -6,10 +6,7 @@
     line-height: 1.8;
 }
 
-body {
-    /* background-color: rgb(10, 10, 10) ; */
-    color: white;
-}
+
 
 ::selection {
     background-color: grey;
