@@ -14,9 +14,6 @@ type ILeftNavBar = {
 
 export function LeftNavBar({onZoomIn,onZoomOut,currentFontSize,toggleTheme}:ILeftNavBar) {
   
-  function changeBg() {
-    
-  }
 
   return (
     <div className="leftNavBar">

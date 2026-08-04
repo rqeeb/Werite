@@ -10,6 +10,8 @@ export function App() {
 
   useEffect(() => {
     document.body.style.backgroundColor = bgColor;
+    document.body.style.color =
+      bgColor === "rgb(10, 10, 10)" ? "white" : "black";
   }, [bgColor]);
 
   function zoomIn() {
@@ -23,11 +25,10 @@ export function App() {
   }
 
   function toggleTheme() {
-    if(bgColor == "rgb(10, 10, 10)"){
+    if (bgColor == "rgb(10, 10, 10)") {
       setBgColor("rgb(242, 239, 233)");
-    }
-    else{
-       setBgColor("rgb(10, 10, 10)");
+    } else {
+      setBgColor("rgb(10, 10, 10)");
     }
   }
 

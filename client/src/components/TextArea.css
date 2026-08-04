@@ -20,14 +20,17 @@
   border: none;
   outline: none;
 
-  color: white;
+  
   /* font-size: 40px; */
   font-weight: bold;
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
 
+
   margin-bottom: 6%;
+
+  color:inherit;
 }
 
 #ParagraphTextArea {
@@ -44,7 +47,7 @@
   scrollbar-width: thin;
   scrollbar-color: #666 transparent;
 
-  color: white;
+  color:inherit;
   /* font-size: 30px; */
 }
 
