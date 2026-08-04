@@ -2,10 +2,16 @@ import { LeftNavBar } from "./LeftNavBar";
 import { RightNavBar } from "./RightNavBar";
 import "./NavBar.css"
 
-export function NavBar() {
+type INavBar = {
+  onZoomIn: ()=>void,
+  onZoomOut: ()=>void,
+  currentFontSize:number
+}
+
+export function NavBar({onZoomIn,onZoomOut,currentFontSize}:INavBar) {
   return (
     <div className="navBarContainer">
-      <LeftNavBar/>
+      <LeftNavBar onZoomIn={onZoomIn} onZoomOut={onZoomOut} currentFontSize={currentFontSize}  />
       <RightNavBar/>
     </div>
   );

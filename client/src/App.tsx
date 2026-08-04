@@ -1,13 +1,35 @@
+import { useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
 
-
 export function App() {
-  return <div>
-    <TextArea/>
-    <NavBar/>
-  </div>;
+  const [headingFontSize, setHeadingFontSize] = useState(40);
+  const [paragraphFontSize, setParagraphFontSize] = useState(30);
+
+  function zoomIn() {
+    setHeadingFontSize((prev) => Math.min(60, prev + 2));
+    setParagraphFontSize((prev) => Math.min(50, prev + 2));
+  }
+
+  function zoomOut() {
+    setHeadingFontSize((prev) => Math.max(24, prev - 2));
+    setParagraphFontSize((prev) => Math.max(14, prev - 2));
+  }
+
+  return (
+    <div>
+      <TextArea
+        headingFontSize={headingFontSize}
+        paragraphFontSize={paragraphFontSize}
+      />
+      <NavBar
+        onZoomIn={zoomIn}
+        onZoomOut={zoomOut}
+        currentFontSize={paragraphFontSize}
+      />
+    </div>
+  );
 }
 
 export default App;

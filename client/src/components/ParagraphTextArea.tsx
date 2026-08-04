@@ -1,7 +1,14 @@
-export function ParagraphTextArea() {
+
+type IParagraphTextArea = {
+  paragraphFontSize:number
+}
+
+
+export function ParagraphTextArea({paragraphFontSize}:IParagraphTextArea) {
   return (
     <>
       <textarea
+        style={{fontSize:`${paragraphFontSize}px`}}
         spellCheck={false}
         name="ParagraphTextArea"
         id="ParagraphTextArea"

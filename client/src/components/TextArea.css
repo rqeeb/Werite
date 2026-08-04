@@ -23,7 +23,7 @@
   outline: none;
 
   color: white;
-  font-size: 40px;
+  /* font-size: 40px; */
   font-weight: bold;
   white-space: nowrap;
   overflow-x: auto;
@@ -47,5 +47,5 @@
   
   
   color: white;
-  font-size: 30px;
+  /* font-size: 30px; */
 }

@@ -6,7 +6,7 @@ type INavBarButton = {
 export function NavBarButton({ icon, onClick }: INavBarButton) {
   return (
     <div onClick={onClick} className="navBarButton">
-      {icon} 
+      {icon}
     </div>
   );
 }

@@ -2,34 +2,40 @@ import { Sun, ZoomIn, ZoomOut } from "lucide-react";
 import { NavBarButton } from "./NavBarButton";
 import { useState } from "react";
 
-export function LeftNavBar() {
 
-  const [size,setSize] = useState(20);
+type ILeftNavBar = {
+  onZoomIn: ()=>void,
+  onZoomOut: ()=>void
+  currentFontSize:number
+}
 
 
-  function zoomIn() {
-    alert("zoomedIn");
-  }
 
-  function zoomOut() {
-    alert("zoomedIn");
-  }
+export function LeftNavBar({onZoomIn,onZoomOut,currentFontSize}:ILeftNavBar) {
+  
+
+  // function zoomIn() {
+  //   setcurrentFontSize((prev) => Math.min(prev + 2, 32));
+  // }
+
+  // function zoomOut() {
+  //   alert("zoomedIn");
+  // }
+
+  function changeBg() {}
 
   return (
     <div className="leftNavBar">
       <NavBarButton
         icon={<ZoomIn size={22} strokeWidth={2} />}
-        onClick={zoomIn}
+        onClick={onZoomIn}
       />
 
-
-      <div >
-        {size}px
-      </div>
+      <div>{currentFontSize}px</div>
 
       <NavBarButton
         icon={<ZoomOut size={22} strokeWidth={2} />}
-        onClick={zoomOut}
+        onClick={onZoomOut}
       />
       <div
         style={{
@@ -40,7 +46,7 @@ export function LeftNavBar() {
       />
       <NavBarButton
         icon={<Sun size={22} strokeWidth={2} />}
-        onClick={zoomOut}
+        onClick={changeBg}
       />
     </div>
   );
