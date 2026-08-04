@@ -1,6 +1,6 @@
 import { Sun, ZoomIn, ZoomOut } from "lucide-react";
 import { NavBarButton } from "./NavBarButton";
-import { useState } from "react";
+
 
 
 type ILeftNavBar = {
