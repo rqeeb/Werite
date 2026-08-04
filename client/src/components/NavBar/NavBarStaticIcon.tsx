@@ -1,11 +1,10 @@
 type INavBarStaticIcon = {
   icon: React.ReactNode;
-  onClick: () => void;
 };
 
-export function NavBarStaticIcon({ icon, onClick }: INavBarStaticIcon) {
+export function NavBarStaticIcon({ icon}: INavBarStaticIcon) {
   return (
-    <div onClick={onClick} className="navBarStaticIcon" style={{color:"grey"}}>
+    <div className="navBarStaticIcon" style={{color:"grey"}}>
       {icon}
     </div>
   );
