@@ -1,5 +1,3 @@
-import { ZoomIn } from "lucide-react";
-
 type INavBarButton = {
   icon: React.ReactNode;
   onClick: () => void;
@@ -7,8 +5,8 @@ type INavBarButton = {
 
 export function NavBarButton({ icon, onClick }: INavBarButton) {
   return (
-    <div onClick={onClick} className="NavBarButton">
-      {icon}
+    <div onClick={onClick} className="navBarButton">
+      {icon} 
     </div>
   );
 }

@@ -1,10 +1,9 @@
-.NavBarContainer {
+.navBarContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 55px;
-  
-  
+
   padding: 0 99px;
   width: 100%;
   position: fixed;
@@ -15,14 +14,28 @@
   border-top: 1px solid rgb(48 48 48);
 }
 
-.NavBarButton {
+.leftNavBar {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightNavBar {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBarButton {
   display: flex;
   align-items: center;
   justify-content: center;
   color: grey;
 
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
 
   border: none;
   background: transparent;
@@ -30,16 +43,8 @@
 
   cursor: pointer;
   transition: background-color 0.2s ease;
-  
 }
 
-.NavBarButton:hover{
-  background-color: rgba(255,255,255,0.08);
+.navBarButton:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
-
-.LeftNavBar {
-  display: flex;
-  gap: 20px
-}
-
-

@@ -4,7 +4,7 @@ import "./NavBar.css"
 
 export function NavBar() {
   return (
-    <div className="NavBarContainer">
+    <div className="navBarContainer">
       <LeftNavBar/>
       <RightNavBar/>
     </div>
