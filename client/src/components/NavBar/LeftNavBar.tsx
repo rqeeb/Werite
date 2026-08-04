@@ -7,13 +7,16 @@ type ILeftNavBar = {
   onZoomIn: ()=>void,
   onZoomOut: ()=>void
   currentFontSize:number
+  toggleTheme:()=>void,
 }
 
 
 
-export function LeftNavBar({onZoomIn,onZoomOut,currentFontSize}:ILeftNavBar) {
+export function LeftNavBar({onZoomIn,onZoomOut,currentFontSize,toggleTheme}:ILeftNavBar) {
   
-  function changeBg() {}
+  function changeBg() {
+    
+  }
 
   return (
     <div className="leftNavBar">
@@ -37,7 +40,7 @@ export function LeftNavBar({onZoomIn,onZoomOut,currentFontSize}:ILeftNavBar) {
       />
       <NavBarButton
         icon={<Sun size={22} strokeWidth={2} />}
-        onClick={changeBg}
+        onClick={toggleTheme}
       />
     </div>
   );
