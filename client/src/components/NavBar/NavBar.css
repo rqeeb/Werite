@@ -12,8 +12,34 @@
   left: 0;
   right: 0;
 
-  border-top: 1px solid rgb(143, 143, 143);
+  border-top: 1px solid rgb(48 48 48);
 }
 
+.NavBarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+}
+
+.NavBarButton:hover{
+  background-color: rgba(255,255,255,0.08);
+}
+
+.LeftNavBar {
+  display: flex;
+  gap: 20px
+}
 
 

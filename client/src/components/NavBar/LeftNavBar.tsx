@@ -1,8 +1,16 @@
+import { ZoomIn } from "lucide-react";
+import { NavBarButton } from "./NavBarButton";
+
 export function LeftNavBar() {
+  function zoomIn() {
+    alert("zoomedIn");
+  }
+
   return (
-    <div style={{ border: "2px solid white", display: "flex", gap: "20px" }}>
-      <div>ONE</div>
-      <div>TWO</div>
+    <div className="LeftNavBar">
+      <NavBarButton icon={<ZoomIn />} onClick={zoomIn} />
+      <NavBarButton icon={<ZoomIn />} onClick={zoomIn} />
+      <NavBarButton icon={<ZoomIn />} onClick={zoomIn} />
     </div>
   );
 }
