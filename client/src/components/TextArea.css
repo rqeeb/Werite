@@ -1,6 +1,6 @@
 #TextAreaContainer {
   max-width: 950px;
-  margin: 80px auto 0;
+  margin: 40px auto 0;
   padding: 0 24px;
 
   height: calc(100vh - 80px - 60px);

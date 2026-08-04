@@ -13,30 +13,21 @@ type ILeftNavBar = {
 
 export function LeftNavBar({onZoomIn,onZoomOut,currentFontSize}:ILeftNavBar) {
   
-
-  // function zoomIn() {
-  //   setcurrentFontSize((prev) => Math.min(prev + 2, 32));
-  // }
-
-  // function zoomOut() {
-  //   alert("zoomedIn");
-  // }
-
   function changeBg() {}
 
   return (
     <div className="leftNavBar">
-      <NavBarButton
-        icon={<ZoomIn size={22} strokeWidth={2} />}
-        onClick={onZoomIn}
-      />
-
-      <div>{currentFontSize}px</div>
 
       <NavBarButton
         icon={<ZoomOut size={22} strokeWidth={2} />}
         onClick={onZoomOut}
       />
+      <div>{currentFontSize}px</div>
+      <NavBarButton
+        icon={<ZoomIn size={22} strokeWidth={2} />}
+        onClick={onZoomIn}
+      />
+
       <div
         style={{
           width: "1px",
