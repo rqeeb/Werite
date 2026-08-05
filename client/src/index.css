@@ -9,10 +9,10 @@
 
 
 
-::selection {
+body::selection {
     background-color: grey;
 }
-::-moz-selection {
+body::-moz-selection {
     background-color: grey;
 }
 

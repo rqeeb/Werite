@@ -14,6 +14,11 @@
   border-top: 1px solid rgb(48 48 48);
   color: grey;
 }
+.navBarContainer {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 .leftNavBar {
   display: flex;
@@ -57,7 +62,6 @@
   border: none;
   background: transparent;
   border-radius: 8px;
-
 }
 
 .navBarButton:hover {
