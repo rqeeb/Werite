@@ -31,7 +31,7 @@ export function LeftNavBar({onZoomIn,onZoomOut,currentFontSize,toggleTheme}:ILef
       <div
         style={{
           width: "1px",
-          height: "34px",
+          height: "28px",
           backgroundColor: "grey",
         }}
       />

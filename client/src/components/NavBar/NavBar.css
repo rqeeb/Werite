@@ -29,7 +29,7 @@
 
 .rightNavBar {
   display: flex;
-  /* gap: 1px; */
+  gap: 18px;
   justify-content: center;
   align-items: center;
 }
