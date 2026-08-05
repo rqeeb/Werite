@@ -12,6 +12,7 @@
   right: 0;
 
   border-top: 1px solid rgb(48 48 48);
+  color: grey;
 }
 
 .leftNavBar {
@@ -23,7 +24,7 @@
 
 .rightNavBar {
   display: flex;
-  gap: 18px;
+  /* gap: 1px; */
   justify-content: center;
   align-items: center;
 }

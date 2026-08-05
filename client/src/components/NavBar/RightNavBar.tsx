@@ -16,7 +16,7 @@ export function RightNavBar() {
 
   return (
     <div className="rightNavBar">
-      <NavBarStaticIcon icon={<Clock />} />
+      <NavBarStaticIcon icon={<Clock size={22} strokeWidth={2} />} />
       <div>{time.toLocaleTimeString()}</div>
     </div>
   );
