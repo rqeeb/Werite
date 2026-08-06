@@ -7,8 +7,8 @@ export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(30);
   const [isDark, setIsDark] = useState(true);
-  const [heading,setHeading] = useState("");
-  const [paragraph,setParagraph] = useState("");
+  const [heading, setHeading] = useState("");
+  const [paragraph, setParagraph] = useState("");
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -32,6 +32,10 @@ export function App() {
     setIsDark((prev: boolean) => !prev);
   }
 
+  function exportMD(){
+    console.log("HELLO FROM exportMD")
+  }
+
   return (
     <div>
       <TextArea
@@ -41,13 +45,13 @@ export function App() {
         setHeading={setHeading}
         paragraph={paragraph}
         setParagraph={setParagraph}
-        
       />
       <NavBar
         onZoomIn={zoomIn}
         onZoomOut={zoomOut}
         currentFontSize={paragraphFontSize}
         toggleTheme={toggleTheme}
+        exportMD={exportMD}
       />
     </div>
   );

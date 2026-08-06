@@ -7,6 +7,7 @@ type INavBar = {
   onZoomOut: () => void;
   currentFontSize: number;
   toggleTheme: () => void;
+  exportMD:()=>void;
 };
 
 export function NavBar({
@@ -14,6 +15,7 @@ export function NavBar({
   onZoomOut,
   currentFontSize,
   toggleTheme,
+  exportMD
 }: INavBar) {
   return (
     <div className="navBarContainer">
@@ -23,7 +25,9 @@ export function NavBar({
         currentFontSize={currentFontSize}
         toggleTheme={toggleTheme}
       />
-      <RightNavBar />
+      <RightNavBar 
+      exportMD={exportMD}
+       />
     </div>
   );
 }

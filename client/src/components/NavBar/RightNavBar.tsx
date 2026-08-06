@@ -3,7 +3,12 @@ import { NavBarButton } from "./NavBarButton";
 import { NavBarStaticIcon } from "./NavBarStaticIcon";
 import { useEffect, useState } from "react";
 
-export function RightNavBar() {
+type IRightNavBar = {
+  exportMD:()=>void;
+}
+
+
+export function RightNavBar({exportMD}:IRightNavBar) {
   const [time, setTime] = useState(new Date());
   const [fullScreen, setFullScreen] = useState(false);
 
@@ -39,10 +44,6 @@ export function RightNavBar() {
     }
   }
 
-  function exportMD(){
-    
-  }
-
   return (
     <div className="rightNavBar">
       <div
@@ -64,10 +65,10 @@ export function RightNavBar() {
         }}
       />
 
-
-      <NavBarButton icon={
-        <Download size={22} strokeWidth={2} />
-      } onClick={exportMD} />
+      <NavBarButton
+        icon={<Download size={22} strokeWidth={2} />}
+        onClick={exportMD}
+      />
 
       <NavBarButton
         icon={

@@ -13,9 +13,8 @@ export function HeadingTextArea({
     <div className="HeadingTextAreaContainer">
       <input
         value={heading}
-        onChange={(z) => {
-          setHeading(z.target.value);
-          console.log(z.target.value);
+        onChange={(e) => {
+          setHeading(e.target.value);
         }}
         spellCheck={false}
         name="HeadingTextArea"

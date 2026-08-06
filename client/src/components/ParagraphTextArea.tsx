@@ -13,8 +13,8 @@ export function ParagraphTextArea({
     <>
       <textarea
         value={paragraph}
-        onChange={(z) => {
-          setParagraph(z.target.value);
+        onChange={(e) => {
+          setParagraph(e.target.value);
         }}
         style={{ fontSize: `${paragraphFontSize}px` }}
         spellCheck={false}
