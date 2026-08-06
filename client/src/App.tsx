@@ -40,12 +40,20 @@ export function App() {
     });
 
     const url = URL.createObjectURL(blob);
-
     const link = document.createElement("a");
-    link.href = url;
 
+    const fileName = heading.trim().replace(/[<>:"/\\|?*]/g, "") || "Untitled";
+
+    link.href = url;
+    link.download = `${fileName}.md`;
+
+    document.body.appendChild(link);
     link.click();
-    URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 100);
   }
 
   return (
