@@ -32,8 +32,20 @@ export function App() {
     setIsDark((prev: boolean) => !prev);
   }
 
-  function exportMD(){
-    console.log("HELLO FROM exportMD")
+  function exportMD() {
+    const markDown = `# ${heading}\n${paragraph}`;
+
+    const blob = new Blob([markDown], {
+      type: "text/markdown",
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+
+    link.click();
+    URL.revokeObjectURL(url);
   }
 
   return (
