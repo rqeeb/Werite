@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
-import logoWhite from "./assets/WERITE-LOGO-WHITE.svg";
-import logoBlack from "./assets/WERITE-LOGO-BLACK.svg";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(22);
   const [isDark, setIsDark] = useState(true);
-  const [heading, setHeading] = useState("");
-  const [paragraph, setParagraph] = useState("");
+  const [heading, setHeading] = useState(() => {
+    return localStorage.getItem("heading") || "";
+  });
+  const [paragraph, setParagraph] = useState(() => {
+    return localStorage.getItem("paragraph") || "";
+  });
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -19,6 +21,11 @@ export function App() {
 
     document.body.style.color = isDark ? "white" : "black";
   }, [isDark]);
+
+  useEffect(() => {
+    localStorage.setItem("heading", heading);
+    localStorage.setItem("paragraph", paragraph);
+  }, [heading, paragraph]);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
@@ -59,7 +66,7 @@ export function App() {
   }
 
   return (
-    <div>     
+    <div>
       <TextArea
         headingFontSize={headingFontSize}
         paragraphFontSize={paragraphFontSize}
