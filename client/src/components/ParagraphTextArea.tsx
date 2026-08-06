@@ -12,6 +12,8 @@ export function ParagraphTextArea({
   return (
     <>
       <textarea
+        autoComplete="off"
+        autoCorrect="off"
         value={paragraph}
         onChange={(e) => {
           setParagraph(e.target.value);

@@ -12,6 +12,8 @@ export function HeadingTextArea({
   return (
     <div className="HeadingTextAreaContainer">
       <input
+        autoComplete="off"
+        autoCorrect="off"
         value={heading}
         onChange={(e) => {
           setHeading(e.target.value);
