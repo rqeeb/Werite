@@ -1,4 +1,4 @@
-import { Clock, Expand, Shrink } from "lucide-react";
+import { Clock, Download, Maximize2, Minimize2 } from "lucide-react";
 import { NavBarButton } from "./NavBarButton";
 import { NavBarStaticIcon } from "./NavBarStaticIcon";
 import { useEffect, useState } from "react";
@@ -39,6 +39,10 @@ export function RightNavBar() {
     }
   }
 
+  function exportMD(){
+    
+  }
+
   return (
     <div className="rightNavBar">
       <div
@@ -60,12 +64,17 @@ export function RightNavBar() {
         }}
       />
 
+
+      <NavBarButton icon={
+        <Download size={22} strokeWidth={2} />
+      } onClick={exportMD} />
+
       <NavBarButton
         icon={
           fullScreen ? (
-            <Shrink size={22} strokeWidth={2} />
+            <Minimize2 size={20} strokeWidth={2} />
           ) : (
-            <Expand size={22} strokeWidth={2} />
+            <Maximize2 size={20} strokeWidth={2} />
           )
         }
         onClick={toggleFullScreen}

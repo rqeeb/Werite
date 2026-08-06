@@ -7,6 +7,8 @@ export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(30);
   const [isDark, setIsDark] = useState(true);
+  const [heading,setHeading] = useState("");
+  const [paragraph,setParagraph] = useState("");
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark

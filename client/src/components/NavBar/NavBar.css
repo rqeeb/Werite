@@ -22,14 +22,14 @@
 
 .leftNavBar {
   display: flex;
-  gap: 18px;
+  gap: 12px;
   justify-content: center;
   align-items: center;
 }
 
 .rightNavBar {
   display: flex;
-  gap: 18px;
+  gap: 12px;
   justify-content: center;
   align-items: center;
 }
@@ -40,8 +40,8 @@
   justify-content: center;
   color: grey;
 
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
 
   border: none;
   background: transparent;
