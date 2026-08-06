@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
+import logoWhite from "./assets/WERITE-LOGO-WHITE.svg";
+import logoBlack from "./assets/WERITE-LOGO-BLACK.svg";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
-  const [paragraphFontSize, setParagraphFontSize] = useState(30);
+  const [paragraphFontSize, setParagraphFontSize] = useState(22);
   const [isDark, setIsDark] = useState(true);
   const [heading, setHeading] = useState("");
   const [paragraph, setParagraph] = useState("");
@@ -57,7 +59,7 @@ export function App() {
   }
 
   return (
-    <div>
+    <div>     
       <TextArea
         headingFontSize={headingFontSize}
         paragraphFontSize={paragraphFontSize}

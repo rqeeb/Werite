@@ -4,7 +4,7 @@
   align-items: center;
   height: 55px;
 
-  padding: 0 99px;
+  padding: 0 clamp(12px, 7vw, 99px);
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -66,4 +66,23 @@
 
 .navBarButton:hover {
   background-color: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 600px) {
+  .leftNavBar,
+  .rightNavBar {
+    gap: 6px;
+  }
+}
+
+.clockContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .clockContainer {
+    display: none;
+  }
 }

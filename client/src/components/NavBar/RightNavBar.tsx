@@ -47,11 +47,8 @@ export function RightNavBar({exportMD}:IRightNavBar) {
   return (
     <div className="rightNavBar">
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        
+        className="clockContainer"
       >
         <NavBarStaticIcon icon={<Clock size={22} strokeWidth={2} />} />
         <div>{time.toLocaleTimeString()}</div>

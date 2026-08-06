@@ -1,21 +1,18 @@
 * {
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-    font-family: Lato,sans-serif;
-    line-height: 1.8;
-    
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Lato, sans-serif;
+  line-height: 1.8;
 }
-
-
 
 body::selection {
-    background-color: grey;
+  background-color: grey;
 }
 body::-moz-selection {
-    background-color: grey;
+  background-color: grey;
 }
 
-body{
-    transition: background-color 0.4s ease ;
+body {
+  transition: background-color 0.4s ease;
 }
