@@ -11,7 +11,7 @@ export function ParagraphTextArea({
 }: IParagraphTextArea) {
   return (
     <>
-      <textarea
+     <textarea
         autoComplete="off"
         autoCorrect="off"
         value={paragraph}
