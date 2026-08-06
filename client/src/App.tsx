@@ -37,6 +37,11 @@ export function App() {
       <TextArea
         headingFontSize={headingFontSize}
         paragraphFontSize={paragraphFontSize}
+        heading={heading}
+        setHeading={setHeading}
+        paragraph={paragraph}
+        setParagraph={setParagraph}
+        
       />
       <NavBar
         onZoomIn={zoomIn}

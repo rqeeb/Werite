@@ -5,13 +5,32 @@ import "./TextArea.css";
 type ITextArea = {
   headingFontSize: number;
   paragraphFontSize: number;
+  heading: string;
+  setHeading: React.Dispatch<React.SetStateAction<string>>;
+  paragraph: string;
+  setParagraph: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export function TextArea({ headingFontSize, paragraphFontSize }: ITextArea) {
+export function TextArea({
+  headingFontSize,
+  paragraphFontSize,
+  heading,
+  setHeading,
+  paragraph,
+  setParagraph,
+}: ITextArea) {
   return (
     <div id="TextAreaContainer">
-      <HeadingTextArea headingFontSize={headingFontSize} />
-      <ParagraphTextArea paragraphFontSize={paragraphFontSize} />
+      <HeadingTextArea
+        headingFontSize={headingFontSize}
+        heading={heading}
+        setHeading={setHeading}
+      />
+      <ParagraphTextArea
+        paragraphFontSize={paragraphFontSize}
+        paragraph={paragraph}
+        setParagraph={setParagraph}
+      />
     </div>
   );
 }

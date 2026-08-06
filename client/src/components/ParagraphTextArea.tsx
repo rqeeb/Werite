@@ -1,14 +1,22 @@
-
 type IParagraphTextArea = {
-  paragraphFontSize:number
-}
+  paragraphFontSize: number;
+  paragraph: string;
+  setParagraph: React.Dispatch<React.SetStateAction<string>>;
+};
 
-
-export function ParagraphTextArea({paragraphFontSize}:IParagraphTextArea) {
+export function ParagraphTextArea({
+  paragraphFontSize,
+  paragraph,
+  setParagraph,
+}: IParagraphTextArea) {
   return (
     <>
       <textarea
-        style={{fontSize:`${paragraphFontSize}px`}}
+        value={paragraph}
+        onChange={(z) => {
+          setParagraph(z.target.value);
+        }}
+        style={{ fontSize: `${paragraphFontSize}px` }}
         spellCheck={false}
         name="ParagraphTextArea"
         id="ParagraphTextArea"
