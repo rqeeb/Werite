@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
-import WERITELOGOWHITE from "./assets/WERITE-LOGO-WHITE-CROPPED.svg";
-import WERITELOGOBLACK from "./assets/WERITELOGOWHITE.svg";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
@@ -69,9 +67,6 @@ export function App() {
 
   return (
     <div>
-      <div className="logo-container">
-        <img src={isDark ? WERITELOGOWHITE : WERITELOGOBLACK} alt="" />
-      </div>
       <TextArea
         headingFontSize={headingFontSize}
         paragraphFontSize={paragraphFontSize}

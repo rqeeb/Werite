@@ -20,17 +20,15 @@
   border: none;
   outline: none;
 
-  
   /* font-size: 40px; */
   font-weight: bold;
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
 
-
   margin-bottom: 6%;
 
-  color:inherit;
+  color: inherit;
   transition: font-size 0.3s ease;
 }
 
@@ -48,7 +46,7 @@
   scrollbar-width: thin;
   scrollbar-color: #666 transparent;
 
-  color:inherit;
+  color: inherit;
   transition: font-size 0.3s ease;
   /* font-size: 30px; */
 }
