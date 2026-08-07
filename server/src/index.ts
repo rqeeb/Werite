@@ -11,7 +11,7 @@ app.use(cors({
 
 app.listen(2020);
 
-app.get("/",({req,res} : any )=>{
+app.get("/health",(req,res)=>{
 res.json({
     message:"server is running.... 67676"
 })
