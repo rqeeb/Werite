@@ -2,8 +2,10 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../lib/db";
 import jwt from "jsonwebtoken";
+import "dotenv/config";
 
 const router = Router();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/signup", async (req, res) => {
   try {
@@ -50,14 +52,14 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  if (email || password) {
+  if (!email || !password) {
     return res.status(400).json({
       error: "Email and password both are required",
     });
   }
 
   const userExists = await prisma.user.findUnique({
-    where: email,
+    where: {email},
   });
 
   if (!userExists) {
@@ -67,7 +69,15 @@ router.post("/login", async (req, res) => {
   }
 
   if (await bcrypt.compare(password, userExists.passwordHash)) {
-    
+    const token =  jwt.sign(
+      { userId: userExists.id },
+      JWT_SECRET!,
+    );
+
+    res.status(200).json({
+      message:"login successful",
+      token,
+    });
   } else {
     return res.status(400).json({
       error: "Invalid credentials or user doesn't exists",
