@@ -2,7 +2,7 @@ import "dotenv/config"
 import express from "express";
 import cors from "cors";
 import { prisma } from "./lib/db.ts";
-import router from "./routes/authRouter.ts";
+import router from "./routes/auth.ts";
 
 const app = express();
 
