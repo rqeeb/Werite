@@ -1,6 +1,8 @@
+import "dotenv/config"
 import express from "express";
 import cors from "cors";
 import { prisma } from "./lib/db.ts";
+import router from "./routes/authRouter.ts";
 
 const app = express();
 
@@ -12,17 +14,14 @@ app.use(
   }),
 );
 
-app.listen(2020);
 
-app.get("/health", async (req, res) => {
-//   const createUser = await prisma.user.create({
-//     data: {
-//       email: "shsh@gmail.com",
-//       passwordHash: "1234",
-//     },
-//   });
+app.use("/auth",router);
 
-  res.json({
-    message: "server is running.... 67676",
+
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    message: "server is running!",
   });
 });
+
+app.listen(process.env.PORT||2020);
