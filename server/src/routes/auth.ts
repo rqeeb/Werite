@@ -55,7 +55,7 @@ router.post("/login",(req,res)=>{
     })
   }
 
-  // const userExists = await prisma.user
+  // const userExists = await prisma.user 
 
 })
 
