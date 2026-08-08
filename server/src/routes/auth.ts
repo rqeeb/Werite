@@ -8,7 +8,7 @@ router.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      res.status(400).json({
+      return res.status(400).json({
         error: "Email & password both are required",
       });
     }
@@ -18,12 +18,12 @@ router.post("/signup", async (req, res) => {
     });
 
     if (existingUser) {
-      res.status(400).json({
+      return res.status(400).json({
         error: "User already exist please login",
       });
     }
 
-    const passwordHash = await bcrypt.hash(email, 13);
+    const passwordHash = await bcrypt.hash(password, 13);
     const createUser = await prisma.user.create({
       data: {
         email,
@@ -45,5 +45,18 @@ router.post("/signup", async (req, res) => {
     });
   }
 });
+
+router.post("/login",(req,res)=>{
+  const {email,password} = req.body;
+
+  if(email || password){
+    return res.status(400).json({
+      error:"Email and password both are required"
+    })
+  }
+
+  // const userExists = await prisma.user
+
+})
 
 export default router;
