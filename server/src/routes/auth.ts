@@ -1,6 +1,7 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../lib/db";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
@@ -46,17 +47,32 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.post("/login",(req,res)=>{
-  const {email,password} = req.body;
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
-  if(email || password){
+  if (email || password) {
     return res.status(400).json({
-      error:"Email and password both are required"
-    })
+      error: "Email and password both are required",
+    });
   }
 
-  // const userExists = await prisma.user 
+  const userExists = await prisma.user.findUnique({
+    where: email,
+  });
 
-})
+  if (!userExists) {
+    return res.status(400).json({
+      error: "Invalid credentials or user doesn't exists",
+    });
+  }
+
+  if (await bcrypt.compare(password, userExists.passwordHash)) {
+    
+  } else {
+    return res.status(400).json({
+      error: "Invalid credentials or user doesn't exists",
+    });
+  }
+});
 
 export default router;
