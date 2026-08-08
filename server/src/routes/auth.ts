@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/signup", (req, res) => {
+router.post("/signup", (req, res) => {
   res.json({
     message: "signup endpoint",
   });
