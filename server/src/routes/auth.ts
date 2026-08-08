@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
   }
 
   const userExists = await prisma.user.findUnique({
-    where: {email},
+    where: { email },
   });
 
   if (!userExists) {
@@ -69,15 +69,18 @@ router.post("/login", async (req, res) => {
   }
 
   if (await bcrypt.compare(password, userExists.passwordHash)) {
-    const token =  jwt.sign(
-      { userId: userExists.id },
-      JWT_SECRET!,
-    );
+    const token = jwt.sign({ userId: userExists.id }, JWT_SECRET!);
 
-    res.status(200).json({
-      message:"login successful",
-      token,
-    });
+    return res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+      })
+      .status(200)
+      .json({
+        message: "login successful",
+      });
   } else {
     return res.status(400).json({
       error: "Invalid credentials or user doesn't exists",
