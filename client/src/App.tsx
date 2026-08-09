@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
+import LoginModal from "./components/AuthModal/LoginModal";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
@@ -13,6 +14,7 @@ export function App() {
   const [paragraph, setParagraph] = useState(() => {
     return localStorage.getItem("paragraph") || "";
   });
+  const [isLoginModalOpen, setisLoginModalOpen] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -65,6 +67,11 @@ export function App() {
     }, 100);
   }
 
+  function openModal() {
+    setisLoginModalOpen(!isLoginModalOpen);
+
+  }
+
   return (
     <div>
       <TextArea
@@ -81,7 +88,9 @@ export function App() {
         currentFontSize={paragraphFontSize}
         toggleTheme={toggleTheme}
         exportMD={exportMD}
+        openModal={openModal}
       />
+      {isLoginModalOpen && <LoginModal onClose={openModal} />}
     </div>
   );
 }

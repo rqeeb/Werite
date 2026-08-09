@@ -4,13 +4,12 @@ import { NavBarStaticIcon } from "./NavBarStaticIcon";
 import { useEffect, useState } from "react";
 
 type IRightNavBar = {
-  exportMD:()=>void;
-}
+  exportMD: () => void;
+  openModal: () => void;
+};
 
-
-export function RightNavBar({exportMD}:IRightNavBar) {
+export function RightNavBar({ exportMD, openModal }: IRightNavBar) {
   const [time, setTime] = useState(new Date());
-  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,13 +19,9 @@ export function RightNavBar({exportMD}:IRightNavBar) {
     return () => clearInterval(interval);
   }, []);
 
-
   return (
     <div className="rightNavBar">
-      <div
-        
-        className="clockContainer"
-      >
+      <div className="clockContainer">
         <NavBarStaticIcon icon={<Clock size={22} strokeWidth={2} />} />
         <div>{time.toLocaleTimeString()}</div>
       </div>
@@ -44,8 +39,10 @@ export function RightNavBar({exportMD}:IRightNavBar) {
         onClick={exportMD}
       />
 
-      
-      <NavBarButton icon={<Share2 size={20} strokeWidth={2} />} onClick={()=>{}}/>
+      <NavBarButton
+        icon={<Share2 size={20} strokeWidth={2} />}
+        onClick={openModal}
+      />
     </div>
   );
 }
