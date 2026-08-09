@@ -1,4 +1,4 @@
-import { Clock, Download, Maximize2, Minimize2 } from "lucide-react";
+import { Clock, Download, Share2 } from "lucide-react";
 import { NavBarButton } from "./NavBarButton";
 import { NavBarStaticIcon } from "./NavBarStaticIcon";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ type IRightNavBar = {
 
 export function RightNavBar({exportMD}:IRightNavBar) {
   const [time, setTime] = useState(new Date());
-  const [fullScreen, setFullScreen] = useState(false);
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,29 +20,6 @@ export function RightNavBar({exportMD}:IRightNavBar) {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    function handleFullscreenChange() {
-      setFullScreen(document.fullscreenElement !== null);
-    }
-
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    };
-  }, []);
-
-  async function toggleFullScreen() {
-    try {
-      if (!document.fullscreenElement) {
-        await document.documentElement.requestFullscreen();
-      } else {
-        await document.exitFullscreen();
-      }
-    } catch (error) {
-      console.error("Fullscreen failed:", error);
-    }
-  }
 
   return (
     <div className="rightNavBar">
@@ -67,16 +44,8 @@ export function RightNavBar({exportMD}:IRightNavBar) {
         onClick={exportMD}
       />
 
-      <NavBarButton
-        icon={
-          fullScreen ? (
-            <Minimize2 size={20} strokeWidth={2} />
-          ) : (
-            <Maximize2 size={20} strokeWidth={2} />
-          )
-        }
-        onClick={toggleFullScreen}
-      />
+      
+      <NavBarButton icon={<Share2 size={20} strokeWidth={2} />} onClick={()=>{}}/>
     </div>
   );
 }

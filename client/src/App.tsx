@@ -16,7 +16,7 @@ export function App() {
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
-      ? "rgb(10, 10, 10)"
+      ? "rgb(0, 0, 0)"
       : "rgb(242, 239, 233)";
 
     document.body.style.color = isDark ? "white" : "black";
