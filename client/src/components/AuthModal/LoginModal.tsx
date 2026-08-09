@@ -7,8 +7,8 @@ type LoginModalProps = {
 function LoginModal({ onClose }: LoginModalProps) {
   return (
     <div className="modalBackdrop" onClick={onClose}>
-      <div className="loginModal" onClick={(e) => e.stopPropagation}>
-        <button onClick={onClose}></button>
+      <div className="loginModal" onClick={(e) => e.stopPropagation()}>
+        <button  onClick={onClose}>X</button>
 
         <h2>Please Login...</h2>
 
