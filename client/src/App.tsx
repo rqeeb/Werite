@@ -90,7 +90,7 @@ export function App() {
         exportMD={exportMD}
         openModal={openModal}
       />
-      {isLoginModalOpen && <LoginModal onClose={openModal} />}
+      {isLoginModalOpen && <LoginModal onClose={openModal} isDark={isDark} />}
     </div>
   );
 }

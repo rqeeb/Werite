@@ -16,7 +16,8 @@
 }
 
 .loginModal {
-    width: 400px;
+    height: 60vh;
+    width: 60vh;
     padding:2rem;
 
     background-color: rgb(0, 0, 0);
@@ -27,5 +28,8 @@
 
     gap: 1rem;
 
+    button {
+        cursor: pointer;
+    }
     
 }
