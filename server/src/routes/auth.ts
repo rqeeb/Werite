@@ -3,13 +3,14 @@ import bcrypt from "bcrypt";
 import { prisma } from "../lib/db";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/signup", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password,username } = req.body;
     if (!email || !password) {
       return res.status(400).json({
         error: "Email & password both are required",
@@ -31,6 +32,7 @@ router.post("/signup", async (req, res) => {
       data: {
         email,
         passwordHash,
+        username,
       },
     });
 
@@ -87,5 +89,23 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+// router.get("/me", authMiddleware, async (req, res) => {
+//   // const userId = req.userId;
+
+//   const user = await prisma.user.findUnique({
+//     where: {
+//       id: req.userId,
+//     },
+//     select: {
+//       id: true,
+//       username: true,
+//     },
+//   });
+
+//   return res.json({
+//     user,
+//   });
+// });
 
 export default router;
