@@ -1,35 +1,44 @@
-.modalBackdrop{
-    position:fixed;
-    inset: 0;
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
 
-    display:flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    transition: backdrop-filter 0.7s ease ;
-    
-    background: rgba(255, 255, 255, 0.162);
-    z-index: 1000;
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.25);
 
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .loginModal {
-    height: 60vh;
-    width: 60vh;
-    padding:2rem;
+  position: relative;
 
-    background-color: rgb(0, 0, 0);
-    border-radius: 12px;
+  width: min(400px, 90vw);
 
-    display: flex;
-    flex-direction: column;
+  padding: 2.5rem;
+  border-radius: 25px;
 
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
 
-    button {
-        cursor: pointer;
-    }
-    
+  border: 1px solid;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.loginModal.dark {
+  background-color: rgb(0, 0, 0);
+  color: white;
+
+  border-color: rgb(45, 45, 45);
+}
+
+.loginModal.light {
+    background:rgb(242, 239, 233);
+    color: black;
+
+    border-color: rgb(210, 207, 233);
 }
