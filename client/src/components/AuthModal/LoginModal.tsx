@@ -7,8 +7,12 @@ type LoginModalProps = {
 };
 
 function LoginModal({ onClose, isDark }: LoginModalProps) {
+
+  
+
+
   return (
-    <div className="modalBackdrop">
+    <div className="modalBackdrop" onClick={onClose}>
       <div
         className={`loginModal ${isDark ? "dark" : "light"}`}
         onClick={(e) => e.stopPropagation()}
@@ -39,9 +43,9 @@ function LoginModal({ onClose, isDark }: LoginModalProps) {
               name="password"
               placeholder="password"
             />
-          </div>
+         </div>
 
-          <button className="loginButton">Login</button>
+          <button className={`loginButton ${isDark ? "dark" : "light"}`} >Login</button>
         </div>
 
        

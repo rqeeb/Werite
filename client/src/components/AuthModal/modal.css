@@ -34,10 +34,6 @@
   color: white;
 
   border-color: rgb(45, 45, 45);
-  background-image: url(../../assets/output-onlinepngtools.png);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .loginModal.light {
@@ -93,7 +89,7 @@
 }
 
 .loginContent p {
-  margin: -0.5rem 0 0.75rem;
+  margin: -1.25rem 0 0.75rem;
 
   color: grey;
 
@@ -113,4 +109,86 @@
 }
 
 .inputGroup input {
+  width: 100%;
+  padding: 0.5rem 0.9rem;
+
+  border-radius: 8px;
+  border: 1px solid;
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  transition:
+    border-color 0.2 ease,
+    box-shadow 0.2s ease;
+}
+
+.loginModal.dark .inputGroup input {
+  background: rgb(18, 18, 18);
+  color: white;
+
+  border-color: rgb(50, 50, 50);
+}
+
+.loginModal.light .inputGroup input {
+  background: rgb(255, 255, 255);
+  .loginButton {
+    margin-top: 0.5rem;
+
+    padding: 0.75rem;
+
+    border: none;
+    border-radius: 8px;
+
+    background: black;
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.1s ease;
+  }
+}
+
+.inputGroup input:focus {
+  border-color: #8b5cf6;
+  /* box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15); */
+}
+
+.loginButton {
+  margin-top: 0.5rem;
+
+  padding: 0.75rem;
+
+  border: none;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.loginButton.light {
+  background: black;
+  color: white;
+}
+
+.loginButton.dark {
+  background: white;
+  color: black;
+}
+
+.loginButton:active {
+  transform: scale(0.98);
 }
