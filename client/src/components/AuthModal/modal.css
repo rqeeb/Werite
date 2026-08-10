@@ -34,6 +34,10 @@
   color: white;
 
   border-color: rgb(45, 45, 45);
+  background-image: url(../../assets/output-onlinepngtools.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .loginModal.light {
@@ -41,6 +45,10 @@
   color: black;
 
   border-color: rgb(210, 207, 233);
+  background-image: url(../../assets/modalBGWhite.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .closeButton {
@@ -92,4 +100,17 @@
   font-size: 14px;
 }
 
+.inputGroup {
+  display: flex;
+  flex-direction: column;
 
+  gap: 0.4rem;
+}
+
+.inputGroup label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.inputGroup input {
+}
