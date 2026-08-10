@@ -1,15 +1,25 @@
 import { X } from "lucide-react";
 import "./modal.css";
+import { useState } from "react";
 
 type LoginModalProps = {
   onClose: () => void;
   isDark: boolean;
+  switchTab:(tab:string)=>void;
 };
 
-function LoginModal({ onClose, isDark }: LoginModalProps) {
+function LoginModal({ onClose, isDark,switchTab }: LoginModalProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  
+  function loginFunction() {
+    return;
+  }
 
+  function changeToSignup() {
+switchTab("signup")
+console.log("chnagetosignup")
+  }
 
   return (
     <div className="modalBackdrop" onClick={onClose}>
@@ -32,6 +42,10 @@ function LoginModal({ onClose, isDark }: LoginModalProps) {
               id="email"
               name="email"
               placeholder="you@example.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
 
@@ -42,13 +56,35 @@ function LoginModal({ onClose, isDark }: LoginModalProps) {
               id="password"
               name="password"
               placeholder="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
-         </div>
+          </div>
 
-          <button className={`loginButton ${isDark ? "dark" : "light"}`} >Login</button>
+          <button
+            className={`loginButton ${isDark ? "dark" : "light"}`}
+            onClick={loginFunction}
+          >
+            Login
+          </button>
         </div>
 
-       
+        <div style={{ color: "grey", marginTop: "4px" }}>
+          Don't have an account?
+          <span
+            onClick={changeToSignup}
+            style={{
+              cursor: "pointer",
+              color: "inherit",
+              textDecoration: "underline",
+              marginLeft: "0.25rem",
+            }}
+          >
+            Create one
+          </span>
+        </div>
       </div>
     </div>
   );

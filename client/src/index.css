@@ -6,12 +6,12 @@
   line-height: 1.8;
 }
 
-body::selection {
+/* body::selection {
   background-color: grey;
 }
 body::-moz-selection {
   background-color: grey;
-}
+} */
 
 body {
   transition: background-color 0.4s ease;

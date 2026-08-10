@@ -3,6 +3,7 @@ import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
 import LoginModal from "./components/AuthModal/LoginModal";
+import SignupModal from "./components/AuthModal/SignupModal";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
@@ -14,7 +15,12 @@ export function App() {
   const [paragraph, setParagraph] = useState(() => {
     return localStorage.getItem("paragraph") || "";
   });
-  const [isLoginModalOpen, setisLoginModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<
+    "login" | "signup" | "share" | null
+  >(null);
+  // false = nothing is visible
+  // login = login
+  // signup = signup
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -67,9 +73,22 @@ export function App() {
     }, 100);
   }
 
-  function openModal() {
-    setisLoginModalOpen(!isLoginModalOpen);
+  function onClose() {
+    setActiveModal(null);
+  }
 
+  function openModal() {
+    setActiveModal("login"); //TODO
+  }
+
+  function switchTab(tab: string) {
+    if (tab == "login") {
+      setActiveModal("login");
+    } else if (tab == "signup") {
+      setActiveModal("signup");
+    } else {
+      setActiveModal(null);
+    }
   }
 
   return (
@@ -90,7 +109,18 @@ export function App() {
         exportMD={exportMD}
         openModal={openModal}
       />
-      {isLoginModalOpen && <LoginModal onClose={openModal} isDark={isDark} />}
+
+      {activeModal === "login" && (
+        <LoginModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
+      )}
+
+      {activeModal === "signup" && (
+        <SignupModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
+      )}
+
+      {/* {activeModal === "signup" && (
+  <ShareModal  />
+)} */}
     </div>
   );
 }
