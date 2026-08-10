@@ -44,7 +44,7 @@ function LoginModal({ onClose, isDark }: LoginModalProps) {
           <button className="loginButton">Login</button>
         </div>
 
-        <button>Login</button>
+       
       </div>
     </div>
   );
