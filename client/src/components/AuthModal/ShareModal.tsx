@@ -1,7 +1,7 @@
 const ShareModal = () => {
   return (
-    <div>
-      
+    <div style={{width:"50%",backgroundColor:"blue"}}>
+      Hello world 
     </div>
   )
 }

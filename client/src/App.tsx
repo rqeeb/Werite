@@ -6,6 +6,7 @@ import LoginModal from "./components/AuthModal/LoginModal";
 import SignupModal from "./components/AuthModal/SignupModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ShareModal from "./components/AuthModal/ShareModal";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
@@ -20,9 +21,9 @@ export function App() {
   const [activeModal, setActiveModal] = useState<
     "login" | "signup" | "share" | null
   >(null);
-  // false = nothing is visible
-  // login = login
-  // signup = signup
+  const [currentModal, setCurrentModal] = useState<
+    "login" | "signup" | "share"
+  >("signup");
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -79,18 +80,23 @@ export function App() {
     setActiveModal(null);
   }
 
-  function openModal() {
-    setActiveModal("signup"); //TODO
-  }
-
   function switchTab(tab: string) {
     if (tab == "login") {
       setActiveModal("login");
+      setCurrentModal("login");
     } else if (tab == "signup") {
       setActiveModal("signup");
+      setCurrentModal("signup");
+    } else if (tab == "share") {
+      setActiveModal("share");
+      setCurrentModal("share");
     } else {
       setActiveModal(null);
     }
+  }
+
+  function openCurrentModal() {
+    setActiveModal(currentModal);
   }
 
   return (
@@ -110,7 +116,7 @@ export function App() {
         currentFontSize={paragraphFontSize}
         toggleTheme={toggleTheme}
         exportMD={exportMD}
-        openModal={openModal}
+        openModal={openCurrentModal}
       />
 
       {activeModal === "login" && (
@@ -121,9 +127,7 @@ export function App() {
         <SignupModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
       )}
 
-      {/* {activeModal === "signup" && (
-  <ShareModal  />
-)} */}
+      {activeModal === "share" && <ShareModal />}
     </div>
   );
 }
