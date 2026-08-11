@@ -17,19 +17,19 @@ router.post("/signup", async (req, res) => {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex) {
+    if (!emailRegex.test(email)) {
       return res.status(400).json({
         error: "Enter a valid email address",
       });
     }
 
-    if(password.length < 8){
+    if (password.length < 8) {
       return res.status(400).json({
-        error:"password must be at least 8 characters"
-      })
+        error: "password must be at least 8 characters",
+      });
     }
 
-    const normalisedEmail = email.trim().toLowerCase()
+    const normalisedEmail = email.trim().toLowerCase();
     const existingUser = await prisma.user.findUnique({
       where: { email: normalisedEmail },
     });
@@ -41,11 +41,11 @@ router.post("/signup", async (req, res) => {
     }
 
     const passwordHash = await bcrypt.hash(password, 13);
-    
+
     const username = normalisedEmail.split("@")[0];
     const createUser = await prisma.user.create({
       data: {
-        email:normalisedEmail,
+        email: normalisedEmail,
         passwordHash,
         username,
       },
@@ -70,13 +70,14 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({
+    return res.status(401).json({
       error: "Email and password both are required",
     });
   }
 
+  const normalisedEmail = email.trim().toLowerCase();
   const userExists = await prisma.user.findUnique({
-    where: { email },
+    where: { email: normalisedEmail },
   });
 
   if (!userExists) {
@@ -86,7 +87,9 @@ router.post("/login", async (req, res) => {
   }
 
   if (await bcrypt.compare(password, userExists.passwordHash)) {
-    const token = jwt.sign({ userId: userExists.id }, JWT_SECRET!);
+    const token = jwt.sign({ userId: userExists.id }, JWT_SECRET!, {
+      expiresIn: Math.floor(Date.now() / 1000) + 604800,
+    });
 
     return res
       .cookie("token", token, {
