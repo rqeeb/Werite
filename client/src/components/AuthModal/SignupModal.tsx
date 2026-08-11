@@ -63,7 +63,26 @@ function SignupModal({ onClose, isDark, switchTab }: SignupModalProps) {
       toast.success("Sign up successful, please login");
       switchTab("login");
     } catch (error) {
-      toast.error(`An error occured {error}`);
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+
+        if (status === 409) {
+          setEmailError("An account with this email already exists");
+          toast.error("Email already registered");
+        } else if (status === 400) {
+          toast.error(
+            error.response?.data?.error || "Invalid email or password",
+          );
+        } else if (status === 500) {
+          toast.error("Server error. Please try again.");
+        } else if (!error.response) {
+          toast.error("Cannot connect to the server");
+        } else {
+          toast.error("Something went wrong");
+        }
+      } else {
+        toast.error("Something went wrong");
+      }
     } finally {
       setIsLoading(false);
     }

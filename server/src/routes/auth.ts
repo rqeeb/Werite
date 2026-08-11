@@ -16,23 +16,36 @@ router.post("/signup", async (req, res) => {
       });
     }
 
-    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex) {
+      return res.status(400).json({
+        error: "Enter a valid email address",
+      });
+    }
 
+    if(password.length < 8){
+      return res.status(400).json({
+        error:"password must be at least 8 characters"
+      })
+    }
+
+    const normalisedEmail = email.trim().toLowerCase()
     const existingUser = await prisma.user.findUnique({
-      where: { email: email },
+      where: { email: normalisedEmail },
     });
 
     if (existingUser) {
-      return res.status(400).json({
-        error: "User already exist please login",
+      return res.status(409).json({
+        error: "User already exist, please login",
       });
     }
 
     const passwordHash = await bcrypt.hash(password, 13);
-    const username = email.split("@")[0];
+    
+    const username = normalisedEmail.split("@")[0];
     const createUser = await prisma.user.create({
       data: {
-        email,
+        email:normalisedEmail,
         passwordHash,
         username,
       },
@@ -67,7 +80,7 @@ router.post("/login", async (req, res) => {
   });
 
   if (!userExists) {
-    return res.status(400).json({
+    return res.status(401).json({
       error: "Invalid credentials or user doesn't exists",
     });
   }

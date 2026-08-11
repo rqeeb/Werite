@@ -13,7 +13,7 @@ function LoginModal({ onClose, isDark, switchTab }: LoginModalProps) {
   const [password, setPassword] = useState("");
 
   function loginFunction() {
-    return;
+    
   }
 
   function changeToSignup() {
