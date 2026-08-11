@@ -3,19 +3,20 @@ import bcrypt from "bcrypt";
 import { prisma } from "../lib/db";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import { authMiddleware } from "../middleware/auth.middleware";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/signup", async (req, res) => {
   try {
-    const { email, password,username } = req.body;
+    const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({
         error: "Email & password both are required",
       });
     }
+
+    
 
     const existingUser = await prisma.user.findUnique({
       where: { email: email },
@@ -28,6 +29,7 @@ router.post("/signup", async (req, res) => {
     }
 
     const passwordHash = await bcrypt.hash(password, 13);
+    const username = email.split("@")[0];
     const createUser = await prisma.user.create({
       data: {
         email,

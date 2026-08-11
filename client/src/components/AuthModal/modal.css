@@ -192,3 +192,41 @@
 .loginButton:active {
   transform: scale(0.98);
 }
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+.spinner.dark {
+  border: 2px solid #00000030;
+  border-top-color: black;
+}
+
+.spinner.light {
+  border: 2px solid #ffffff50;
+  border-top-color: white;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ErrorState {
+  color: #ff4d4f;
+}
+
+.inputError {
+  border-color: #ff4d4f !important;
+}
+
+.errorMessage {
+  color: #ff4d4f;
+  font-size: 13px;
+  margin-top: 4px;
+}

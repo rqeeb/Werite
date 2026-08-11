@@ -5,10 +5,10 @@ import { useState } from "react";
 type LoginModalProps = {
   onClose: () => void;
   isDark: boolean;
-  switchTab:(tab:string)=>void;
+  switchTab: (tab: string) => void;
 };
 
-function LoginModal({ onClose, isDark,switchTab }: LoginModalProps) {
+function LoginModal({ onClose, isDark, switchTab }: LoginModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,8 +17,7 @@ function LoginModal({ onClose, isDark,switchTab }: LoginModalProps) {
   }
 
   function changeToSignup() {
-switchTab("signup")
-console.log("chnagetosignup")
+    switchTab("signup");
   }
 
   return (
@@ -32,8 +31,8 @@ console.log("chnagetosignup")
         </button>
 
         <div className="loginContent">
-          <h2>Please Login...</h2>
-          <p>welcome back!</p>
+          <h2>Log in</h2>
+          <p>Go write peak!</p>
 
           <div className="inputGroup">
             <label htmlFor="email">Email</label>

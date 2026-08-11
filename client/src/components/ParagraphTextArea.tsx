@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 type IParagraphTextArea = {
   paragraphFontSize: number;
   paragraph: string;
@@ -9,9 +11,25 @@ export function ParagraphTextArea({
   paragraph,
   setParagraph,
 }: IParagraphTextArea) {
+  const [placeholder, setPlaceholder] = useState("Type it out loud..");
+
+  const placeholderLines = [
+    "write peak, Shakespeare.",
+    "make words hit.",
+    "make Shakespeare nervous.",
+    "Shakespeare is typing...",
+    "write. cook. repeat.",
+    "write your magnum opus",
+  ];
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * placeholderLines.length);
+
+    setPlaceholder(placeholderLines[randomIndex]!);
+  }, []);
   return (
     <>
-     <textarea
+      <textarea
         autoComplete="off"
         autoCorrect="off"
         value={paragraph}
@@ -22,7 +40,7 @@ export function ParagraphTextArea({
         spellCheck={false}
         name="ParagraphTextArea"
         id="ParagraphTextArea"
-        placeholder="Type it out loud.."
+        placeholder={placeholder}
       ></textarea>
     </>
   );

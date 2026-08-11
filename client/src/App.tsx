@@ -4,6 +4,8 @@ import { TextArea } from "./components/TextArea";
 import "./index.css";
 import LoginModal from "./components/AuthModal/LoginModal";
 import SignupModal from "./components/AuthModal/SignupModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
@@ -78,7 +80,7 @@ export function App() {
   }
 
   function openModal() {
-    setActiveModal("login"); //TODO
+    setActiveModal("signup"); //TODO
   }
 
   function switchTab(tab: string) {
@@ -93,6 +95,7 @@ export function App() {
 
   return (
     <div>
+      <ToastContainer />
       <TextArea
         headingFontSize={headingFontSize}
         paragraphFontSize={paragraphFontSize}
