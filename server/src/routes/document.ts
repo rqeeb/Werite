@@ -106,7 +106,7 @@ router.get("/:id", authMiddleware, async (req, res) => {
 router.patch("/:id", authMiddleware, async (req, res) => {
   if (!req.userId) {
     return res.status(401).json({
-      error: "User not authenticted",
+      error: "User not authenticated",
     });
   }
 
@@ -120,7 +120,7 @@ router.patch("/:id", authMiddleware, async (req, res) => {
   }
 
   if (title === undefined && content === undefined) {
-    res.status(200).json({
+    res.status(400).json({
       error: "Nothing to update",
     });
   }
@@ -135,7 +135,7 @@ router.patch("/:id", authMiddleware, async (req, res) => {
 
     if (!document) {
       return res.status(404).json({
-        error: "Document not foudn",
+        error: "Document not found",
       });
     }
 
