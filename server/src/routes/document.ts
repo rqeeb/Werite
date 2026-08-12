@@ -34,4 +34,33 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/", authMiddleware, async (req, res) => {
+  if (!req.userId) {
+    return res.status(401).json({
+      error: "Not authenticated",
+    });
+  }
+  const ownerId = req.userId;
+
+  try {
+    const documents = prisma.document.findMany({
+      where: {
+        ownerId,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+    });
+
+    return res.status(200).json({
+      documents,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+});
+
 export default router;
