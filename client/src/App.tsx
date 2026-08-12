@@ -7,6 +7,7 @@ import SignupModal from "./components/AuthModal/SignupModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShareModal from "./components/AuthModal/ShareModal";
+import axios from "axios";
 
 export function App() {
   const [headingFontSize, setHeadingFontSize] = useState(40);
@@ -24,6 +25,12 @@ export function App() {
   const [currentModal, setCurrentModal] = useState<
     "login" | "signup" | "share"
   >("signup");
+  // const [documentId, setDocumentId] = useState<string | null>(null);
+  const [user, setUser] = useState<{
+    id: string;
+    username: string;
+    email: string;
+  } | null>(null);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -37,6 +44,24 @@ export function App() {
     localStorage.setItem("heading", heading);
     localStorage.setItem("paragraph", paragraph);
   }, [heading, paragraph]);
+
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const response = await axios.get("http://localhost:2021/auth/me", {
+          withCredentials: true,
+        });
+
+        setUser(response.data.user);
+        setCurrentModal("share");
+      } catch {
+        setUser(null);
+        setCurrentModal("login");
+      }
+    }
+
+    checkAuth();
+  }, []);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
@@ -99,6 +124,8 @@ export function App() {
     setActiveModal(currentModal);
   }
 
+ 
+
   return (
     <div>
       <ToastContainer />
@@ -127,7 +154,9 @@ export function App() {
         <SignupModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
       )}
 
-      {activeModal === "share" && <ShareModal />}
+      {activeModal === "share" && (
+        <ShareModal createDocument={createDocument} onClose={onClose}/>
+      )}
     </div>
   );
 }

@@ -1,7 +1,19 @@
-const ShareModal = () => {
+type ShareModalProps = {
+  createDocument:()=>void
+  onClose: () => void;
+}
+
+
+const ShareModal = ({createDocument,onClose}:ShareModalProps) => {
   return (
-    <div style={{width:"50%",backgroundColor:"blue"}}>
-      Hello world 
+    <div >
+     <button onClick={createDocument}>
+      Create Document
+     </button>
+     <button onClick={onClose}>
+      Close modal 
+     </button>
+     
     </div>
   )
 }

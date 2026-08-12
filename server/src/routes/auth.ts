@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { prisma } from "../lib/db";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -108,22 +109,23 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.get("/me", authMiddleware, async (req, res) => {
-//   // const userId = req.userId;
+router.get("/me", authMiddleware, async (req, res) => {
+  
 
-//   const user = await prisma.user.findUnique({
-//     where: {
-//       id: req.userId,
-//     },
-//     select: {
-//       id: true,
-//       username: true,
-//     },
-//   });
+  const user = await prisma.user.findUnique({
+    where: {
+      id: req.userId,
+    },
+    select: {
+      id: true,
+      username: true,
+      email:true,
+    },
+  });
 
-//   return res.json({
-//     user,
-//   });
-// });
+  return res.json({
+    user,
+  });
+});
 
 export default router;

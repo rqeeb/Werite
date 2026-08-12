@@ -14,7 +14,7 @@ function LoginModal({ onClose, isDark, switchTab }: LoginModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [loggedIn,isLoggedIn] = useState(false);
+  
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -58,6 +58,8 @@ function LoginModal({ onClose, isDark, switchTab }: LoginModalProps) {
       await axios.post("http://localhost:2021/auth/login",{
         email:email.trim(),
         password
+      },{
+        withCredentials:true
       });
       toast.success("Log in successful");
       switchTab("share")
