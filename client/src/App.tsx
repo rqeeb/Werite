@@ -65,6 +65,65 @@ export function App() {
     checkAuth();
   }, []);
 
+  useEffect(() => {
+    if (!documentId) {
+      return;
+    }
+    if (!user) {
+      return;
+    }
+
+    // console.log("Checking");
+    // console.log(documentId);
+    // console.log(user)
+
+    const timeout = setTimeout(async () => {
+      try {
+        await axios.patch(
+          `http://localhost:2021/api/document/${documentId}`,
+          {
+            title: heading,
+            content: paragraph,
+          },
+          {
+            withCredentials: true,
+          },
+        );
+        // console.log("Saved");
+      } catch (error) {
+        console.log(error);
+      }
+    }, 800);
+
+    return () => clearTimeout(timeout);
+  }, [heading, paragraph, documentId]);
+
+  useEffect(() => {
+    console.log("new load start")
+    if (!documentId) {
+      return;
+    }
+
+    async function loadDocument() {
+      try {
+        const response = await axios.get(
+          `http://localhost:2021/api/document/${documentId}`,
+          {
+            withCredentials: true,
+          },
+        );
+
+        setHeading(response.data.document.title);
+        setParagraph(response.data.document.content);
+        console.log("New loaded")
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    loadDocument();
+  }, [documentId]);
+
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
     setParagraphFontSize((prev) => Math.min(50, prev + 2));
@@ -125,35 +184,6 @@ export function App() {
   function openCurrentModal() {
     setActiveModal(currentModal);
   }
-
-  useEffect(() => {
-    if (!documentId) {
-      return;
-    }
-    if(!user){
-      return;
-    }
-
-    const timeout = setTimeout(async () => {
-      try {
-        await axios.patch(
-          `http://localhost:2021/api/document/${documentId}`,
-          {
-            title: heading,
-            content: paragraph,
-          },
-          {
-            withCredentials: true,
-          },
-        );
-        console.log("Saved");
-      } catch (error) {
-        console.log(error);
-      }
-    }, 800);
-
-    return () => clearTimeout(timeout);
-  }, [heading, paragraph, documentId]);
 
   return (
     <div>
