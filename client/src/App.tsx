@@ -130,6 +130,9 @@ export function App() {
     if (!documentId) {
       return;
     }
+    if(!user){
+      return;
+    }
 
     const timeout = setTimeout(async () => {
       try {

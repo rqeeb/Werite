@@ -89,7 +89,7 @@ router.post("/login", async (req, res) => {
 
   if (await bcrypt.compare(password, userExists.passwordHash)) {
     const token = jwt.sign({ userId: userExists.id }, JWT_SECRET!, {
-      expiresIn: Math.floor(Date.now() / 1000) + 604800,
+      expiresIn: "7d",
     });
 
     return res
@@ -97,6 +97,7 @@ router.post("/login", async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .status(200)
       .json({
@@ -110,8 +111,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/me", authMiddleware, async (req, res) => {
-  
-
   const user = await prisma.user.findUnique({
     where: {
       id: req.userId,
@@ -119,7 +118,7 @@ router.get("/me", authMiddleware, async (req, res) => {
     select: {
       id: true,
       username: true,
-      email:true,
+      email: true,
     },
   });
 
