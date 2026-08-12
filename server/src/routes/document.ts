@@ -43,7 +43,7 @@ router.get("/", authMiddleware, async (req, res) => {
   const ownerId = req.userId;
 
   try {
-    const documents = prisma.document.findMany({
+    const documents = await prisma.document.findMany({
       where: {
         ownerId,
       },
@@ -62,5 +62,46 @@ router.get("/", authMiddleware, async (req, res) => {
     });
   }
 });
+
+router.get("/:id", authMiddleware, async (req, res) => {
+  const { id } = req.params;
+
+  if (!req.userId) {
+    return res.status(401).json({
+      error: "User not authenticated",
+    });
+  }
+
+  if (typeof id !== "string") {
+    return res.status(400).json({
+      error: "Invalid document id",
+    });
+  }
+
+  try {
+    const document = await prisma.document.findUnique({
+      where: {
+        id,
+        ownerId: req.userId,
+      },
+    });
+
+    if (!document) {
+      return res.status(404).json({
+        error: "Document not found",
+      });
+    }
+
+    return res.status(200).json({
+      document,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+});
+
+// router.patch("/:id")
 
 export default router;
