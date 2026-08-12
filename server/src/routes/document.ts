@@ -74,12 +74,12 @@ router.get("/:id", authMiddleware, async (req, res) => {
 
   if (typeof id !== "string") {
     return res.status(400).json({
-      error: "Invalid document id",
+      error: "Invalid document id type",
     });
   }
 
   try {
-    const document = await prisma.document.findUnique({
+    const document = await prisma.document.findFirst({
       where: {
         id,
         ownerId: req.userId,
@@ -99,9 +99,65 @@ router.get("/:id", authMiddleware, async (req, res) => {
     res.status(500).json({
       error: "Internal server error",
     });
+    console.log(error);
   }
 });
 
-// router.patch("/:id")
+router.patch("/:id", authMiddleware, async (req, res) => {
+  if (!req.userId) {
+    return res.status(401).json({
+      error: "User not authenticted",
+    });
+  }
+
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  if (typeof id !== "string") {
+    return res.status(400).json({
+      error: "Invalid document id type",
+    });
+  }
+
+  if (title === undefined && content === undefined) {
+    res.status(200).json({
+      error: "Nothing to update",
+    });
+  }
+
+  try {
+    const document = await prisma.document.findFirst({
+      where: {
+        id,
+        ownerId: req.userId,
+      },
+    });
+
+    if (!document) {
+      return res.status(404).json({
+        error: "Document not foudn",
+      });
+    }
+
+    const updatedDocument = await prisma.document.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        content,
+      },
+    });
+
+    res.status(200).json({
+      updatedDocument,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Internal server error",
+    });
+    console.log(error);
+  }
+});
 
 export default router;
