@@ -25,7 +25,9 @@ export function App() {
   const [currentModal, setCurrentModal] = useState<
     "login" | "signup" | "share"
   >("signup");
-  const [documentId, setDocumentId] = useState<string | null>(null);
+  const [documentId, setDocumentId] = useState<string | null>(
+    "cmspxqtnh0004s4hmmi4ilbpz",
+  );
   const [user, setUser] = useState<{
     id: string;
     username: string;
@@ -124,25 +126,31 @@ export function App() {
     setActiveModal(currentModal);
   }
 
-  async function createDocument() {
-    try {
-      const response = await axios.post(
-        "http://localhost:2021/api/document",
-        {
-          title: heading,
-          content: paragraph,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-
-      setDocumentId(response.data.document.id);
-      console.log(response.data.document.id);
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    if (!documentId) {
+      return;
     }
-  }
+
+    const timeout = setTimeout(async () => {
+      try {
+        await axios.patch(
+          `http://localhost:2021/api/document/${documentId}`,
+          {
+            title: heading,
+            content: paragraph,
+          },
+          {
+            withCredentials: true,
+          },
+        );
+        console.log("Saved");
+      } catch (error) {
+        console.log(error);
+      }
+    }, 800);
+
+    return () => clearTimeout(timeout);
+  }, [heading, paragraph, documentId]);
 
   return (
     <div>
@@ -172,9 +180,7 @@ export function App() {
         <SignupModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
       )}
 
-      {activeModal === "share" && (
-        <ShareModal createDocument={createDocument} onClose={onClose} />
-      )}
+      {activeModal === "share" && <ShareModal onClose={onClose} />}
     </div>
   );
 }
