@@ -120,7 +120,7 @@ router.patch("/:id", authMiddleware, async (req, res) => {
   }
 
   if (title === undefined && content === undefined) {
-    res.status(400).json({
+    return res.status(400).json({
       error: "Nothing to update",
     });
   }
@@ -149,7 +149,7 @@ router.patch("/:id", authMiddleware, async (req, res) => {
       },
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       updatedDocument,
     });
   } catch (error) {
@@ -157,6 +157,52 @@ router.patch("/:id", authMiddleware, async (req, res) => {
       error: "Internal server error",
     });
     console.log(error);
+  }
+});
+
+router.delete("/:id", authMiddleware, async (req, res) => {
+  const { id } = req.params;
+
+  if (!req.userId) {
+    return res.status(401).json({
+      error: "User not authenticated",
+    });
+  }
+
+  if (typeof id !== "string") {
+    return res.status(400).json({
+      error: "Invalid document id type",
+    });
+  }
+
+  try {
+    const document = await prisma.document.findFirst({
+      where: {
+        id,
+        ownerId: req.userId,
+      },
+    });
+
+    if (!document) {
+      return res.status(400).json({
+        error: "Document not found",
+      });
+    }
+
+    const deletedDocument = await prisma.document.delete({
+      where: {
+        id,
+        ownerId: req.userId,
+      },
+    });
+
+    return res.status(200).json({
+      deletedDocument,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Internal server error",
+    });
   }
 });
 
