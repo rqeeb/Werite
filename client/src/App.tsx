@@ -25,7 +25,7 @@ export function App() {
   const [currentModal, setCurrentModal] = useState<
     "login" | "signup" | "share"
   >("signup");
-  // const [documentId, setDocumentId] = useState<string | null>(null);
+  const [documentId, setDocumentId] = useState<string | null>(null);
   const [user, setUser] = useState<{
     id: string;
     username: string;
@@ -124,7 +124,25 @@ export function App() {
     setActiveModal(currentModal);
   }
 
- 
+  async function createDocument() {
+    try {
+      const response = await axios.post(
+        "http://localhost:2021/api/document",
+        {
+          title: heading,
+          content: paragraph,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      setDocumentId(response.data.document.id);
+      console.log(response.data.document.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -155,7 +173,7 @@ export function App() {
       )}
 
       {activeModal === "share" && (
-        <ShareModal createDocument={createDocument} onClose={onClose}/>
+        <ShareModal createDocument={createDocument} onClose={onClose} />
       )}
     </div>
   );
