@@ -191,10 +191,8 @@ export function App() {
 
   function handleLogin(user: { id: string; username: string; email: string }) {
     setUser(user);
-    setCurrentModal("share")
-    setActiveModal("share")
-
-
+    setCurrentModal("share");
+    setActiveModal("share");
   }
   return (
     <div>
@@ -228,7 +226,12 @@ export function App() {
       </div>
 
       {activeModal === "login" && (
-        <LoginModal onClose={onClose} isDark={isDark} switchTab={switchTab} handleLogin={handleLogin}/>
+        <LoginModal
+          onClose={onClose}
+          isDark={isDark}
+          switchTab={switchTab}
+          handleLogin={handleLogin}
+        />
       )}
 
       {activeModal === "signup" && (
