@@ -10,27 +10,23 @@ import ShareModal from "./components/AuthModal/ShareModal";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-const navigate = useNavigate();
 
 export function App() {
-  const { id } = useParams();
+  const { documentId } = useParams();
+  const navigate = useNavigate();
 
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(22);
   const [isDark, setIsDark] = useState(true);
-  const [heading, setHeading] = useState(() => {
-    return localStorage.getItem("heading") || "";
-  });
-  const [paragraph, setParagraph] = useState(() => {
-    return localStorage.getItem("paragraph") || "";
-  });
+  const [heading, setHeading] = useState("");
+  const [paragraph, setParagraph] = useState("");
   const [activeModal, setActiveModal] = useState<
     "login" | "signup" | "share" | null
   >(null);
   const [currentModal, setCurrentModal] = useState<
     "login" | "signup" | "share"
   >("signup");
-  const [documentId, setDocumentId] = useState<string | null>(id!);
+  // const [documentId, setDocumentId] = useState<string | null>(id!);
   const [user, setUser] = useState<{
     id: string;
     username: string;
@@ -47,10 +43,10 @@ export function App() {
     document.body.style.color = isDark ? "white" : "black";
   }, [isDark]);
 
-  useEffect(() => {
-    localStorage.setItem("heading", heading);
-    localStorage.setItem("paragraph", paragraph);
-  }, [heading, paragraph]);
+  // useEffect(() => {
+  //   localStorage.setItem("heading", heading);
+  //   localStorage.setItem("paragraph", paragraph);
+  // }, [heading, paragraph]);
 
   useEffect(() => {
     async function checkAuth() {
@@ -130,7 +126,7 @@ export function App() {
   }, [documentId]);
 
   useEffect(() => {
-    if (id || !user) {
+    if (documentId || !user) {
       return;
     }
 
@@ -156,7 +152,7 @@ export function App() {
     }
 
     createDocument();
-  }, [id, user]);
+  }, [documentId, user]);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
