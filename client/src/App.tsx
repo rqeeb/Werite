@@ -9,10 +9,10 @@ import "react-toastify/dist/ReactToastify.css";
 import ShareModal from "./components/AuthModal/ShareModal";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 
 export function App() {
-  const {id} = useParams();
-
+  const { id } = useParams();
 
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(22);
@@ -29,9 +29,7 @@ export function App() {
   const [currentModal, setCurrentModal] = useState<
     "login" | "signup" | "share"
   >("signup");
-  const [documentId, setDocumentId] = useState<string | null>(
-    id!,
-  );
+  const [documentId, setDocumentId] = useState<string | null>(id!);
   const [user, setUser] = useState<{
     id: string;
     username: string;
@@ -189,20 +187,23 @@ export function App() {
     setActiveModal(currentModal);
   }
 
-
-
   return (
-
     <div>
       <ToastContainer />
-      <TextArea
-        headingFontSize={headingFontSize}
-        paragraphFontSize={paragraphFontSize}
-        heading={heading}
-        setHeading={setHeading}
-        paragraph={paragraph}
-        setParagraph={setParagraph}
-      />
+      <div className="workspace">
+        <div>
+          <TextArea
+            headingFontSize={headingFontSize}
+            paragraphFontSize={paragraphFontSize}
+            heading={heading}
+            setHeading={setHeading}
+            paragraph={paragraph}
+            setParagraph={setParagraph}
+          />
+        </div>
+
+        <Sidebar />
+      </div>
       <NavBar
         onZoomIn={zoomIn}
         onZoomOut={zoomOut}
