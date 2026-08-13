@@ -1,4 +1,4 @@
-import { Clock, Download, Share2 } from "lucide-react";
+import { Clock, Download, PanelRight, Share2 } from "lucide-react";
 import { NavBarButton } from "./NavBarButton";
 import { NavBarStaticIcon } from "./NavBarStaticIcon";
 import { useEffect, useState } from "react";
@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 type IRightNavBar = {
   exportMD: () => void;
   openModal: () => void;
+  openSidebar:()=>void;
 };
 
-export function RightNavBar({ exportMD, openModal }: IRightNavBar) {
+export function RightNavBar({ exportMD, openModal,openSidebar }: IRightNavBar) {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -43,6 +44,10 @@ export function RightNavBar({ exportMD, openModal }: IRightNavBar) {
         icon={<Share2 size={20} strokeWidth={2} />}
         onClick={openModal}
       />
+      
+      <NavBarButton 
+      icon={<PanelRight size={20} strokeWidth={2} />}
+      onClick={openSidebar} />
     </div>
   );
 }

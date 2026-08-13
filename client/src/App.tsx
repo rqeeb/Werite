@@ -200,6 +200,9 @@ export function App() {
         toggleTheme={toggleTheme}
         exportMD={exportMD}
         openModal={openCurrentModal}
+        openSidebar={() => {
+          setIsSidebarOpen((prev) => !prev);
+        }}
       />
 
       <div className="workspace">
@@ -218,7 +221,7 @@ export function App() {
       </div>
 
       {activeModal === "login" && (
-        <LoginModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
+        <LoginModal onClose={onClose} isDark={isDark} switchTab={switchTab}  />
       )}
 
       {activeModal === "signup" && (
@@ -226,21 +229,6 @@ export function App() {
       )}
 
       {activeModal === "share" && <ShareModal onClose={onClose} />}
-
-      <button
-        style={{
-          position: "fixed",
-          top: "20px",
-          left: "20px",
-          zIndex: 9999,
-        }}
-        onClick={() => {
-          console.log("hell");
-          setIsSidebarOpen((prev) => !prev);
-        }}
-      >
-        Open
-      </button>
     </div>
   );
 }
