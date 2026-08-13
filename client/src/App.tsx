@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
@@ -127,6 +127,31 @@ export function App() {
 
     loadDocument();
   }, [documentId]);
+
+  useEffect(() => {
+    if (id) {
+      return;
+    }
+
+    async function createDocument() {
+      try {
+        const response = await axios.post(
+          "http://localhost:2021/api/document",
+          {
+            title: heading,
+            content: paragraph,
+          },
+          {
+            withCredentials: true,
+          },
+        );
+
+        setDocumentId(response.data.document.id);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, []);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));

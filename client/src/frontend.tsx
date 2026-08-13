@@ -8,6 +8,7 @@ const app = (
   <BrowserRouter>
     <Routes>
       <Route path="/document/:id" element={<App/>}/>
+      <Route path="/" element={<App/>} />
     </Routes>
   </BrowserRouter>
 );
