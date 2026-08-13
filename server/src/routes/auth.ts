@@ -4,7 +4,6 @@ import { prisma } from "../lib/db";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { authMiddleware } from "../middleware/auth.middleware";
-import { useTransition } from "react";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET;

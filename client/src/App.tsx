@@ -8,8 +8,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShareModal from "./components/AuthModal/ShareModal";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
+const navigate = useNavigate();
 
 export function App() {
   const { id } = useParams();
@@ -129,7 +130,7 @@ export function App() {
   }, [documentId]);
 
   useEffect(() => {
-    if (id) {
+    if (id || !user) {
       return;
     }
 
@@ -146,12 +147,16 @@ export function App() {
           },
         );
 
-        setDocumentId(response.data.document.id);
+        navigate(`/document/${response.data.document.id}`, { replace: true });
+        // setDocumentId(response.data.document.id);
+        // console.log("created new document");
       } catch (error) {
         console.log(error);
       }
     }
-  }, []);
+
+    createDocument();
+  }, [id, user]);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
