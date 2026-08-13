@@ -20,7 +20,9 @@ export function NavBar({
   openModal,
 }: INavBar) {
   return (
-    <div className="navBarContainer">
+    <div className="navBarContainer" style={{
+          zIndex:9999
+        }}>
       <LeftNavBar
         onZoomIn={onZoomIn}
         onZoomOut={onZoomOut}

@@ -36,6 +36,8 @@ export function App() {
     email: string;
   } | null>(null);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   useEffect(() => {
     document.body.style.backgroundColor = isDark
       ? "rgb(0, 0, 0)"
@@ -190,8 +192,18 @@ export function App() {
   return (
     <div>
       <ToastContainer />
+
+      <NavBar
+        onZoomIn={zoomIn}
+        onZoomOut={zoomOut}
+        currentFontSize={paragraphFontSize}
+        toggleTheme={toggleTheme}
+        exportMD={exportMD}
+        openModal={openCurrentModal}
+      />
+
       <div className="workspace">
-        <div>
+        <div className={`editorArea ${isSidebarOpen ? "sidebarOpen" : ""}`}>
           <TextArea
             headingFontSize={headingFontSize}
             paragraphFontSize={paragraphFontSize}
@@ -202,16 +214,8 @@ export function App() {
           />
         </div>
 
-        <Sidebar />
+        <Sidebar isSidebarOpen={isSidebarOpen} />
       </div>
-      <NavBar
-        onZoomIn={zoomIn}
-        onZoomOut={zoomOut}
-        currentFontSize={paragraphFontSize}
-        toggleTheme={toggleTheme}
-        exportMD={exportMD}
-        openModal={openCurrentModal}
-      />
 
       {activeModal === "login" && (
         <LoginModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
@@ -222,6 +226,21 @@ export function App() {
       )}
 
       {activeModal === "share" && <ShareModal onClose={onClose} />}
+
+      <button
+        style={{
+          position: "fixed",
+          top: "20px",
+          left: "20px",
+          zIndex: 9999,
+        }}
+        onClick={() => {
+          console.log("hell");
+          setIsSidebarOpen((prev) => !prev);
+        }}
+      >
+        Open
+      </button>
     </div>
   );
 }
