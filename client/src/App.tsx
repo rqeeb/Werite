@@ -4,12 +4,16 @@ import { TextArea } from "./components/TextArea";
 import "./index.css";
 import LoginModal from "./components/AuthModal/LoginModal";
 import SignupModal from "./components/AuthModal/SignupModal";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShareModal from "./components/AuthModal/ShareModal";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export function App() {
+  const {id} = useParams();
+
+
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(22);
   const [isDark, setIsDark] = useState(true);
@@ -26,7 +30,7 @@ export function App() {
     "login" | "signup" | "share"
   >("signup");
   const [documentId, setDocumentId] = useState<string | null>(
-    "cmspxqtnh0004s4hmmi4ilbpz",
+    id!,
   );
   const [user, setUser] = useState<{
     id: string;
@@ -99,7 +103,7 @@ export function App() {
   }, [heading, paragraph, documentId]);
 
   useEffect(() => {
-    console.log("new load start")
+    // console.log("new load start")
     if (!documentId) {
       return;
     }
@@ -115,7 +119,7 @@ export function App() {
 
         setHeading(response.data.document.title);
         setParagraph(response.data.document.content);
-        console.log("New loaded")
+        // console.log("New loaded")
       } catch (error) {
         console.log(error);
       }
@@ -185,7 +189,10 @@ export function App() {
     setActiveModal(currentModal);
   }
 
+
+
   return (
+
     <div>
       <ToastContainer />
       <TextArea
