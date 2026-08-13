@@ -4,17 +4,28 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+type User = {
+  id: string;
+  username: string;
+  email: string;
+};
+
 type LoginModalProps = {
   onClose: () => void;
   isDark: boolean;
   switchTab: (tab: string) => void;
+  handleLogin: (user: User) => void;
 };
 
-function LoginModal({ onClose, isDark, switchTab }: LoginModalProps) {
+function LoginModal({
+  onClose,
+  isDark,
+  switchTab,
+  handleLogin,
+}: LoginModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -23,7 +34,7 @@ function LoginModal({ onClose, isDark, switchTab }: LoginModalProps) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-   function validateInputs() {
+  function validateInputs() {
     let isValid = true;
 
     setEmailError("");
@@ -55,20 +66,22 @@ function LoginModal({ onClose, isDark, switchTab }: LoginModalProps) {
     setIsLoading(true);
 
     try {
-      await axios.post("http://localhost:2021/auth/login",{
-        email:email.trim(),
-        password
-      },{
-        withCredentials:true
-      });
+      const response = await axios.post(
+        "http://localhost:2021/auth/login",
+        {
+          email: email.trim(),
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
       toast.success("Log in successful");
-      switchTab("share")
-    }
-    catch(error){
+      handleLogin(response.data.user);
+    } catch (error) {
       toast.error("Invalid credentials or user doesn't exists");
-      console.log(error)
-    }
-    finally{
+      console.log(error);
+    } finally {
       setIsLoading(false);
     }
   }

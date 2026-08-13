@@ -4,6 +4,7 @@ import { prisma } from "../lib/db";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { authMiddleware } from "../middleware/auth.middleware";
+import { useTransition } from "react";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -102,6 +103,11 @@ router.post("/login", async (req, res) => {
       .status(200)
       .json({
         message: "login successful",
+        user: {
+          id: userExists.id,
+          username: userExists.username,
+          email: userExists.email,
+        },
       });
   } else {
     return res.status(400).json({

@@ -189,6 +189,13 @@ export function App() {
     setActiveModal(currentModal);
   }
 
+  function handleLogin(user: { id: string; username: string; email: string }) {
+    setUser(user);
+    setCurrentModal("share")
+    setActiveModal("share")
+
+
+  }
   return (
     <div>
       <ToastContainer />
@@ -221,7 +228,7 @@ export function App() {
       </div>
 
       {activeModal === "login" && (
-        <LoginModal onClose={onClose} isDark={isDark} switchTab={switchTab}  />
+        <LoginModal onClose={onClose} isDark={isDark} switchTab={switchTab} handleLogin={handleLogin}/>
       )}
 
       {activeModal === "signup" && (
