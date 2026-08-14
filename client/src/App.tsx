@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 
 export function App() {
-  const { documentId } = useParams();
+  const { id: documentId } = useParams();
   const navigate = useNavigate();
 
   const [headingFontSize, setHeadingFontSize] = useState(40);

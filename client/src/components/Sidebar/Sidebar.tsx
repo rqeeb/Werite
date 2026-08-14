@@ -1,26 +1,27 @@
-
 type SidebarProps = {
-    isSidebarOpen:boolean
-}
-import "./Sidebar.css"
+  isSidebarOpen: boolean;
+};
+import { Library } from "lucide-react";
+import "./Sidebar.css";
+import { SidebarDocument } from "./SidebarDocument";
 
-export function Sidebar({isSidebarOpen}:SidebarProps){
-    return <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
-Lorem ipsum dolor sit amet cofvsvfnsectetur adipiscing elit. Quisque faucibus ex sapien vitae fj fdlkfd,fdn hello world ! how are we doing todya 
-lorem suwhs wsdhhwd wdhghjw dw sns nsnsns jsaj shekko world car car car wlkewl wejkwekljew wejkjwe dwhjdwgd whdwg dwhj wd vsfdvfs
-orem ipsum dolor sit amet cofvsvfnsectetur adipiscing elit. Quisque faucibus ex sapien vitae fj fdlkfd,fdn hello world ! how are we doing todya 
-lorem suwhs wsdhhwd wdhghjw dw sns nsnsns jsaj shekko world car car car wlkewl wejkwekljew wejkjwe dwhjdwgd whdwg dwhj wd vsfdvfs
-orem ipsum dolor sit amet cofvsvfnsectetur adipiscing elit. Quisque faucibus ex sapien vitae fj fdlkfd,fdn hello world ! how are we doing todya 
-lorem suwhs wsdhhwd wdhghjw dw sns nsnsns jsaj shekko world car car car wlkewl wejkwekljew wejkjwe dwhjdwgd whdwg dwhj wd vsfdvfs
-orem ipsum dolor sit amet cofvsvfnsectetur adipiscing elit. Quisque faucibus ex sapien vitae fj fdlkfd,fdn hello world ! how are we doing todya 
-lorem suwhs wsdhhwd wdhghjw dw sns nsnsns jsaj shekko world car car car wlkewl wejkwekljew wejkjwe dwhjdwgd whdwg dwhj wd vsfdvfs
-orem ipsum dolor sit amet cofvsvfnsectetur adipiscing elit. Quisque faucibus ex sapien vitae fj fdlkfd,fdn hello world ! how are we doing todya 
-lorem suwhs wsdhhwd wdhghjw dw sns nsnsns jsaj shekko world car car car wlkewl wejkwekljew wejkjwe dwhjdwgd whdwg dwhj wd vsfdvfs
-orem ipsum dolor sit amet cofvsvfnsectetur adipiscing elit. Quisque faucibus ex sapien vitae fj fdlkfd,fdn hello world ! how are we doing todya 
-lorem suwhs wsdhhwd wdhghjw dw sns nsnsns jsaj shekko world car car car wlkewl wejkwekljew wejkjwe dwhjdwgd whdwg dwhj wd vsfdvfs
-orem ipsum dolor sit amet cofvsvfnsectetur adipiscing elit. Quisque faucibus ex sapien vitae fj fdlkfd,fdn hello world ! how are we doing todya 
-lorem suwhs wsdhhwd wdhghjw dw sns nsnsns jsaj shekko world car car car wlkewl wejkwekljew wejkjwe dwhjdwgd whdwg dwhj wd vsfdvfs
-
-
+export function Sidebar({ isSidebarOpen }: SidebarProps) {
+  return (
+    <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
+      <div style={{ display: "flex" }}>
+        <Library />
+        <span>Werite</span>
+      </div>
+      <div>
+        <input type="text" />
+        <button>Search</button>
+      </div>
+      <div>
+        <SidebarDocument/>
+        <SidebarDocument/>
+        <SidebarDocument/>
+        <SidebarDocument/>
+      </div>
     </div>
+  );
 }

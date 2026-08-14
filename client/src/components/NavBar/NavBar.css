@@ -11,7 +11,7 @@
   left: 0;
   right: 0;
 
-  border-top: 1px solid rgb(48 48 48);
+  border-top: 1px solid rgba(48, 48, 48, 0.679);
   color: grey;
 
   z-index: 100;
