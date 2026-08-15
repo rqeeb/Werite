@@ -220,6 +220,7 @@ export function App() {
     setCurrentModal("share");
     setActiveModal("share");
   }
+
   return (
     <div>
       <ToastContainer />
@@ -248,7 +249,11 @@ export function App() {
           />
         </div>
 
-        <Sidebar isSidebarOpen={isSidebarOpen} />
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          user={user}
+          openLogin={() => switchTab("login")}
+        />
       </div>
 
       {activeModal === "login" && (

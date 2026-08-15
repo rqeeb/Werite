@@ -10,7 +10,6 @@
   flex-shrink: 0;
 
   transition: width 0.3s ease;
-  /* margin-top: 14px; */
 }
 
 .sidebarContainer.open {
@@ -40,5 +39,74 @@
 .sidebarHeader span {
   font-size: 19px;
   font-weight: 600;
-  font: optional;
+}
+
+.sidebarSearch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 10px;
+
+  /* background-color: #151515; */
+  border: 1px solid #292929;
+  border-radius: 8px;
+
+  margin-bottom: 16px;
+}
+
+.sidebarSearch:focus-within {
+  border-color: #555;
+}
+
+.sidebarSearch input {
+  width: 100%;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  color: white;
+
+  font-size: 14px;
+}
+
+.sidebarSearch input::placeholder {
+  color: #777;
+}
+
+.sidebarDocumentContainer {
+  flex: 1;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+.sidebar-document {
+  width: 100%;
+  padding: 10px 12px;
+
+  box-sizing: border-box;
+
+  border-radius: 7px;
+
+  color: #aaa;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar-document:hover {
+  background-color: #1a1a1a;
+  color: #fff;
 }
