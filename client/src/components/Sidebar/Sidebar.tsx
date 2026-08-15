@@ -2,7 +2,7 @@ import { Library, Search } from "lucide-react";
 import "./Sidebar.css";
 import { SidebarDocument } from "./SidebarDocument";
 
-type user = {
+type User = {
   id: string;
   username: string;
   email: string;
@@ -10,11 +10,19 @@ type user = {
 
 type SidebarProps = {
   isSidebarOpen: boolean;
-  user: user | null;
+  user: User | null;
   openLogin: () => void;
+  checkAuthLoading: boolean;
+  isDark: boolean;
 };
 
-export function Sidebar({ isSidebarOpen, user, openLogin }: SidebarProps) {
+export function Sidebar({
+  isSidebarOpen,
+  user,
+  openLogin,
+  checkAuthLoading,
+  isDark,
+}: SidebarProps) {
   return (
     <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
       {user ? (
@@ -27,7 +35,6 @@ export function Sidebar({ isSidebarOpen, user, openLogin }: SidebarProps) {
           <div className="sidebarSearch">
             <Search size={17} />
             <input type="text" placeholder="Search documents..." />
-            <Library />
           </div>
 
           <div className="sidebarDocumentContainer">
@@ -35,13 +42,26 @@ export function Sidebar({ isSidebarOpen, user, openLogin }: SidebarProps) {
             <SidebarDocument />
           </div>
         </div>
+      ) : checkAuthLoading ? (
+        <div className="spinnerContainer">
+          <span className={`spinner ${isDark ? "light" : "dark"}`} />
+        </div>
       ) : (
-        <div>
+        <div className="sidebarLoggedOut">
+          <div className="sidebarLoggedOutIcon">
+            <Library size={26} />
+          </div>
+
+          <h3>Your docs live here</h3>
+
+          <p>Log in to view, create, and manage your docs.</p>
+
           <button
-            style={{ justifyContent: "center", alignItems: "center" }}
+            type="button"
+            className="sidebarLoginButton"
             onClick={openLogin}
           >
-            Login
+            Log in
           </button>
         </div>
       )}
