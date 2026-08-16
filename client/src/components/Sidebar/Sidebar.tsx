@@ -26,13 +26,13 @@ export function Sidebar({
   return (
     <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
       {user ? (
-        <div className="innerSidebarContainer">
+        <div className={`innerSidebarContainer `}>
           <div className="sidebarHeader">
             <Library size={28} />
             <span>Werite</span>
           </div>
 
-          <div className="sidebarSearch">
+          <div className={`sidebarSearch ${isDark ? "light" : "dark"}`}>
             <Search size={17} />
             <input type="text" placeholder="Search documents..." />
           </div>
@@ -43,12 +43,12 @@ export function Sidebar({
           </div>
         </div>
       ) : checkAuthLoading ? (
-        <div className="spinnerContainer">
-          <span className={`spinner ${isDark ? "light" : "dark"}`} />
+        <div className="sidebarSpinnerContainer">
+          <span className={`sidebarSpinner ${isDark ? "light" : "dark"}`} />
         </div>
       ) : (
-        <div className="sidebarLoggedOut">
-          <div className="sidebarLoggedOutIcon">
+        <div className={`sidebarLoggedOut ${isDark ? "light" : "dark"}`}>
+          <div className={`sidebarLoggedOutIcon ${isDark ? "light" : "dark"}`}>
             <Library size={26} />
           </div>
 
@@ -58,7 +58,7 @@ export function Sidebar({
 
           <button
             type="button"
-            className="sidebarLoginButton"
+            className={`sidebarLoginButton ${isDark ? "light" : "dark"}`}
             onClick={openLogin}
           >
             Log in

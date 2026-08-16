@@ -141,6 +141,12 @@
   border-radius: 25%;
 }
 
+.sidebarLoggedOutIcon.dark {
+  color: #000000;
+ /* background-color: #df0303; */
+  border: 1px solid #000000;
+}
+
 .sidebarLoggedOut h3 {
   margin: 0 0 7px;
 
@@ -148,6 +154,10 @@
   font-size: 17px;
   font-weight: 600;
   line-height: 1.4;
+}
+
+.sidebarLoggedOut.dark h3{
+  color: #000000;
 }
 
 .sidebarLoggedOut p {
@@ -178,8 +188,19 @@
     transform 0.15s ease;
 }
 
+.sidebarLoginButton.dark {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+
 .sidebarLoginButton:hover {
   background-color: #dcdcdc;
+}
+
+.sidebarLoginButton.dark:hover {
+  /* background-color: #ffffff; */
+  color: black;
 }
 
 .sidebarLoginButton:active {
@@ -191,7 +212,7 @@
   outline-offset: 3px;
 }
 
-.spinner {
+.sidebarSpinner {
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -199,17 +220,17 @@
   animation: spin 0.7s linear infinite;
 }
 
-.spinner.dark {
+.sidebarSpinner.dark {
   border: 3px solid #00000030;
   border-top-color: black;
 }
 
-.spinner.light {
+.sidebarSpinner.light {
   border: 3px solid #ffffff50;
   border-top-color: white;
 }
 
-.spinnerContainer{
+.sidebarSpinnerContainer{
   display: flex;
   justify-content: center;
   align-items: center;

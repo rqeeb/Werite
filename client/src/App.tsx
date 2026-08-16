@@ -34,7 +34,7 @@ export function App() {
   } | null>(null);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [checkAuthLoading, setCheckAuthLoading] = useState(false);
+  const [checkAuthLoading, setCheckAuthLoading] = useState(true);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -44,17 +44,17 @@ export function App() {
     document.body.style.color = isDark ? "white" : "black";
   }, [isDark]);
 
-  useEffect(() => {
-    if (!user) {
-      localStorage.setItem("heading", heading);
-      localStorage.setItem("paragraph", paragraph);
-    }
-  }, [heading, paragraph]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     localStorage.setItem("heading", heading);
+  //     localStorage.setItem("paragraph", paragraph);
+  //   }
+  // }, [heading, paragraph]);
 
   useEffect(() => {
     async function checkAuth() {
       try {
-        setCheckAuthLoading(true);
+        // setCheckAuthLoading(true);
         const response = await axios.get("http://localhost:2021/auth/me", {
           withCredentials: true,
         });
