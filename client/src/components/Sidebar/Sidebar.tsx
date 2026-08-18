@@ -1,6 +1,10 @@
 import { Library, Search } from "lucide-react";
 import "./Sidebar.css";
 import { SidebarDocument } from "./SidebarDocument";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 
 type User = {
   id: string;
@@ -16,6 +20,12 @@ type SidebarProps = {
   isDark: boolean;
 };
 
+type DocumentItem = {
+  id: string;
+  title: string;
+  updatedAt: string;
+};
+
 export function Sidebar({
   isSidebarOpen,
   user,
@@ -23,6 +33,41 @@ export function Sidebar({
   checkAuthLoading,
   isDark,
 }: SidebarProps) {
+  const [documents, setDocuments] = useState<DocumentItem[]>([]);
+  const [documentsLoading, setDocumentsLoading] = useState(true);
+
+  const navigate = useNavigate();
+  const { id: currentDocumentId } = useParams();
+
+  useEffect(() => {
+    if (!user) {
+      setDocuments([]);
+      return;
+    }
+
+    async function fetchDocuments() {
+      try {
+        setDocumentsLoading(true);
+
+        const fetchedDocs = await axios.get(
+          "http://localhost:2021/api/document",
+          {
+            withCredentials: true,
+          },
+        );
+
+        setDocuments(fetchedDocs.data.documents);
+      } catch (error) {
+        console.log(error);
+        toast.error("Error fetching documents");
+      } finally {
+        setDocumentsLoading(false);
+      }
+    }
+
+    fetchDocuments();
+  }, [user, currentDocumentId]);
+
   return (
     <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
       {user ? (
@@ -38,8 +83,7 @@ export function Sidebar({
           </div>
 
           <div className="sidebarDocumentContainer">
-            <SidebarDocument />
-            <SidebarDocument />
+            {false ? <p> loading....</p> : <p> not loading....</p>}
           </div>
         </div>
       ) : checkAuthLoading ? (
