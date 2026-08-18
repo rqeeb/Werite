@@ -26,6 +26,8 @@
 
   padding: 18px 14px;
   box-sizing: border-box;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .sidebarHeader {
@@ -61,15 +63,20 @@
 }
 
 .sidebarSearch input {
-  /* width: 100%; */
+  flex: 1;
+  min-width: 0;
 
   background-color: transparent;
   border: none;
   outline: none;
 
-  color: white;
+  color: black;
 
   font-size: 14px;
+}
+
+.sidebarSearch.light input {
+  color: white;
 }
 
 .sidebarSearch input::placeholder {
@@ -77,8 +84,11 @@
 }
 
 .sidebarDocumentContainer {
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  height: 0;
 
   display: flex;
   flex-direction: column;
@@ -86,10 +96,16 @@
 
   scrollbar-width: thin;
   scrollbar-color: #444 transparent;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar-document {
+  display: block;
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: 10px 12px;
 
   background: transparent;
@@ -105,6 +121,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 0 0 auto;
 
   transition:
     background-color 0.15s ease,

@@ -18,6 +18,7 @@ type SidebarProps = {
   openLogin: () => void;
   checkAuthLoading: boolean;
   isDark: boolean;
+  createDocument: () => void;
 };
 
 type DocumentItem = {
@@ -32,6 +33,7 @@ export function Sidebar({
   openLogin,
   checkAuthLoading,
   isDark,
+  createDocument,
 }: SidebarProps) {
   const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [documentsLoading, setDocumentsLoading] = useState(true);
@@ -80,16 +82,16 @@ export function Sidebar({
           <div className={`sidebarSearch ${isDark ? "light" : "dark"}`}>
             <Search size={17} />
             <input type="text" placeholder="Search documents..." />
-            <button className="newDocumentButton">
+            <button className="newDocumentButton" onClick={createDocument}>
               <Plus size={20} />
             </button>
           </div>
 
           <div className="sidebarDocumentContainer">
             {documentsLoading ? (
-              <p className="documentsMessage">LoadingDocuments....</p>
+              <p className="documentsMessage">Loading Documents....</p>
             ) : documents.length === 0 ? (
-              <p> No documents yet...</p>
+              <p className="documentsMessage">No documents yet...</p>
             ) : (
               documents.map((document) => (
                 <SidebarDocument

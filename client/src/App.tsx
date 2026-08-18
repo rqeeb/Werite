@@ -227,6 +227,12 @@ export function App() {
     setActiveModal("share");
   }
 
+  function createDocument() {
+    navigate(`/`);
+    setHeading("");
+    setParagraph("");
+  }
+
   return (
     <div>
       <ToastContainer />
@@ -261,6 +267,7 @@ export function App() {
           openLogin={() => switchTab("login")}
           checkAuthLoading={checkAuthLoading}
           isDark={isDark}
+          createDocument={createDocument}
         />
       </div>
 
