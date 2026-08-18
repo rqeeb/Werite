@@ -47,6 +47,7 @@
   gap: 8px;
 
   padding: 8px 10px;
+  /* margin-right: 44px; */
 
   /* background-color: #151515; */
   border: 1px solid #292929;
@@ -60,7 +61,7 @@
 }
 
 .sidebarSearch input {
-  width: 100%;
+  /* width: 100%; */
 
   background-color: transparent;
   border: none;
@@ -91,15 +92,19 @@
   width: 100%;
   padding: 10px 12px;
 
-  box-sizing: border-box;
-
+  background: transparent;
+  border: none;
   border-radius: 7px;
 
   color: #aaa;
 
+  text-align: left;
   font-size: 14px;
 
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   transition:
     background-color 0.15s ease,
@@ -109,6 +114,18 @@
 .sidebar-document:hover {
   background-color: #1a1a1a;
   color: #fff;
+}
+
+.sidebar-document.active {
+  background-color: #242424;
+  color: #fff;
+}
+
+.documentsMessage {
+  padding: 12px;
+  color: #777;
+  font-size: 13px;
+  text-align: center;
 }
 
 .sidebarLoggedOut {
@@ -143,7 +160,7 @@
 
 .sidebarLoggedOutIcon.dark {
   color: #000000;
- /* background-color: #df0303; */
+  /* background-color: #df0303; */
   border: 1px solid #000000;
 }
 
@@ -156,7 +173,7 @@
   line-height: 1.4;
 }
 
-.sidebarLoggedOut.dark h3{
+.sidebarLoggedOut.dark h3 {
   color: #000000;
 }
 
@@ -192,7 +209,6 @@
   color: #ffffff;
   background-color: #000000;
 }
-
 
 .sidebarLoginButton:hover {
   background-color: #dcdcdc;
@@ -230,9 +246,25 @@
   border-top-color: white;
 }
 
-.sidebarSpinnerContainer{
+.sidebarSpinnerContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.newDocumentButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2px;
+  margin: 0;
+
+  background: transparent;
+  border: none;
+  color: inherit;
+
+  cursor: pointer;
+  flex-shrink: 0;
 }

@@ -1,4 +1,4 @@
-import { Library, Search } from "lucide-react";
+import { Library, Plus, Search } from "lucide-react";
 import "./Sidebar.css";
 import { SidebarDocument } from "./SidebarDocument";
 import { useEffect, useState } from "react";
@@ -80,6 +80,9 @@ export function Sidebar({
           <div className={`sidebarSearch ${isDark ? "light" : "dark"}`}>
             <Search size={17} />
             <input type="text" placeholder="Search documents..." />
+            <button className="newDocumentButton">
+              <Plus size={20} />
+            </button>
           </div>
 
           <div className="sidebarDocumentContainer">
