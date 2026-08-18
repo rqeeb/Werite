@@ -56,7 +56,7 @@ export function Sidebar({
           },
         );
 
-        setDocuments(fetchedDocs.data.documents);
+        setDocuments(fetchedDocs.data.documents ?? []);
       } catch (error) {
         console.log(error);
         toast.error("Error fetching documents");
@@ -83,7 +83,20 @@ export function Sidebar({
           </div>
 
           <div className="sidebarDocumentContainer">
-            {false ? <p> loading....</p> : <p> not loading....</p>}
+            {documentsLoading ? (
+              <p className="documentsMessage">LoadingDocuments....</p>
+            ) : documents.length === 0 ? (
+              <p> No documents yet...</p>
+            ) : (
+              documents.map((document) => (
+                <SidebarDocument
+                  key={document.id}
+                  title={document.title}
+                  isActive={document.id === currentDocumentId}
+                  onClick={() => navigate(`/document/${document.id}`)}
+                />
+              ))
+            )}
           </div>
         </div>
       ) : checkAuthLoading ? (
