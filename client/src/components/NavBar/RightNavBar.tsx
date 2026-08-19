@@ -1,4 +1,4 @@
-import { Clock, Download, PanelRight, Share2 } from "lucide-react";
+import { Clock, Divide, Download, PanelRight, Share2 } from "lucide-react";
 import { NavBarButton } from "./NavBarButton";
 import { NavBarStaticIcon } from "./NavBarStaticIcon";
 import { useEffect, useState } from "react";
@@ -28,39 +28,55 @@ export function RightNavBar({
 
   return (
     <div className="rightNavBar">
-      <div className="clockContainer">
-        <NavBarStaticIcon icon={<Clock size={22} strokeWidth={2} />} />
-        <div>{time.toLocaleTimeString()}</div>
+      <div className="rightNavBarLeftContainer">
+        <div className="clockContainer">
+          <NavBarStaticIcon icon={<Clock size={22} strokeWidth={2} />} />
+          <div>{time.toLocaleTimeString()}</div>
+        </div>
+
+        <div
+          style={{
+            width: "1px",
+            height: "22px",
+            backgroundColor: "grey",
+          }}
+        />
+
+        <NavBarButton
+          icon={<Download size={22} strokeWidth={2} />}
+          onClick={exportMD}
+        />
+
+        <NavBarButton
+          icon={<Share2 size={20} strokeWidth={2} />}
+          onClick={openModal}
+        />
+
+        <NavBarButton
+          icon={<PanelRight size={20} strokeWidth={2} />}
+          onClick={openSidebar}
+        />
       </div>
 
-      <div
-        style={{
-          width: "1px",
-          height: "22px",
-          backgroundColor: "grey",
-        }}
-      />
-
-      <NavBarButton
-        icon={<Download size={22} strokeWidth={2} />}
-        onClick={exportMD}
-      />
-
-      <NavBarButton
-        icon={<Share2 size={20} strokeWidth={2} />}
-        onClick={openModal}
-      />
-
-      <NavBarButton
-        icon={<PanelRight size={20} strokeWidth={2} />}
-        onClick={openSidebar}
-      />
-
-      <div className="isSaving" style={{marginLeft:"22px"}}>
-        <span style={{borderRadius:"100%",backgroundColor:"red",fontSize:"75%",marginRight:"8px"}}>ㅤ</span>
-        {isSaving == "saved" && "saved : )"}
-        {isSaving == "saving" && "saving..."}
-        {isSaving == "couldnt save" && <p style={{color:"red"}}>couldn't save</p>}
+      <div className="isSaving">
+        {isSaving == "saved" && (
+          <div className="saveStatus">
+            <span className="savedDot green"></span>
+            <span>Saved</span>
+          </div>
+        )}
+        {isSaving == "saving" && (
+          <div className="saveStatus">
+            <span className="savedDot blue"></span>
+            <span>Saving...</span>
+          </div>
+        )}
+        {isSaving == "couldnt save" && (
+          <div className="saveStatus">
+            <span className="savedDot red"></span>
+            <span>couldn't save</span>
+          </div>
+        )}
       </div>
     </div>
   );

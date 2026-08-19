@@ -36,7 +36,7 @@ export function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [checkAuthLoading, setCheckAuthLoading] = useState(true);
   const [isSaving, setIsSaving] = useState<
-    "saving" | "saved" | "couldn't save"
+    "saving" | "saved" | "couldnt save"
   >("saved");
   const [isDocumentLoading, setisDocumentLoading] = useState(false);
 
@@ -78,6 +78,7 @@ export function App() {
 
   useEffect(() => {
     if (!documentId || !user || isDocumentLoading) {
+      console.log("Returned")
       return;
     }
 
@@ -100,7 +101,7 @@ export function App() {
         );
         setIsSaving("saved");
       } catch (error) {
-        setIsSaving("couldn't save");
+        setIsSaving("couldnt save");
         console.log(error);
       }
     }, 800);
@@ -126,7 +127,8 @@ export function App() {
 
         setHeading(response.data.document.title);
         setParagraph(response.data.document.content);
-        // console.log("New loaded")
+        console.log("New loaded")
+        setisDocumentLoading(false);
       } catch (error) {
         console.log(error);
       }

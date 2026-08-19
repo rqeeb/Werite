@@ -4,7 +4,7 @@
   align-items: center;
   height: 55px;
 
-  padding: 0 clamp(12px, 7vw, 99px);
+  padding: 0 clamp(14px, 18vw, 64px);
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -33,8 +33,9 @@
 .rightNavBar {
   display: flex;
   gap: 12px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  
 }
 
 .navBarButton {
@@ -84,8 +85,43 @@
   align-items: center;
 }
 
+.rightNavBarLeftContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.isSaving{
+  margin-left: 22px;
+}
+
 @media (max-width: 480px) {
   .clockContainer {
     display: none;
   }
+}
+
+.saveStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.savedDot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.savedDot.green{
+  background-color: green;
+}
+.savedDot.blue{
+  background-color: blue;
+}
+.savedDot.red{
+  background-color: red;
 }
