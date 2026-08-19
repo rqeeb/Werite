@@ -35,10 +35,10 @@ export function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [checkAuthLoading, setCheckAuthLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState<
-    "saving" | "saved" | "couldnt save"
-  >("saved");
-  const [isDocumentLoading, setisDocumentLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState<"saving" | "saved" | "couldnt save">(
+    "saved",
+  );
+  const [isDocumentLoading, setIsDocumentLoading] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -78,7 +78,6 @@ export function App() {
 
   useEffect(() => {
     if (!documentId || !user || isDocumentLoading) {
-      console.log("Returned")
       return;
     }
 
@@ -86,9 +85,9 @@ export function App() {
     // console.log(documentId);
     // console.log(user)
 
+    setIsSaving("saving");
     const timeout = setTimeout(async () => {
       try {
-        setIsSaving("saving");
         await axios.patch(
           `http://localhost:2021/api/document/${documentId}`,
           {
@@ -117,7 +116,7 @@ export function App() {
 
     async function loadDocument() {
       try {
-        setisDocumentLoading(true);
+        setIsDocumentLoading(true);
         const response = await axios.get(
           `http://localhost:2021/api/document/${documentId}`,
           {
@@ -127,10 +126,10 @@ export function App() {
 
         setHeading(response.data.document.title);
         setParagraph(response.data.document.content);
-        console.log("New loaded")
-        setisDocumentLoading(false);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsDocumentLoading(false);
       }
     }
 
