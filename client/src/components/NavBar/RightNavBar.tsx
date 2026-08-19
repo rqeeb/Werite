@@ -56,7 +56,8 @@ export function RightNavBar({
         onClick={openSidebar}
       />
 
-      <div className="isSaving">
+      <div className="isSaving" style={{marginLeft:"22px"}}>
+        <span style={{borderRadius:"100%",backgroundColor:"red",fontSize:"75%",marginRight:"8px"}}>ㅤ</span>
         {isSaving == "saved" && "saved : )"}
         {isSaving == "saving" && "saving..."}
         {isSaving == "couldnt save" && <p style={{color:"red"}}>couldn't save</p>}
