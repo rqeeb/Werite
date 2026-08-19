@@ -10,6 +10,7 @@ type INavBar = {
   exportMD: () => void;
   openModal: () => void;
   openSidebar: () =>void;
+  isSaving: string
 };
 
 export function NavBar({
@@ -19,7 +20,8 @@ export function NavBar({
   toggleTheme,
   exportMD,
   openModal,
-  openSidebar
+  openSidebar,
+  isSaving
 }: INavBar) {
   return (
     <div className="navBarContainer" style={{
@@ -31,7 +33,7 @@ export function NavBar({
         currentFontSize={currentFontSize}
         toggleTheme={toggleTheme}
       />
-      <RightNavBar exportMD={exportMD} openModal={openModal} openSidebar={openSidebar} />
+      <RightNavBar exportMD={exportMD} openModal={openModal} openSidebar={openSidebar} isSaving={isSaving} />
     </div>
   );
 }

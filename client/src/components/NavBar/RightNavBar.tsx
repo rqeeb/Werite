@@ -6,10 +6,16 @@ import { useEffect, useState } from "react";
 type IRightNavBar = {
   exportMD: () => void;
   openModal: () => void;
-  openSidebar:()=>void;
+  openSidebar: () => void;
+  isSaving: string;
 };
 
-export function RightNavBar({ exportMD, openModal,openSidebar }: IRightNavBar) {
+export function RightNavBar({
+  exportMD,
+  openModal,
+  openSidebar,
+  isSaving,
+}: IRightNavBar) {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -44,10 +50,16 @@ export function RightNavBar({ exportMD, openModal,openSidebar }: IRightNavBar) {
         icon={<Share2 size={20} strokeWidth={2} />}
         onClick={openModal}
       />
-      
-      <NavBarButton 
-      icon={<PanelRight size={20} strokeWidth={2} />}
-      onClick={openSidebar} />
+
+      <NavBarButton
+        icon={<PanelRight size={20} strokeWidth={2} />}
+        onClick={openSidebar}
+      />
+
+      <div className="isSaving">
+        {isSaving == "saved" && "saved : )"}
+        {isSaving == "saving" && "saving..."}
+      </div>
     </div>
   );
 }

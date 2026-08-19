@@ -35,6 +35,9 @@ export function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [checkAuthLoading, setCheckAuthLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState<
+    "saving" | "saved" | "couldn't save"
+  >("saved");
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -86,6 +89,7 @@ export function App() {
 
     const timeout = setTimeout(async () => {
       try {
+        setIsSaving("saving");
         await axios.patch(
           `http://localhost:2021/api/document/${documentId}`,
           {
@@ -96,8 +100,9 @@ export function App() {
             withCredentials: true,
           },
         );
-        // console.log("Saved");
+        setIsSaving("saved");
       } catch (error) {
+        setIsSaving("couldn't save");
         console.log(error);
       }
     }, 800);
@@ -247,6 +252,7 @@ export function App() {
         openSidebar={() => {
           setIsSidebarOpen((prev) => !prev);
         }}
+        isSaving={isSaving}
       />
 
       <div className="workspace">
