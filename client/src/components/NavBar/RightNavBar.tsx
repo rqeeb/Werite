@@ -59,6 +59,7 @@ export function RightNavBar({
       <div className="isSaving">
         {isSaving == "saved" && "saved : )"}
         {isSaving == "saving" && "saving..."}
+        {isSaving == "couldnt save" && <p style={{color:"red"}}>couldn't save</p>}
       </div>
     </div>
   );

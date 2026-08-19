@@ -38,6 +38,7 @@ export function App() {
   const [isSaving, setIsSaving] = useState<
     "saving" | "saved" | "couldn't save"
   >("saved");
+  const [isDocumentLoading, setisDocumentLoading] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -76,10 +77,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (!documentId) {
-      return;
-    }
-    if (!user) {
+    if (!documentId || !user || isDocumentLoading) {
       return;
     }
 
@@ -118,6 +116,7 @@ export function App() {
 
     async function loadDocument() {
       try {
+        setisDocumentLoading(true);
         const response = await axios.get(
           `http://localhost:2021/api/document/${documentId}`,
           {
