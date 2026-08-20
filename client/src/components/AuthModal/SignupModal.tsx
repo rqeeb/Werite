@@ -59,7 +59,7 @@ function SignupModal({ onClose, isDark, switchTab }: SignupModalProps) {
         email: email.trim(),
         password,
       });
- 
+
       toast.success("Sign up successful, please login");
       switchTab("login");
     } catch (error) {
@@ -89,7 +89,7 @@ function SignupModal({ onClose, isDark, switchTab }: SignupModalProps) {
   }
 
   return (
-    <div className="modalBackdrop" onClick={onClose}>
+    <div className="modalBackdrop">
       <div
         className={`loginModal ${isDark ? "dark" : "light"}`}
         onClick={(e) => e.stopPropagation()}

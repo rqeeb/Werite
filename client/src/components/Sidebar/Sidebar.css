@@ -103,7 +103,7 @@
 
 .sidebar-document {
   display: block;
-  width: 100%;
+  width: auto;
   min-width: 0;
   box-sizing: border-box;
   padding: 10px 12px;
@@ -121,7 +121,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex: 0 0 auto;
+  flex: 1;
   line-height: 1.4;
 
   transition:
@@ -285,4 +285,35 @@
 
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.SidebarDocumentRow {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.deleteDocumentButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #888;
+  border-radius: 6px;
+}
+
+.deleteDocumentButton:hover {
+  color: red;
+  background: rgba(255, 80, 80, 0.12);
 }

@@ -1,4 +1,4 @@
-import { Clock, Divide, Download, PanelRight, Share2 } from "lucide-react";
+import { Clock, Download, PanelRight, Share2 } from "lucide-react";
 import { NavBarButton } from "./NavBarButton";
 import { NavBarStaticIcon } from "./NavBarStaticIcon";
 import { useEffect, useState } from "react";
@@ -77,6 +77,13 @@ export function RightNavBar({
             <span>Couldn't save</span>
           </div>
         )}
+        {isSaving == "saved locally" && (
+          <div className="saveStatus">
+            <span className="savedDot green"></span>
+            <span>Saved locally</span>
+          </div>
+        )}
+
       </div>
     </div>
   );

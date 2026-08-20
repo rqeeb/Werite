@@ -70,6 +70,11 @@ export function Sidebar({
     fetchDocuments();
   }, [user, currentDocumentId]);
 
+
+
+  async function onDelete(){
+    await axios.delete("http")
+  }
   return (
     <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
       {user ? (
@@ -99,6 +104,7 @@ export function Sidebar({
                   title={document.title}
                   isActive={document.id === currentDocumentId}
                   onClick={() => navigate(`/document/${document.id}`)}
+                  onDelete={onDelete}
                 />
               ))
             )}

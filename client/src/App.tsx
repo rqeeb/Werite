@@ -35,9 +35,9 @@ export function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [checkAuthLoading, setCheckAuthLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState<"saving" | "saved" | "couldnt save">(
-    "saved",
-  );
+  const [isSaving, setIsSaving] = useState<
+    "saving" | "saved" | "couldnt save" | "saved locally"
+  >("saved");
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
 
   useEffect(() => {
@@ -51,8 +51,10 @@ export function App() {
   useEffect(() => {
     if (user || checkAuthLoading) return;
 
+    
     localStorage.setItem("guestHeading", heading);
     localStorage.setItem("guestParagraph", paragraph);
+    setIsSaving("saved locally");
   }, [heading, paragraph, user, checkAuthLoading]);
 
   useEffect(() => {
