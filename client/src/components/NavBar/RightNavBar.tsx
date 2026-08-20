@@ -74,7 +74,7 @@ export function RightNavBar({
         {isSaving == "couldnt save" && (
           <div className="saveStatus">
             <span className="savedDot red"></span>
-            <span>couldn't save</span>
+            <span>Couldn't save</span>
           </div>
         )}
       </div>

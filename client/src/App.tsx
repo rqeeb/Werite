@@ -48,12 +48,12 @@ export function App() {
     document.body.style.color = isDark ? "white" : "black";
   }, [isDark]);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     localStorage.setItem("heading", heading);
-  //     localStorage.setItem("paragraph", paragraph);
-  //   }
-  // }, [heading, paragraph]);
+  useEffect(() => {
+    if (user || checkAuthLoading) return;
+
+    localStorage.setItem("guestHeading", heading);
+    localStorage.setItem("guestParagraph", paragraph);
+  }, [heading, paragraph, user, checkAuthLoading]);
 
   useEffect(() => {
     async function checkAuth() {
@@ -67,6 +67,9 @@ export function App() {
         setCurrentModal("share");
       } catch {
         setUser(null);
+        setHeading(localStorage.getItem("guestHeading") ?? "");
+        setParagraph(localStorage.getItem("guestParagraph") ?? "");
+
         setCurrentModal("login");
       } finally {
         setCheckAuthLoading(false);
@@ -110,7 +113,7 @@ export function App() {
 
   useEffect(() => {
     // console.log("new load start")
-    if (!documentId) {
+    if (!documentId || !user) {
       return;
     }
 
@@ -134,7 +137,7 @@ export function App() {
     }
 
     loadDocument();
-  }, [documentId]);
+  }, [documentId, user]);
 
   useEffect(() => {
     if (documentId || !user) {

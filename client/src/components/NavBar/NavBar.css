@@ -16,6 +16,7 @@
 
   z-index: 100;
   background-color: inherit;
+  box-sizing: border-box;
 }
 .navBarContainer {
   -webkit-user-select: none;
