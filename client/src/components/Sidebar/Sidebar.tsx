@@ -19,6 +19,7 @@ type SidebarProps = {
   checkAuthLoading: boolean;
   isDark: boolean;
   createDocument: () => void;
+  setTextAreaDefault: () => void;
 };
 
 type DocumentItem = {
@@ -34,6 +35,7 @@ export function Sidebar({
   checkAuthLoading,
   isDark,
   createDocument,
+  setTextAreaDefault,
 }: SidebarProps) {
   const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [documentsLoading, setDocumentsLoading] = useState(true);
@@ -70,11 +72,33 @@ export function Sidebar({
     fetchDocuments();
   }, [user, currentDocumentId]);
 
+  async function onDelete(id: string) {
+    try {
+      await axios.delete(`http://localhost:2021/api/document/${id}`, {
+        withCredentials: true,
+      });
 
+      const nextDocument = documents.find((document) => document.id !== id);
 
-  async function onDelete(){
-    await axios.delete("http")
+      setDocuments((previousDocuments) =>
+        previousDocuments.filter((document) => document.id !== id),
+      );
+
+      if (currentDocumentId === id) {
+        if (nextDocument) {
+          navigate(`/document/${nextDocument.id}`);
+        } else {
+          setTextAreaDefault();
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Couldn't delete document");
+    }
   }
+
+  
   return (
     <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
       {user ? (
@@ -104,7 +128,7 @@ export function Sidebar({
                   title={document.title}
                   isActive={document.id === currentDocumentId}
                   onClick={() => navigate(`/document/${document.id}`)}
-                  onDelete={onDelete}
+                  onDelete={() => onDelete(document.id)}
                 />
               ))
             )}

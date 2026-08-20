@@ -243,6 +243,11 @@ export function App() {
     setParagraph("");
   }
 
+  function setTextAreaDefault(){
+    setHeading("");
+    setParagraph("");
+  }
+
   return (
     <div>
       <ToastContainer />
@@ -279,6 +284,7 @@ export function App() {
           checkAuthLoading={checkAuthLoading}
           isDark={isDark}
           createDocument={createDocument}
+          setTextAreaDefault={setTextAreaDefault}
         />
       </div>
 

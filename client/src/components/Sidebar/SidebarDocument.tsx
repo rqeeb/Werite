@@ -23,7 +23,7 @@ export function SidebarDocument({
         {title.trim() || "Untitled"}
       </button>
 
-      <button className="deleteDocumentButton" >
+      <button className="deleteDocumentButton" onClick={onDelete} >
         <Trash />
       </button>
     </div>

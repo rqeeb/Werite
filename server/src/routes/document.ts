@@ -16,7 +16,7 @@ router.post("/", authMiddleware, async (req, res) => {
 
     const document = await prisma.document.create({
       data: {
-        title: title || "Untitled",
+        title: title || "New Document",
         content: content || "",
         ownerId: req.userId,
       },
