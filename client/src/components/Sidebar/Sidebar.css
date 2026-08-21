@@ -102,6 +102,7 @@
 }
 
 .sidebar-document {
+  flex: 1;
   display: block;
   width: auto;
   min-width: 0;
@@ -121,7 +122,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex: 1;
+
   line-height: 1.4;
 
   transition:
@@ -129,15 +130,15 @@
     color 0.15s ease;
 }
 
-.sidebar-document:hover {
+/* .sidebar-document:hover {
   background-color: #1a1a1a;
   color: #fff;
-}
+} */
 
-.sidebar-document.active {
+/* .sidebar-document.active {
   background-color: #242424;
   color: #fff;
-}
+} */
 
 .documentsMessage {
   padding: 12px;
@@ -291,29 +292,74 @@
   display: flex;
   width: 100%;
   min-width: 0;
+  min-width: 0;
   align-items: center;
   gap: 4px;
+
+  border-radius: 7px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.SidebarDocumentRow:active {
+  background-color: #242424;
+}
+.SidebarDocumentRow:hover {
+  background-color: #1a1a1a;
+}
+
+.SidebarDocumentRow:hover .sidebar-document,
+.SidebarDocumentRow:active .sidebar-document {
+  color: #fff;
 }
 
 .deleteDocumentButton {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
+  margin-right: 5px;
 
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: #888;
+  background: transparent;
+  border: none;
   border-radius: 6px;
+
+  color: #888;
+  cursor: pointer;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.SidebarDocumentRow:hover .deleteDocumentButton {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .deleteDocumentButton:hover {
   color: red;
   background: rgba(255, 80, 80, 0.12);
+}
+
+.deleteDocumentButton:active {
+  transform: scale(0.9);
+}
+
+.SidebarDocumentRow.active .deleteDocumentButton {
+  opacity: 0.45;
+  pointer-events: auto;
+}
+
+.SidebarDocumentRow.active:hover .deleteDocumentButton {
+  opacity: 1;
 }

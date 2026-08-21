@@ -42,6 +42,7 @@ export function Sidebar({
 
   const navigate = useNavigate();
   const { id: currentDocumentId } = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (!user) {
@@ -72,6 +73,14 @@ export function Sidebar({
     fetchDocuments();
   }, [user, currentDocumentId]);
 
+  const filteredDocuments = documents.filter((document) => {
+    const documentTitle = document.title.trim() || "Untitled";
+
+    return documentTitle
+      .toLowerCase()
+      .includes(searchQuery.trim().toLowerCase());
+  });
+
   async function onDelete(id: string) {
     try {
       await axios.delete(`http://localhost:2021/api/document/${id}`, {
@@ -98,7 +107,6 @@ export function Sidebar({
     }
   }
 
-  
   return (
     <div className={`sidebarContainer ${isSidebarOpen ? "open" : ""}`}>
       {user ? (
@@ -110,7 +118,12 @@ export function Sidebar({
 
           <div className={`sidebarSearch ${isDark ? "light" : "dark"}`}>
             <Search size={17} />
-            <input type="text" placeholder="Search documents..." />
+            <input
+              type="text"
+              placeholder="Search documents..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <button className="newDocumentButton" onClick={createDocument}>
               <Plus size={20} />
             </button>
@@ -119,10 +132,12 @@ export function Sidebar({
           <div className="sidebarDocumentContainer">
             {documentsLoading ? (
               <p className="documentsMessage">Loading Documents....</p>
-            ) : documents.length === 0 ? (
-              <p className="documentsMessage">No documents yet...</p>
+            ) : filteredDocuments.length === 0 ? (
+              <p className="documentsMessage">
+                {searchQuery ? "No matching documents" : "No documents yet..."}
+              </p>
             ) : (
-              documents.map((document) => (
+              filteredDocuments.map((document) => (
                 <SidebarDocument
                   key={document.id}
                   title={document.title}

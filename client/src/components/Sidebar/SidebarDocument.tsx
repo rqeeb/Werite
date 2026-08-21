@@ -11,20 +11,23 @@ export function SidebarDocument({
   title,
   isActive,
   onClick,
-  onDelete
+  onDelete,
 }: SidebarDocumentProps) {
+
+  
+
+
   return (
-    <div className="SidebarDocumentRow">
+    <div className={`SidebarDocumentRow ${isActive ? "active" : ""}`}>
       <button
         type="button"
-        className={`sidebar-document ${isActive ? "active" : ""}`}
+        className={`sidebar-document`}
         onClick={onClick}
       >
         {title.trim() || "Untitled"}
       </button>
-
-      <button className="deleteDocumentButton" onClick={onDelete} >
-        <Trash />
+      <button className="deleteDocumentButton" onClick={onDelete,()=>{}} >
+        <Trash size={15} strokeWidth={1.8} />
       </button>
     </div>
   );
