@@ -1,10 +1,11 @@
 import { Trash } from "lucide-react";
+import { useState } from "react";
 
 type SidebarDocumentProps = {
   title: string;
   isActive: boolean;
   onClick: () => void;
-  onDelete: () => void;
+  onDelete: () => Promise<void>;
 };
 
 export function SidebarDocument({
@@ -13,9 +14,19 @@ export function SidebarDocument({
   onClick,
   onDelete,
 }: SidebarDocumentProps) {
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
-  
+  async function handleDelete() {
+    try {
+      setIsDeleteLoading(true);
 
+      await onDelete();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsDeleteLoading(false);
+    }
+  }
 
   return (
     <div className={`SidebarDocumentRow ${isActive ? "active" : ""}`}>
@@ -23,11 +34,23 @@ export function SidebarDocument({
         type="button"
         className={`sidebar-document`}
         onClick={onClick}
+        disabled={isDeleteLoading}
       >
         {title.trim() || "Untitled"}
       </button>
-      <button className="deleteDocumentButton" onClick={onDelete,()=>{}} >
-        <Trash size={15} strokeWidth={1.8} />
+
+      <button
+        type="button"
+        className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""}`}
+        onClick={handleDelete}
+        disabled={isDeleteLoading}
+        aria-label="Delete document"
+      >
+        {isDeleteLoading ? (
+          <span className="deleteSpinner" />
+        ) : (
+          <Trash size={15} strokeWidth={1.8} />
+        )}
       </button>
     </div>
   );

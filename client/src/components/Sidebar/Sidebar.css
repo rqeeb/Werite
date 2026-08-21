@@ -272,6 +272,27 @@
   height: 100%;
 }
 
+.deleteSpinner {
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid rgba(128, 128, 128, 0.3);
+  border-top-color: #aaa;
+  border-radius: 50%;
+
+  animation: spin 0.65s linear infinite;
+}
+
+.deleteDocumentButton.loading {
+  opacity: 1;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .newDocumentButton {
   display: flex;
   align-items: center;
@@ -302,8 +323,9 @@
     color 0.15s ease;
 }
 
-.SidebarDocumentRow:active {
-  background-color: #242424;
+.SidebarDocumentRow.active {
+  background-color: #1a1a1a;
+  color: #fff;
 }
 .SidebarDocumentRow:hover {
   background-color: #1a1a1a;
