@@ -82,7 +82,13 @@ router.get("/:id", authMiddleware, async (req, res) => {
     const document = await prisma.document.findFirst({
       where: {
         id,
-        ownerId: req.userId,
+      },
+    });
+
+    const documentMember = await prisma.documentMember.findFirst({
+      where: {
+        documentId: id,
+        userId: req.userId,
       },
     });
 
@@ -92,11 +98,17 @@ router.get("/:id", authMiddleware, async (req, res) => {
       });
     }
 
+    if (document.ownerId != req.userId && !documentMember) {
+      return res.status(403).json({
+        error: "You don't have access to this document",
+      });
+    }
+
     return res.status(200).json({
       document,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: "Internal server error",
     });
     console.log(error);
@@ -129,7 +141,6 @@ router.patch("/:id", authMiddleware, async (req, res) => {
     const document = await prisma.document.findFirst({
       where: {
         id,
-        ownerId: req.userId,
       },
     });
 
@@ -137,6 +148,20 @@ router.patch("/:id", authMiddleware, async (req, res) => {
       return res.status(404).json({
         error: "Document not found",
       });
+    }
+
+    const memberRole = await prisma.documentMember.findFirst({
+      where: {
+        documentId: id,
+        userId: req.userId,
+        role: "EDITOR",
+      },
+    });
+
+    if (!memberRole && req.userId !== document.ownerId) {
+      return res
+        .status(400)
+        .json({ error: "You don't have access to this document" });
     }
 
     const updatedDocument = await prisma.document.update({
@@ -248,7 +273,7 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
     });
 
     if (!document) {
-      return res.status(400).json({
+      return res.status(403).json({
         error: "Only owner can share this document",
       });
     }
@@ -292,7 +317,5 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
     });
   }
 });
-
-
 
 export default router;

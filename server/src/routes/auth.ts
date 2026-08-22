@@ -127,6 +127,8 @@ router.get("/me", authMiddleware, async (req, res) => {
     },
   });
 
+  // console.log(user?.email);
+
   return res.json({
     user,
   });
