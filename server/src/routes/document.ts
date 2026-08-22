@@ -222,13 +222,13 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
   };
 
   if (!email || !role) {
-    res.status(400).json({
+    return res.status(400).json({
       error: "Email and role are required",
     });
   }
 
   if (role != "VIEWER" && role != "EDITOR") {
-    res.status(400).json({
+    return res.status(400).json({
       error: "Invalid role",
     });
   }
@@ -240,7 +240,7 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
   }
 
   try {
-    const document = await prisma.document.findUnique({
+    const document = await prisma.document.findFirst({
       where: {
         id,
         ownerId: req.userId,
@@ -249,7 +249,7 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
 
     if (!document) {
       return res.status(400).json({
-        error: "Only owner can share this docuement",
+        error: "Only owner can share this document",
       });
     }
 
@@ -292,5 +292,7 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
     });
   }
 });
+
+
 
 export default router;
