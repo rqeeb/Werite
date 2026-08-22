@@ -205,5 +205,92 @@ router.delete("/:id", authMiddleware, async (req, res) => {
     });
   }
 });
+// access other users docs etc endpoint
+
+router.post("/:id/members", authMiddleware, async (req, res) => {
+  const { id } = req.params;
+
+  if (!req.userId) {
+    return res.status(401).json({
+      error: "User not authenticated",
+    });
+  }
+
+  const { email, role } = req.body as {
+    email?: string;
+    role?: "VIEWER" | "EDITOR";
+  };
+
+  if (!email || !role) {
+    res.status(400).json({
+      error: "Email and role are required",
+    });
+  }
+
+  if (role != "VIEWER" && role != "EDITOR") {
+    res.status(400).json({
+      error: "Invalid role",
+    });
+  }
+
+  if (typeof id !== "string") {
+    return res.status(404).json({
+      error: "Invalid document id type",
+    });
+  }
+
+  try {
+    const document = await prisma.document.findUnique({
+      where: {
+        id,
+        ownerId: req.userId,
+      },
+    });
+
+    if (!document) {
+      return res.status(400).json({
+        error: "Only owner can share this docuement",
+      });
+    }
+
+    const memberEmail = email?.trim().toLowerCase();
+    const member = await prisma.user.findUnique({
+      where: {
+        email: memberEmail,
+      },
+    });
+
+    if (!member) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (member.id === req.userId) {
+      return res.status(400).json({ error: "You already own this document" });
+    }
+
+    const existingMember = await prisma.documentMember.findFirst({
+      where: {
+        documentId: id,
+        userId: member.id,
+      },
+    });
+
+    const membership = existingMember
+      ? await prisma.documentMember.update({
+          where: { id: existingMember.id },
+          data: { role },
+        })
+      : await prisma.documentMember.create({
+          data: { documentId: id, userId: member.id, role },
+        });
+
+    return res.status(200).json({ membership });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+});
 
 export default router;

@@ -111,7 +111,9 @@ export function App() {
     }, 800);
 
     return () => clearTimeout(timeout);
-  }, [heading, paragraph, documentId]);
+  }, [heading, paragraph, documentId,user,isDocumentLoading
+
+  ]);
 
   useEffect(() => {
     // console.log("new load start")
