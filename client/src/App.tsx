@@ -17,7 +17,11 @@ export function App() {
 
   const [headingFontSize, setHeadingFontSize] = useState(40);
   const [paragraphFontSize, setParagraphFontSize] = useState(22);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    return savedTheme !== null ? JSON.parse(savedTheme) : true;
+  });
   const [heading, setHeading] = useState("");
   const [paragraph, setParagraph] = useState("");
   const [activeModal, setActiveModal] = useState<
@@ -51,7 +55,6 @@ export function App() {
   useEffect(() => {
     if (user || checkAuthLoading) return;
 
-    
     localStorage.setItem("guestHeading", heading);
     localStorage.setItem("guestParagraph", paragraph);
     setIsSaving("saved locally");
@@ -111,9 +114,7 @@ export function App() {
     }, 800);
 
     return () => clearTimeout(timeout);
-  }, [heading, paragraph, documentId,user,isDocumentLoading
-
-  ]);
+  }, [heading, paragraph, documentId, user, isDocumentLoading]);
 
   useEffect(() => {
     // console.log("new load start")
@@ -171,6 +172,10 @@ export function App() {
 
     createDocument();
   }, [documentId, user]);
+
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(isDark));
+  }, [isDark]);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
@@ -245,7 +250,7 @@ export function App() {
     setParagraph("");
   }
 
-  function setTextAreaDefault(){
+  function setTextAreaDefault() {
     setHeading("");
     setParagraph("");
   }

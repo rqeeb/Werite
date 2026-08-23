@@ -45,7 +45,10 @@ router.get("/", authMiddleware, async (req, res) => {
   try {
     const documents = await prisma.document.findMany({
       where: {
-        ownerId,
+        OR: [
+          { ownerId: req.userId },
+          { memberships: { some: { userId: req.userId } } },
+        ],
       },
       orderBy: {
         updatedAt: "desc",
@@ -160,8 +163,8 @@ router.patch("/:id", authMiddleware, async (req, res) => {
 
     if (!memberRole && req.userId !== document.ownerId) {
       return res
-        .status(400)
-        .json({ error: "You don't have access to this document" });
+        .status(403)
+        .json({ error: "You don't have edit access to this document" });
     }
 
     const updatedDocument = await prisma.document.update({
