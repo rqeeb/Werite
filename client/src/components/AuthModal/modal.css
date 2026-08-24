@@ -11,6 +11,7 @@
   z-index: 1000;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  animation: backdropIn 0.18s ease both;
 }
 
 .loginModal {
@@ -19,7 +20,7 @@
   width: min(400px, 90vw);
 
   padding: 2.5rem;
-  border-radius: 50px;
+  border-radius: 25px;
 
   display: flex;
   flex-direction: column;
@@ -27,6 +28,7 @@
   border: 1px solid;
 
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: modalIn 0.2s ease both;
 }
 
 .loginModal.dark {
@@ -332,4 +334,61 @@
 
 .shareEyebrow {
   margin: 0;
+}
+
+.modalBackdrop.isClosing {
+  animation: backdropOut 0.18s ease both;
+}
+
+.modalBackdrop.isClosing .loginModal {
+  animation: modalOut 0.18s ease both;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+}
+
+@keyframes backdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes backdropOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.shareRoleOption:hover {
+  transform: translateY(-1px);
+}
+
+.shareRoleOption {
+  transform: 0.15s ease;
+  border-color: 0.15s ease;
 }
