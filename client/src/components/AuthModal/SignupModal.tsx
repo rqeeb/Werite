@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
-import "./modal.css";
 import { useState } from "react";
+import "./modal.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 

@@ -308,7 +308,7 @@ export function App() {
         <SignupModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
       )}
 
-      {activeModal === "share" && <ShareModal onClose={onClose} />}
+      {activeModal === "share" && <ShareModal isDark={isDark} onClose={onClose} />}
     </div>
   );
 }
