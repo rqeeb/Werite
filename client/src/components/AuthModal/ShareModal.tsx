@@ -41,6 +41,9 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
     setIsClosing(true);
     setTimeout(onClose, 180);
   }
+  function addMember(){
+    setIsLoading(true);
+  }
 
   return (
     <div className={`modalBackdrop ${isClosing ? "isClosing" : ""}`}>
@@ -108,6 +111,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
           <button
             className={`loginButton ${isDark ? "dark" : "light"}`}
             disabled={isLoading}
+            onClick={addMember}
           >
             {isLoading ? (
               <span className={`spinner ${isDark ? "dark" : "light"}`} />

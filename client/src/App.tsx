@@ -75,7 +75,7 @@ export function App() {
         setHeading(localStorage.getItem("guestHeading") ?? "");
         setParagraph(localStorage.getItem("guestParagraph") ?? "");
 
-        setCurrentModal("login");
+        // setCurrentModal("login");
       } finally {
         setCheckAuthLoading(false);
       }
@@ -235,7 +235,11 @@ export function App() {
   }
 
   function openCurrentModal() {
-    setActiveModal(currentModal);
+    if (activeModal === currentModal) {
+      setActiveModal(null);
+    } else {
+      setActiveModal(currentModal);
+    }
   }
 
   function handleLogin(user: { id: string; username: string; email: string }) {
@@ -308,7 +312,9 @@ export function App() {
         <SignupModal onClose={onClose} isDark={isDark} switchTab={switchTab} />
       )}
 
-      {activeModal === "share" && <ShareModal isDark={isDark} onClose={onClose} />}
+      {activeModal === "share" && (
+        <ShareModal isDark={isDark} onClose={onClose} />
+      )}
     </div>
   );
 }
