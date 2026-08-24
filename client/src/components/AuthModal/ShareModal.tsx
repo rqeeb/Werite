@@ -51,7 +51,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
             <Share2 size={20} />
           </div>
           <p className="shareEyebrow">COLLABORATION</p>
-          <h2>Invite a writer</h2>
+          <h2>Add a member</h2>
           <p className="shareSubtitle">Give someone access to this document.</p>
 
           <div className="inputGroup">
@@ -82,7 +82,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
               <button
                 type="button"
                 className={`shareRoleOption ${role === "VIEWER" ? "selected" : ""}`}
-                onClick={() => setRole("EDITOR")}
+                onClick={() => setRole("VIEWER")}
               >
                 <span>View only</span>
                 <small>Can read</small>
@@ -94,7 +94,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
                 onClick={() => setRole("EDITOR")}
               >
                 <span>Can edit</span>
-                <small>Ca</small>
+                <small>Can read and write</small>
               </button>
             </div>
           </div>
@@ -102,12 +102,11 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
           <button
             className={`loginButton ${isDark ? "dark" : "light"}`}
             disabled={isLoading}
-            style={{ backgroundColor: "#AE37FF" }}
           >
             {isLoading ? (
               <span className={`spinner ${isDark ? "dark" : "light"}`} />
             ) : (
-              "Sign up"
+              "Invite Collabrator"
             )}
           </button>
         </div>

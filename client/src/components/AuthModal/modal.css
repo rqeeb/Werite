@@ -19,7 +19,7 @@
   width: min(400px, 90vw);
 
   padding: 2.5rem;
-  border-radius: 25px;
+  border-radius: 50px;
 
   display: flex;
   flex-direction: column;
@@ -231,3 +231,36 @@
   margin-top: 4px;
 }
 
+.shareRolePicker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap:8px;
+}
+
+.shareRoleOption {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #303030;
+
+  cursor: pointer;
+  border-radius: 9px;
+
+  background:transparent;
+  
+}
+
+.shareRoleOption.selected {
+  background-color: #1d1d1d;
+  counter-reset: #888;
+  color: white;
+}
+
+.ShareContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.shareicon {
+  
+}
