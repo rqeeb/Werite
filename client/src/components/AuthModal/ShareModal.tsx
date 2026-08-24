@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { Share2, X } from "lucide-react";
 import "./modal.css";
 import { useState } from "react";
 import axios from "axios";
@@ -14,7 +14,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [role, setRole] = useState<"VIEWER" | "EDITOR">("VIEWER");
 
   function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -24,7 +24,6 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
     let isValid = true;
 
     setEmailError("");
-    setPasswordError("");
 
     if (!email.trim()) {
       setEmailError("Email is required");
@@ -35,45 +34,6 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
     }
 
     return isValid;
-  }
-
-  async function signupFunction() {
-    if (!validateInputs()) {
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      await axios.post("http://localhost:2021/auth/signup", {
-        email: email.trim(),
-      });
-
-      toast.success("Sign up successful, please login");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const status = error.response?.status;
-
-        if (status === 409) {
-          setEmailError("An account with this email already exists");
-          toast.error("Email already registered");
-        } else if (status === 400) {
-          toast.error(
-            error.response?.data?.error || "Invalid email or password",
-          );
-        } else if (status === 500) {
-          toast.error("Server error. Please try again.");
-        } else if (!error.response) {
-          toast.error("Cannot connect to the server");
-        } else {
-          toast.error("Something went wrong");
-        }
-      } else {
-        toast.error("Something went wrong");
-      }
-    } finally {
-      setIsLoading(false);
-    }
   }
 
   return (
@@ -87,8 +47,12 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
         </button>
 
         <div className="ShareContent">
-          <h2>Share this Document</h2>
-          <p>Shakespeare would be jealous</p>
+          <div className="shareIcon">
+            <Share2 size={20} />
+          </div>
+          <p className="shareEyebrow">COLLABORATION</p>
+          <h2>Invite a writer</h2>
+          <p className="shareSubtitle">Give someone access to this document.</p>
 
           <div className="inputGroup">
             <label className={emailError ? "ErrorState" : ""} htmlFor="email">
@@ -99,7 +63,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
               type="email"
               id="email"
               name="email"
-              placeholder="you@example.com"
+              placeholder="they@example.com"
               value={email}
               className={emailError ? "inputError" : ""}
               onChange={(e) => {
@@ -112,23 +76,33 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
           </div>
 
           <div className="inputGroup">
-            <label
-              className={passwordError ? "ErrorState" : ""}
-              htmlFor="password"
-            >
-              Role
-            </label>
+            <label>Permission</label>
 
-            <select  name="role-dropdown" id="role-dropdown">
-              <option value="Editor">Editor</option>
-              <option value="Viewer">Viewer</option>
-            </select>
+            <div className="shareRolePicker">
+              <button
+                type="button"
+                className={`shareRoleOption ${role === "VIEWER" ? "selected" : ""}`}
+                onClick={() => setRole("EDITOR")}
+              >
+                <span>View only</span>
+                <small>Can read</small>
+              </button>
+
+              <button
+                type="button"
+                className={`shareRoleOption ${role === "EDITOR" ? "selected" : ""}`}
+                onClick={() => setRole("EDITOR")}
+              >
+                <span>Can edit</span>
+                <small>Ca</small>
+              </button>
+            </div>
           </div>
 
           <button
             className={`loginButton ${isDark ? "dark" : "light"}`}
-            onClick={signupFunction}
             disabled={isLoading}
+            style={{ backgroundColor: "#AE37FF" }}
           >
             {isLoading ? (
               <span className={`spinner ${isDark ? "dark" : "light"}`} />
@@ -136,20 +110,6 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
               "Sign up"
             )}
           </button>
-        </div>
-
-        <div style={{ color: "grey", marginTop: "4px" }}>
-          Already have an account?
-          <span
-            style={{
-              cursor: "pointer",
-              color: "inherit",
-              textDecoration: "underline",
-              marginLeft: "0.25rem",
-            }}
-          >
-            Login
-          </span>
         </div>
       </div>
     </div>
