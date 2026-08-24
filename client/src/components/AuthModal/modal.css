@@ -41,7 +41,7 @@
   color: black;
 
   border-color: rgb(210, 207, 233);
-  background-image: url(../../assets/modalBGWhite.png);
+  /* background-image: url(../../assets/modalBGWhite.png); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -234,7 +234,7 @@
 .shareRolePicker {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap:8px;
+  gap: 8px;
 }
 
 .shareRoleOption {
@@ -245,14 +245,12 @@
   cursor: pointer;
   border-radius: 9px;
 
-  background:transparent;
-  
+  background: transparent;
 }
 
 .shareRoleOption.selected {
   background-color: #1d1d1d;
-  counter-reset: #888;
-  color: white;
+  border-color: #888;
 }
 
 .ShareContent {
@@ -261,6 +259,77 @@
   gap: 16px;
 }
 
-.shareicon {
-  
+.shareIcon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+
+  border-radius: 12px;
+  place-items: center;
+  border: 1px solid #444;
+}
+
+.shareEyebrow {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #888;
+}
+
+.shareSubtitle {
+  margin: -10px 0 4px;
+  color: #888;
+  font-size: 14px;
+}
+
+.shareRoleOption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shareRoleOption span {
+  font-size: 14px;
+  /* font-weight: 600; */
+}
+
+.shareRoleOption small {
+  font-size: 12px;
+  color: #777;
+}
+
+.shareRoleOption.selected {
+  color: white;
+}
+
+.shareRoleOption.selected small {
+  color: #b5b5b5;
+}
+.shareRoleOption {
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+.loginModal.dark .shareRoleOption {
+  background: #111;
+  border-color: #303030;
+  color: #eaeaea;
+}
+
+.loginModal.dark .shareRoleOption.selected {
+  background: #202020;
+  border-color: #666;
+}
+.shareRoleOption {
+  min-height: 76px;
+  width: 100%;
+}
+
+.shareMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shareEyebrow {
+  margin: 0;
 }

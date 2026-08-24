@@ -15,6 +15,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
 
   const [emailError, setEmailError] = useState("");
   const [role, setRole] = useState<"VIEWER" | "EDITOR">("VIEWER");
+  // const [isClosing, setIsClosing] = useState(false);
 
   function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -36,21 +37,28 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
     return isValid;
   }
 
+  function handleClose() {
+    setIsClosing(true);
+    setTimeout(onClose, 180);
+  }
+
   return (
     <div className="modalBackdrop">
       <div
         className={`loginModal ${isDark ? "dark" : "light"}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="closeButton">
+        <button onClick={handleClose} className="closeButton">
           <X />
         </button>
 
         <div className="ShareContent">
           <div className="shareIcon">
-            <Share2 size={20} />
+            <div className="shareMeta">
+              <Share2 size={22} />
+              <p className="shareEyebrow">COLLABORATION</p>
+            </div>
           </div>
-          <p className="shareEyebrow">COLLABORATION</p>
           <h2>Add a member</h2>
           <p className="shareSubtitle">Give someone access to this document.</p>
 
@@ -106,7 +114,7 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
             {isLoading ? (
               <span className={`spinner ${isDark ? "dark" : "light"}`} />
             ) : (
-              "Invite Collabrator"
+              "Invite Collaborator"
             )}
           </button>
         </div>
