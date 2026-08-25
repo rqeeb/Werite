@@ -1,4 +1,4 @@
-import { Trash } from "lucide-react";
+import { Trash, Users } from "lucide-react";
 import { useState } from "react";
 
 type SidebarDocumentProps = {
@@ -41,8 +41,17 @@ export function SidebarDocument({
 
       <button
         type="button"
-        className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""}`}
+        className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""} user`}
         onClick={handleDelete}
+        disabled={isDeleteLoading}
+        aria-label="Delete document"
+      >
+        <Users size={15} />
+      </button>
+
+      <button
+        type="button"
+        className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""}`}
         disabled={isDeleteLoading}
         aria-label="Delete document"
       >

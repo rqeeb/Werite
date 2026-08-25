@@ -7,9 +7,10 @@ import { toast } from "react-toastify";
 type SignupModalProps = {
   onClose: () => void;
   isDark: boolean;
+  documentId: string | undefined;
 };
 
-function ShareModal({ onClose, isDark }: SignupModalProps) {
+function ShareModal({ onClose, isDark, documentId }: SignupModalProps) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,8 +42,38 @@ function ShareModal({ onClose, isDark }: SignupModalProps) {
     setIsClosing(true);
     setTimeout(onClose, 180);
   }
-  function addMember(){
+
+  async function addMember() {
+    if (!validateInputs()) {
+      return;
+    }
+    if (documentId === undefined) {
+      toast.error("No Document to share");
+      return;
+    }
+
     setIsLoading(true);
+    try {
+      const response = await axios.post(
+        `http://localhost:2021/api/document/${documentId}/members`,
+        {
+          email,
+          role,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      toast.success("User added successful");
+      // console.log(response);
+    } catch (e) {
+      console.log(e);
+      toast.error("Error adding user");
+      //todo: add u w sttus codes
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

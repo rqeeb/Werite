@@ -373,6 +373,11 @@
   background: rgba(255, 80, 80, 0.12);
 }
 
+.deleteDocumentButton.user:hover {
+  color: rgb(0, 128, 0);
+  background: rgba(255, 80, 80, 0.12);
+}
+
 .deleteDocumentButton:active {
   transform: scale(0.9);
 }

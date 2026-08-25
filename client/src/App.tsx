@@ -69,6 +69,7 @@ export function App() {
         });
 
         setUser(response.data.user);
+        // console.log(response.data.user);
         setCurrentModal("share");
       } catch {
         setUser(null);
@@ -313,7 +314,7 @@ export function App() {
       )}
 
       {activeModal === "share" && (
-        <ShareModal isDark={isDark} onClose={onClose} />
+        <ShareModal isDark={isDark} onClose={onClose} documentId={documentId} />
       )}
     </div>
   );
