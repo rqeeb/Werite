@@ -9,6 +9,7 @@ type ITextArea = {
   setHeading: React.Dispatch<React.SetStateAction<string>>;
   paragraph: string;
   setParagraph: React.Dispatch<React.SetStateAction<string>>;
+  canEdit: boolean;
 };
 
 export function TextArea({
@@ -18,6 +19,7 @@ export function TextArea({
   setHeading,
   paragraph,
   setParagraph,
+  canEdit,
 }: ITextArea) {
   return (
     <div id="TextAreaContainer">
@@ -30,6 +32,7 @@ export function TextArea({
         paragraphFontSize={paragraphFontSize}
         paragraph={paragraph}
         setParagraph={setParagraph}
+        canEdit={canEdit}
       />
     </div>
   );

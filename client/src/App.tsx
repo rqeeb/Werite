@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
@@ -40,10 +40,10 @@ export function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [checkAuthLoading, setCheckAuthLoading] = useState(true);
   const [isSaving, setIsSaving] = useState<
-    "saving" | "saved" | "couldnt save" | "saved locally"
+    "saving" | "saved" | "couldnt save" | "saved locally" | "view only"
   >("saved");
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
-  const [canEdit, setCanEdit] = useState(true);
+  const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -87,7 +87,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (!documentId || !user || isDocumentLoading) {
+    if (!documentId || !user || isDocumentLoading || !canEdit) {
       return;
     }
 
@@ -135,6 +135,7 @@ export function App() {
         );
 
         setCanEdit(response.data.canEdit);
+        // console.log(response.data.canEdit);
         setHeading(response.data.document.title);
         setParagraph(response.data.document.content);
       } catch (error) {
@@ -179,6 +180,12 @@ export function App() {
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(isDark));
   }, [isDark]);
+
+  useEffect(() => {
+    if (canEdit === false) {
+      setIsSaving("view only");
+    }
+  }, [canEdit]);
 
   function zoomIn() {
     setHeadingFontSize((prev) => Math.min(60, prev + 2));
@@ -288,6 +295,7 @@ export function App() {
             setHeading={setHeading}
             paragraph={paragraph}
             setParagraph={setParagraph}
+            canEdit={canEdit}
           />
         </div>
 

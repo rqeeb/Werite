@@ -325,5 +325,4 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
   }
 });
 
-
 export default router;

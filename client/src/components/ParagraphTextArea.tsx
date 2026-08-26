@@ -4,12 +4,14 @@ type IParagraphTextArea = {
   paragraphFontSize: number;
   paragraph: string;
   setParagraph: React.Dispatch<React.SetStateAction<string>>;
+  canEdit: boolean;
 };
 
 export function ParagraphTextArea({
   paragraphFontSize,
   paragraph,
   setParagraph,
+  canEdit,
 }: IParagraphTextArea) {
   const [placeholder, setPlaceholder] = useState("Type it out loud..");
 
@@ -27,9 +29,12 @@ export function ParagraphTextArea({
 
     setPlaceholder(placeholderLines[randomIndex]!);
   }, []);
+
+  // console.log(canEdit);
   return (
     <>
       <textarea
+        readOnly={!canEdit}
         autoComplete="off"
         autoCorrect="off"
         value={paragraph}

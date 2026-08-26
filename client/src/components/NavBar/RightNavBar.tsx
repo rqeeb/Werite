@@ -83,7 +83,15 @@ export function RightNavBar({
             <span>Saved locally</span>
           </div>
         )}
-
+        {isSaving == "view only" && (
+          <div
+            className="saveStatus"
+            title="View Only access - Refresh to view changes"
+          >
+            <span className="savedDot green"></span>
+            <span>View only</span>
+          </div>
+        )}
       </div>
     </div>
   );
