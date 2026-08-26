@@ -42,7 +42,6 @@ export function SidebarDocument({
       <button
         type="button"
         className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""} user`}
-        onClick={handleDelete}
         disabled={isDeleteLoading}
         aria-label="Delete document"
       >
@@ -54,6 +53,7 @@ export function SidebarDocument({
         className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""}`}
         disabled={isDeleteLoading}
         aria-label="Delete document"
+        onClick={handleDelete}
       >
         {isDeleteLoading ? (
           <span className="deleteSpinner" />
