@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
@@ -116,7 +116,7 @@ export function App() {
     }, 800);
 
     return () => clearTimeout(timeout);
-  }, [heading, paragraph, documentId, user, isDocumentLoading]);
+  }, [heading, paragraph, documentId, user, isDocumentLoading,canEdit]);
 
   useEffect(() => {
     // console.log("new load start")

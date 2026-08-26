@@ -27,6 +27,7 @@ export function TextArea({
         headingFontSize={headingFontSize}
         heading={heading}
         setHeading={setHeading}
+        canEdit={canEdit}
       />
       <ParagraphTextArea
         paragraphFontSize={paragraphFontSize}

@@ -43,7 +43,7 @@ export function SidebarDocument({
         type="button"
         className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""} user`}
         disabled={isDeleteLoading}
-        aria-label="Delete document"
+        aria-label="Manage users"
       >
         <Users size={15} />
       </button>
