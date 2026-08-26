@@ -44,6 +44,7 @@ export function App() {
   >("saved");
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
   const [canEdit, setCanEdit] = useState(false);
+  const [isOwner,setIsOwner] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -135,6 +136,8 @@ export function App() {
         );
 
         setCanEdit(response.data.canEdit);
+        setIsOwner(response.data.isOwner);
+
         // console.log(response.data.canEdit);
         setHeading(response.data.document.title);
         setParagraph(response.data.document.content);
@@ -284,6 +287,8 @@ export function App() {
           setIsSidebarOpen((prev) => !prev);
         }}
         isSaving={isSaving}
+        isOwner={isOwner}
+        user={user}
       />
 
       <div className="workspace">

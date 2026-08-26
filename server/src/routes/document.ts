@@ -109,10 +109,12 @@ router.get("/:id", authMiddleware, async (req, res) => {
 
     const canEdit =
       req.userId === document.ownerId || documentMember?.role === "EDITOR";
+    const isOwner = document.ownerId === req.userId;
 
     return res.status(200).json({
       canEdit,
       document,
+      isOwner,
     });
   } catch (error) {
     console.log(error);

@@ -8,6 +8,8 @@ type IRightNavBar = {
   openModal: () => void;
   openSidebar: () => void;
   isSaving: string;
+  isOwner: boolean;
+  user: object | null;
 };
 
 export function RightNavBar({
@@ -15,6 +17,8 @@ export function RightNavBar({
   openModal,
   openSidebar,
   isSaving,
+  isOwner,
+  user,
 }: IRightNavBar) {
   const [time, setTime] = useState(new Date());
 
@@ -47,10 +51,18 @@ export function RightNavBar({
           onClick={exportMD}
         />
 
-        <NavBarButton
-          icon={<Share2 size={20} strokeWidth={2} />}
-          onClick={openModal}
-        />
+        {(isOwner && (
+          <NavBarButton
+            icon={<Share2 size={20} strokeWidth={2} />}
+            onClick={openModal}
+          />
+        )) ||
+          (!user && (
+            <NavBarButton
+              icon={<Share2 size={20} strokeWidth={2} />}
+              onClick={openModal}
+            />
+          ))}
 
         <NavBarButton
           icon={<PanelRight size={20} strokeWidth={2} />}

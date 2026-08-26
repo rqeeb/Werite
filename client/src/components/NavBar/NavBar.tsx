@@ -9,8 +9,10 @@ type INavBar = {
   toggleTheme: () => void;
   exportMD: () => void;
   openModal: () => void;
-  openSidebar: () =>void;
-  isSaving: string
+  openSidebar: () => void;
+  isSaving: string;
+  isOwner: boolean;
+  user:object | null;
 };
 
 export function NavBar({
@@ -21,19 +23,31 @@ export function NavBar({
   exportMD,
   openModal,
   openSidebar,
-  isSaving
+  isSaving,
+  isOwner,
+  user
 }: INavBar) {
   return (
-    <div className="navBarContainer" style={{
-          zIndex:9999
-        }}>
+    <div
+      className="navBarContainer"
+      style={{
+        zIndex: 9999,
+      }}
+    >
       <LeftNavBar
         onZoomIn={onZoomIn}
         onZoomOut={onZoomOut}
         currentFontSize={currentFontSize}
         toggleTheme={toggleTheme}
       />
-      <RightNavBar exportMD={exportMD} openModal={openModal} openSidebar={openSidebar} isSaving={isSaving} />
+      <RightNavBar
+        exportMD={exportMD}
+        openModal={openModal}
+        openSidebar={openSidebar}
+        isSaving={isSaving}
+        isOwner={isOwner}
+        user={user}
+      />
     </div>
   );
 }
