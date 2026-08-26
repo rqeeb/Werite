@@ -4,7 +4,7 @@ import { TextArea } from "./components/TextArea";
 import "./index.css";
 import LoginModal from "./components/AuthModal/LoginModal";
 import SignupModal from "./components/AuthModal/SignupModal";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShareModal from "./components/AuthModal/ShareModal";
 import axios from "axios";
@@ -43,6 +43,7 @@ export function App() {
     "saving" | "saved" | "couldnt save" | "saved locally"
   >("saved");
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
+  const [canEdit, setCanEdit] = useState(true);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -133,6 +134,7 @@ export function App() {
           },
         );
 
+        setCanEdit(response.data.canEdit);
         setHeading(response.data.document.title);
         setParagraph(response.data.document.content);
       } catch (error) {

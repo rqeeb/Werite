@@ -107,14 +107,18 @@ router.get("/:id", authMiddleware, async (req, res) => {
       });
     }
 
+    const canEdit =
+      req.userId === document.ownerId || documentMember?.role === "EDITOR";
+
     return res.status(200).json({
+      canEdit,
       document,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       error: "Internal server error",
     });
-    console.log(error);
   }
 });
 
@@ -321,33 +325,5 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
   }
 });
 
-//can edit?
-router.get("/:id/perm", authMiddleware, async (req, res) => {
-  if (!req.userId) {
-    return res.status(401).json({
-      error: "User not authenticated",
-    });
-  }
-
-  const { id } = req.params;
-  if (typeof id != "string") {
-    return res.status(400).json({
-      error: "Invalid document Id type",
-    });
-  }
-
-  try {
-    const response = await prisma.documentMember.findFirst({
-      where: {
-        documentId: id,
-        userId: req.userId,
-      },
-    });
-
-    if(!response){
-      return res.status(400).json({error:"Document doesn't exist or you dont have permission to access"})
-    }
-  } catch (err) {}
-});
 
 export default router;
