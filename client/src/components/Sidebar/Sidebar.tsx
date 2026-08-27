@@ -20,6 +20,7 @@ type SidebarProps = {
   isDark: boolean;
   createDocument: () => void;
   setTextAreaDefault: () => void;
+  isOwner: boolean;
 };
 
 type DocumentItem = {
@@ -36,6 +37,7 @@ export function Sidebar({
   isDark,
   createDocument,
   setTextAreaDefault,
+  isOwner,
 }: SidebarProps) {
   const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [documentsLoading, setDocumentsLoading] = useState(true);
@@ -144,6 +146,7 @@ export function Sidebar({
                   isActive={document.id === currentDocumentId}
                   onClick={() => navigate(`/document/${document.id}`)}
                   onDelete={() => onDelete(document.id)}
+                  isOwner={isOwner}
                 />
               ))
             )}

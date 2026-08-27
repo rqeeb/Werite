@@ -6,6 +6,7 @@ type SidebarDocumentProps = {
   isActive: boolean;
   onClick: () => void;
   onDelete: () => Promise<void>;
+  isOwner: boolean;
 };
 
 export function SidebarDocument({
@@ -13,6 +14,7 @@ export function SidebarDocument({
   isActive,
   onClick,
   onDelete,
+  isOwner,
 }: SidebarDocumentProps) {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
@@ -39,14 +41,16 @@ export function SidebarDocument({
         {title.trim() || "Untitled"}
       </button>
 
-      <button
-        type="button"
-        className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""} user`}
-        disabled={isDeleteLoading}
-        aria-label="Manage users"
-      >
-        <Users size={15} />
-      </button>
+      {/* {(isOwner && (
+        <button
+          type="button"
+          className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""} user`}
+          disabled={isDeleteLoading}
+          aria-label="Manage users"
+        >
+          <Users size={15} />
+        </button>
+      ))} */}
 
       <button
         type="button"

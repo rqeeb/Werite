@@ -394,3 +394,13 @@
     border-color 0.15s ease,
     background-color 0.15s ease;
 }
+
+.switchManageButton{
+  color: gray;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.switchManageButton:hover{
+  text-decoration: underline;
+}

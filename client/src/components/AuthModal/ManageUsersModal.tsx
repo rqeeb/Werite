@@ -4,82 +4,22 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-type SignupModalProps = {
+type ManageUsersModalProps = {
   onClose: () => void;
   isDark: boolean;
   documentId: string | undefined;
-  switchTab: (tab: string) => void;
 };
 
-function ShareModal({
+function ManageUsersModal({
   onClose,
   isDark,
   documentId,
-  switchTab,
-}: SignupModalProps) {
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [emailError, setEmailError] = useState("");
-  const [role, setRole] = useState<"VIEWER" | "EDITOR">("VIEWER");
+}: ManageUsersModalProps) {
   const [isClosing, setIsClosing] = useState(false);
-
-  function validateEmail(email: string) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function validateInputs() {
-    let isValid = true;
-
-    setEmailError("");
-
-    if (!email.trim()) {
-      setEmailError("Email is required");
-      isValid = false;
-    } else if (!validateEmail(email)) {
-      setEmailError("Enter a valid email");
-      isValid = false;
-    }
-
-    return isValid;
-  }
 
   function handleClose() {
     setIsClosing(true);
     setTimeout(onClose, 180);
-  }
-
-  async function addMember() {
-    if (!validateInputs()) {
-      return;
-    }
-    if (documentId === undefined) {
-      toast.error("No Document to share");
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      const response = await axios.post(
-        `http://localhost:2021/api/document/${documentId}/members`,
-        {
-          email,
-          role,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-
-      toast.success("User added successful");
-      // console.log(response);
-    } catch (e) {
-      console.log(e);
-      toast.error("Error adding user");
-      //todo: add u w sttus codes
-    } finally {
-      setIsLoading(false);
-    }
   }
 
   return (
@@ -97,10 +37,10 @@ function ShareModal({
             <Share2 size={22} />
             <p className="shareEyebrow">COLLABORATION</p>
           </div>
-          <h2>Add a member</h2>
-          <p className="shareSubtitle">Give someone access to this document.</p>
+          <h2>Manage Members</h2>
+          <p className="shareSubtitle">Edit members and their permission.</p>
 
-          <div className="inputGroup">
+          {/* <div className="inputGroup">
             <label className={emailError ? "ErrorState" : ""} htmlFor="email">
               Email
             </label>
@@ -119,9 +59,9 @@ function ShareModal({
             />
 
             {emailError && <span className="errorMessage">{emailError}</span>}
-          </div>
+          </div> */}
 
-          <div className="inputGroup">
+          {/* <div className="inputGroup">
             <label>Permission</label>
 
             <div className="shareRolePicker">
@@ -143,9 +83,9 @@ function ShareModal({
                 <small>Can read and write</small>
               </button>
             </div>
-          </div>
+          </div> */}
 
-          <button
+          {/* <button
             className={`loginButton ${isDark ? "dark" : "light"}`}
             disabled={isLoading}
             onClick={addMember}
@@ -155,19 +95,11 @@ function ShareModal({
             ) : (
               "Invite Collaborator"
             )}
-          </button>
-
-          <button
-            className={`switchManageButton`}
-            disabled={isLoading}
-            onClick={() => switchTab("manage")}
-          >
-            Manage members
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
   );
 }
 
-export default ShareModal;
+export default ManageUsersModal;

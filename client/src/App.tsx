@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
@@ -10,6 +10,7 @@ import ShareModal from "./components/AuthModal/ShareModal";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
+import ManageUsersModal from "./components/AuthModal/ManageUsersModal";
 
 export function App() {
   const { id: documentId } = useParams();
@@ -25,7 +26,7 @@ export function App() {
   const [heading, setHeading] = useState("");
   const [paragraph, setParagraph] = useState("");
   const [activeModal, setActiveModal] = useState<
-    "login" | "signup" | "share" | null
+    "login" | "signup" | "share" | "manage" | null
   >(null);
   const [currentModal, setCurrentModal] = useState<
     "login" | "signup" | "share"
@@ -44,7 +45,7 @@ export function App() {
   >("saved");
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
   const [canEdit, setCanEdit] = useState(false);
-  const [isOwner,setIsOwner] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -117,7 +118,7 @@ export function App() {
     }, 800);
 
     return () => clearTimeout(timeout);
-  }, [heading, paragraph, documentId, user, isDocumentLoading,canEdit]);
+  }, [heading, paragraph, documentId, user, isDocumentLoading, canEdit]);
 
   useEffect(() => {
     // console.log("new load start")
@@ -242,6 +243,8 @@ export function App() {
     } else if (tab == "share") {
       setActiveModal("share");
       setCurrentModal("share");
+    } else if (tab == "manage") {
+      setActiveModal("manage");
     } else {
       setActiveModal(null);
     }
@@ -312,6 +315,7 @@ export function App() {
           isDark={isDark}
           createDocument={createDocument}
           setTextAreaDefault={setTextAreaDefault}
+          isOwner={isOwner}
         />
       </div>
 
@@ -329,7 +333,20 @@ export function App() {
       )}
 
       {activeModal === "share" && (
-        <ShareModal isDark={isDark} onClose={onClose} documentId={documentId} />
+        <ShareModal
+          isDark={isDark}
+          onClose={onClose}
+          documentId={documentId}
+          switchTab={switchTab}
+        />
+      )}
+
+      {activeModal === "manage" && (
+        <ManageUsersModal
+          isDark={isDark}
+          onClose={onClose}
+          documentId={documentId}
+        />
       )}
     </div>
   );
