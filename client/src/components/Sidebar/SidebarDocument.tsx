@@ -7,6 +7,7 @@ type SidebarDocumentProps = {
   onClick: () => void;
   onDelete: () => Promise<void>;
   isOwner: boolean;
+  isDark: boolean;
 };
 
 export function SidebarDocument({
@@ -15,6 +16,7 @@ export function SidebarDocument({
   onClick,
   onDelete,
   isOwner,
+  isDark,
 }: SidebarDocumentProps) {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
@@ -41,7 +43,7 @@ export function SidebarDocument({
         {title.trim() || "Untitled"}
       </button>
 
-      {/* {(isOwner && (
+      {isOwner && (
         <button
           type="button"
           className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""} user`}
@@ -50,21 +52,29 @@ export function SidebarDocument({
         >
           <Users size={15} />
         </button>
-      ))} */}
+      )}
 
-      <button
-        type="button"
-        className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""}`}
-        disabled={isDeleteLoading}
-        aria-label="Delete document"
-        onClick={handleDelete}
-      >
-        {isDeleteLoading ? (
-          <span className="deleteSpinner" />
-        ) : (
-          <Trash size={15} strokeWidth={1.8} />
-        )}
-      </button>
+      {isOwner && (
+        <button
+          type="button"
+          className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""}`}
+          disabled={isDeleteLoading}
+          aria-label="Delete document"
+          onClick={handleDelete}
+        >
+          {isDeleteLoading ? (
+            <span className="deleteSpinner" />
+          ) : (
+            <Trash size={15} strokeWidth={1.8} />
+          )}
+        </button>
+      )}
+
+      {!isOwner && (
+        <span className={`sharedLabel  ${isDark ? "light" : "dark"}`}>
+          Shared
+        </span>
+      )}
     </div>
   );
 }

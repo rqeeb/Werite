@@ -83,7 +83,10 @@ function ShareModal({
   }
 
   return (
-    <div className={`modalBackdrop ${isClosing ? "isClosing" : ""}`}>
+    <div
+      className={`modalBackdrop ${isClosing ? "isClosing" : ""}`}
+      onClick={handleClose}
+    >
       <div
         className={`loginModal ${isDark ? "dark" : "light"}`}
         onClick={(e) => e.stopPropagation()}

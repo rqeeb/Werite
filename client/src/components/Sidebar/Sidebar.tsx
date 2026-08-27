@@ -27,6 +27,7 @@ type DocumentItem = {
   id: string;
   title: string;
   updatedAt: string;
+  ownerId: string;
 };
 
 export function Sidebar({
@@ -146,7 +147,8 @@ export function Sidebar({
                   isActive={document.id === currentDocumentId}
                   onClick={() => navigate(`/document/${document.id}`)}
                   onDelete={() => onDelete(document.id)}
-                  isOwner={isOwner}
+                  isOwner={document.ownerId === user.id}
+                  isDark={isDark}
                 />
               ))
             )}

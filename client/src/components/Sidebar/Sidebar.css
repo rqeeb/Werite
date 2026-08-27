@@ -390,3 +390,26 @@
 .SidebarDocumentRow.active:hover .deleteDocumentButton {
   opacity: 1;
 }
+
+.sharedLabel {
+  flex-shrink: 0;
+  margin-right: 9px;
+  padding: 3px 6px;
+  
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sharedLabel.light {
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.1);
+  color: #86efac;
+}
+
+.sharedLabel.dark {
+  border: 1px solid #86efac;
+  background: #dcfce7;
+  color: #15803d;
+}

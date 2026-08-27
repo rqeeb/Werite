@@ -346,6 +346,7 @@ export function App() {
           isDark={isDark}
           onClose={onClose}
           documentId={documentId}
+          switchTab={switchTab}
         />
       )}
     </div>
