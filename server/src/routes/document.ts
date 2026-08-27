@@ -327,4 +327,39 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
   }
 });
 
+
+router.get("/:id/members", authMiddleware, async (req, res) => {
+  if (!req.userId) {
+    return res.status(400).json({
+      error: "User not authenticated",
+    });
+  }
+
+  const { documentId } = req.params;
+
+  if (typeof documentId !== "string") {
+    return res.status(404).json({
+      error: "Invalid document id type",
+    });
+  }
+
+  const document = await prisma.document.findFirst({
+    where: {
+      ownerId: req.userId,
+      id: documentId,
+    },
+  });
+
+  if (!document) {
+    return res.status(403).json({
+      error: "Only owner can manage document",
+    });
+  }
+
+  const members = await prisma.documentMember.findMany({
+    where: {
+      documentId,
+    },
+  });
+});
 export default router;
