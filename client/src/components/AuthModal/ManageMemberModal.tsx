@@ -27,7 +27,7 @@ function ManageMembersModal({
   user,
 }: ManageMembersModalProps) {
   const [isClosing, setIsClosing] = useState(false);
-  const [members, setmembers] = useState(false);
+  const [members, setMembers] = useState([]);
 
   function handleClose() {
     setIsClosing(true);
@@ -36,7 +36,27 @@ function ManageMembersModal({
 
   useEffect(() => {
     if (!user) {
+      setMembers([]);
+      return;
     }
+
+    async function fetchMembers() {
+      try {
+        const fetchedMembs = await axios.get(
+          `http://localhost:2011/api/${documentId}/members`,
+          {
+            withCredentials: true,
+          },
+        );
+
+        setMembers(fetchedMembs.data.members ?? []);
+      } catch (err) {
+        console.log(err);
+        toast.error("Couldn't fetch members");
+      }
+    }
+
+    fetchMembers();
   }, [user, documentId]);
 
   return (
@@ -66,7 +86,9 @@ function ManageMembersModal({
           <h2>Manage Members</h2>
           <p className="shareSubtitle">Edit members and their permission.</p>
 
-          <div></div>
+          <div className="MembersContainer">
+            
+          </div>
         </div>
       </div>
     </div>
