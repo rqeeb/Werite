@@ -464,7 +464,6 @@
   font-size: 11px;
 
   font-weight: 600;
-  
 }
 .memberRole.editor {
   color: #7f8794;
@@ -480,4 +479,75 @@
 
 .loginModal.light .memberName {
   color: #1f1f1f;
+}
+
+.memberActions {
+  display: flex;
+  flex-shrink: 0;
+
+  align-items: center;
+  gap: 4px;
+}
+
+.memberRoleSelect {
+  padding: 5px 7px;
+  background: rgba(74, 222, 128, 0.08);
+
+  color: #a6f4bd;
+
+  border: 1px solid rgba(74, 222, 128, 0.28);
+  border-radius: 6px;
+  outline: none;
+  font-family: inherit;
+
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.memberRoleSelect:focus {
+  border-color: rgba(74, 222, 128, 0.65);
+  background: rgba(74, 222, 128, 0.14);
+}
+
+.memberRoleSelect option {
+  color: #e8e8e8;
+  background: #181818;
+}
+
+.memberRemoveButton {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  padding: 0;
+  color: #888;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.memberRemoveButton:hover {
+  color: #ff6868;
+  background: rgba(255, 80, 80, 0.12);
+}
+
+.memberRemoveButton:active {
+  transform: scale(0.9);
+}
+
+.loginModal.light .memberRoleSelect {
+  color: #15803d;
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.loginModal.light .memberRoleSelect option {
+  color: #1f2937;
+  background: white;
 }

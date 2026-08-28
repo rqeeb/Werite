@@ -14,18 +14,26 @@ function ManageMember({ username, email, role }: ManageMemberProps) {
         <p className="memberEmail">{email}</p>
       </div>
 
-      <span className={`memberRole viewer`}>
-        {role === "EDITOR" ? "Editor" : "Viewer"}
-      </span>
+      <div className="memberActions">
+        <select
+          className="memberRoleSelect"
+          name="role"
+          defaultValue={role}
+          aria-label={`Change ${username}'s permission`}
+        >
+          <option value="EDITOR">Editor</option>
+          <option value="VIEWER">Viewer</option>
+        </select>
 
-      <button
-        type="button"
-        // className={`deleteDocumentButton user`}
-        // disabled={isDeleteLoading}
-        aria-label="Remove User"
-      >
-        <Trash size={15} />
-      </button>
+        <button
+          type="button"
+          className="memberRemoveButton"
+          aria-label={`Remove ${username}`}
+          title="Remove access"
+        >
+          <Trash size={15} strokeWidth={1.8} />
+        </button>
+      </div>
     </div>
   );
 }
