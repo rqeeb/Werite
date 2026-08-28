@@ -45,7 +45,7 @@ function ManageMembersModal({
   }
 
   useEffect(() => {
-    console.log("Effect");
+    
     if (!user || !documentId) {
       setMembers([]);
       return;

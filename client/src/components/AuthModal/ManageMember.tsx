@@ -14,7 +14,7 @@ function ManageMember({ username, email, role }: ManageMemberProps) {
         <p className="memberEmail">{email}</p>
       </div>
 
-      <span className={`memberRole ${role.toLowerCase()}`}>
+      <span className={`memberRole viewer`}>
         {role === "EDITOR" ? "Editor" : "Viewer"}
       </span>
 

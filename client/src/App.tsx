@@ -44,7 +44,7 @@ export function App() {
     "saving" | "saved" | "couldnt save" | "saved locally" | "view only"
   >("saved");
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
-  const [canEdit, setCanEdit] = useState(false);
+  const [canEdit, setCanEdit] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {

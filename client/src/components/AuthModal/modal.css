@@ -464,9 +464,10 @@
   font-size: 11px;
 
   font-weight: 600;
+  
 }
 .memberRole.editor {
-  color: #e4ef86;
+  color: #7f8794;
 }
 
 .memberRole.viewer {
