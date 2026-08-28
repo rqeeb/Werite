@@ -1,34 +1,49 @@
-import { ArrowLeft, Share2, X } from "lucide-react";
+import { ArrowLeft, Share2, User, X } from "lucide-react";
 import "./modal.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import ManageUser from "./ManageUser";
+import ManageUser from "./ManageMember";
 
-type ManageUsersModalProps = {
+type User = {
+  id: string;
+  username: string;
+  email: string;
+};
+
+type ManageMembersModalProps = {
   onClose: () => void;
   isDark: boolean;
   documentId: string | undefined;
   switchTab: (tab: string) => void;
+  user: User | null;
 };
 
-function ManageUsersModal({
+function ManageMembersModal({
   onClose,
   isDark,
   documentId,
   switchTab,
-}: ManageUsersModalProps) {
+  user,
+}: ManageMembersModalProps) {
   const [isClosing, setIsClosing] = useState(false);
+  const [members, setmembers] = useState(false);
 
   function handleClose() {
     setIsClosing(true);
     setTimeout(onClose, 180);
   }
 
-  function get
+  useEffect(() => {
+    if (!user) {
+    }
+  }, [user, documentId]);
 
   return (
-    <div className={`modalBackdrop ${isClosing ? "isClosing" : ""}`} onClick={handleClose}>
+    <div
+      className={`modalBackdrop ${isClosing ? "isClosing" : ""}`}
+      onClick={handleClose}
+    >
       <div
         className={`loginModal ${isDark ? "dark" : "light"}`}
         onClick={(e) => e.stopPropagation()}
@@ -51,13 +66,11 @@ function ManageUsersModal({
           <h2>Manage Members</h2>
           <p className="shareSubtitle">Edit members and their permission.</p>
 
-          <div>
-            
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
   );
 }
 
-export default ManageUsersModal;
+export default ManageMembersModal;

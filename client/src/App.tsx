@@ -10,7 +10,7 @@ import ShareModal from "./components/AuthModal/ShareModal";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import ManageUsersModal from "./components/AuthModal/ManageUsersModal";
+import ManageUsersModal from "./components/AuthModal/ManageMemberModal";
 
 export function App() {
   const { id: documentId } = useParams();
