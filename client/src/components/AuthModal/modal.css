@@ -395,13 +395,51 @@
     background-color 0.15s ease;
 }
 
-.switchManageButton{
+.switchManageButton {
   color: gray;
   cursor: pointer;
   background: transparent;
   border: none;
 }
-.switchManageButton:hover{
+.switchManageButton:hover {
   text-decoration: underline;
 }
 
+.MembersContainer {
+  display: flex;
+
+  max-height: 245px;
+  flex-direction: column;
+  gap: 7px;
+  overflow-y: auto;
+}
+
+.memberRow {
+  display: flex;
+  min-width: 0;
+
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(130, 130, 130, 0.18);
+}
+
+.memberRow:hover {
+  background: rgba(128, 128, 128, 0.06);
+}
+
+.memberAvatar {
+  display: grid;
+  width: 32px;
+  height: 32px;
+
+  background: white;
+  color: #86efac;
+  font-size: 13px;
+  font-weight: 700;
+  
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 50%;
+}
