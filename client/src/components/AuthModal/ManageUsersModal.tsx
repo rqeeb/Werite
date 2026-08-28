@@ -3,6 +3,7 @@ import "./modal.css";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ManageUser from "./ManageUser";
 
 type ManageUsersModalProps = {
   onClose: () => void;
@@ -23,6 +24,8 @@ function ManageUsersModal({
     setIsClosing(true);
     setTimeout(onClose, 180);
   }
+
+  function get
 
   return (
     <div className={`modalBackdrop ${isClosing ? "isClosing" : ""}`} onClick={handleClose}>
@@ -47,6 +50,10 @@ function ManageUsersModal({
           </div>
           <h2>Manage Members</h2>
           <p className="shareSubtitle">Edit members and their permission.</p>
+
+          <div>
+            
+          </div>
         </div>
       </div>
     </div>

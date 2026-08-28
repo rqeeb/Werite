@@ -327,7 +327,6 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
   }
 });
 
-
 router.get("/:id/members", authMiddleware, async (req, res) => {
   if (!req.userId) {
     return res.status(400).json({
@@ -343,23 +342,46 @@ router.get("/:id/members", authMiddleware, async (req, res) => {
     });
   }
 
-  const document = await prisma.document.findFirst({
-    where: {
-      ownerId: req.userId,
-      id: documentId,
-    },
-  });
+  try {
+    const document = await prisma.document.findFirst({
+      where: {
+        ownerId: req.userId,
+        id: documentId,
+      },
+    });
 
-  if (!document) {
-    return res.status(403).json({
-      error: "Only owner can manage document",
+    if (!document) {
+      return res.status(403).json({
+        error: "Only owner can manage document",
+      });
+    }
+
+    const members = await prisma.documentMember.findMany({
+      where: {
+        documentId,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+
+    return res.status(200).json({
+      members,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      error: "Internal server error",
     });
   }
-
-  const members = await prisma.documentMember.findMany({
-    where: {
-      documentId,
-    },
-  });
 });
 export default router;
