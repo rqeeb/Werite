@@ -347,6 +347,7 @@ export function App() {
           onClose={onClose}
           documentId={documentId}
           switchTab={switchTab}
+          user={user}
         />
       )}
     </div>

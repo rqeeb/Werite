@@ -329,15 +329,15 @@ router.post("/:id/members", authMiddleware, async (req, res) => {
 
 router.get("/:id/members", authMiddleware, async (req, res) => {
   if (!req.userId) {
-    return res.status(400).json({
+    return res.status(401).json({
       error: "User not authenticated",
     });
   }
 
-  const { documentId } = req.params;
+  const { id: documentId } = req.params;
 
   if (typeof documentId !== "string") {
-    return res.status(404).json({
+    return res.status(400).json({
       error: "Invalid document id type",
     });
   }

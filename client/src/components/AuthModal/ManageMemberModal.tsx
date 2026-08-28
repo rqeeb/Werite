@@ -11,6 +11,16 @@ type User = {
   email: string;
 };
 
+type Member = {
+  id: string;
+  role: "VIEWER" | "EDITOR";
+  user: {
+    id: string;
+    username: string;
+    email: string;
+  };
+};
+
 type ManageMembersModalProps = {
   onClose: () => void;
   isDark: boolean;
@@ -27,7 +37,7 @@ function ManageMembersModal({
   user,
 }: ManageMembersModalProps) {
   const [isClosing, setIsClosing] = useState(false);
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState<Member[]>([]);
 
   function handleClose() {
     setIsClosing(true);
@@ -35,7 +45,8 @@ function ManageMembersModal({
   }
 
   useEffect(() => {
-    if (!user) {
+    console.log("Effect");
+    if (!user || !documentId) {
       setMembers([]);
       return;
     }
@@ -43,7 +54,7 @@ function ManageMembersModal({
     async function fetchMembers() {
       try {
         const fetchedMembs = await axios.get(
-          `http://localhost:2011/api/${documentId}/members`,
+          `http://localhost:2021/api/document/${documentId}/members`,
           {
             withCredentials: true,
           },
@@ -87,7 +98,18 @@ function ManageMembersModal({
           <p className="shareSubtitle">Edit members and their permission.</p>
 
           <div className="MembersContainer">
-            
+            {members.length === 0 ? (
+              <p className="membersMessage">No members yet...</p>
+            ) : (
+              members.map((member) => (
+                <ManageUser
+                  key={member.id}
+                  username={member.user.username}
+                  email={member.user.email}
+                  role={member.role}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>
