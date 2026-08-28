@@ -408,10 +408,11 @@
 .MembersContainer {
   display: flex;
 
-  max-height: 245px;
+  max-height: 240px;
   flex-direction: column;
-  gap: 7px;
+  gap: 3px;
   overflow-y: auto;
+  margin-top: 12px;
 }
 
 .memberRow {
@@ -419,27 +420,63 @@
   min-width: 0;
 
   align-items: center;
-  padding: 10px;
-  gap: 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(130, 130, 130, 0.18);
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15 ease;
 }
 
 .memberRow:hover {
-  background: rgba(128, 128, 128, 0.06);
+  background: #1a1a1a;
 }
 
-.memberAvatar {
-  display: grid;
-  width: 32px;
-  height: 32px;
+.memberInfo {
+  flex: 1;
+  min-width: 0;
+}
 
-  background: white;
-  color: #86efac;
-  font-size: 13px;
-  font-weight: 700;
-  
+.memberName,
+.memberEmail {
+  overflow: hidden;
+  margin: 0;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.memberName {
+  color: #e8e8e8;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.memberEmail {
+  margin-top: 2px;
+  color: #888;
+  font-size: 11px;
+}
+
+.memberRole {
   flex-shrink: 0;
-  place-items: center;
-  border-radius: 50%;
+  font-size: 11px;
+
+  font-weight: 600;
+}
+.memberRole.editor {
+  color: #e4ef86;
+}
+
+.memberRole.viewer {
+  color: #9ca3af;
+}
+
+.loginModal.light .memberRow:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.loginModal.light .memberName {
+  color: #1f1f1f;
 }
