@@ -279,7 +279,7 @@
 }
 
 .shareSubtitle {
-  margin: -10px 0 4px;
+  margin: -20px 0 4px;
   color: #888;
   font-size: 14px;
 }
@@ -400,6 +400,7 @@
   cursor: pointer;
   background: transparent;
   border: none;
+  margin: -10px;
 }
 .switchManageButton:hover {
   text-decoration: underline;

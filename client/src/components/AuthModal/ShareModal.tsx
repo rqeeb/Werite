@@ -97,8 +97,8 @@ function ShareModal({
 
         <div className="ShareContent">
           <div className="shareMeta">
-            <Share2 size={22} />
-            <p className="shareEyebrow">COLLABORATION</p>
+            {/* <p className="shareEyebrow">COLLABORATION</p> */}
+            {/* <Share2 size={22} /> */}
           </div>
           <h2>Add a member</h2>
           <p className="shareSubtitle">Give someone access to this document.</p>
