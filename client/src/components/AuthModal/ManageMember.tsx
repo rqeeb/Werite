@@ -1,12 +1,20 @@
 import { Trash } from "lucide-react";
+import { useState } from "react";
 
 type ManageMemberProps = {
   username: string;
   email: string;
   role: "VIEWER" | "EDITOR";
+  onUpdate: (newRole: "VIEWER" | "EDITOR") => Promise<void>;
 };
 
-function ManageMember({ username, email, role }: ManageMemberProps) {
+function ManageMember({ username, email, role, onUpdate }: ManageMemberProps) {
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  async function handleRoleChange(e:React.ChangeEvent<HTMLSelectElement>){
+    
+  }
+
   return (
     <div className="memberRow">
       <div className="memberInfo">

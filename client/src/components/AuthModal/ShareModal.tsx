@@ -1,4 +1,4 @@
-import { Share2, X } from "lucide-react";
+import { X } from "lucide-react";
 import "./modal.css";
 import { useState } from "react";
 import axios from "axios";

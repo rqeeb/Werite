@@ -1,4 +1,4 @@
-import { ArrowLeft, Share2, User, X } from "lucide-react";
+import { ArrowLeft, User, X } from "lucide-react";
 import "./modal.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -38,16 +38,26 @@ function ManageMembersModal({
 }: ManageMembersModalProps) {
   const [isClosing, setIsClosing] = useState(false);
   const [members, setMembers] = useState<Member[]>([]);
+  const [membersLoading, setMembersLoading] = useState(false);
 
   function handleClose() {
     setIsClosing(true);
     setTimeout(onClose, 180);
   }
 
+  async function updateMember(
+    newRole: "EDITOR" | "VIEWER",
+    email: string,
+    memberId: string,
+  ) {
+    if (!documentId) return;
+  }
+
   useEffect(() => {
-    
+    setMembersLoading(true);
     if (!user || !documentId) {
       setMembers([]);
+      setMembersLoading(false);
       return;
     }
 
@@ -64,6 +74,8 @@ function ManageMembersModal({
       } catch (err) {
         console.log(err);
         toast.error("Couldn't fetch members");
+      } finally {
+        setMembersLoading(false);
       }
     }
 
@@ -98,7 +110,9 @@ function ManageMembersModal({
           <p className="shareSubtitle">Edit members and their permission.</p>
 
           <div className="MembersContainer">
-            {members.length === 0 ? (
+            {membersLoading ? (
+              <p className="membersMessage">Loading Members...</p>
+            ) : members.length === 0 ? (
               <p className="membersMessage">No members yet...</p>
             ) : (
               members.map((member) => (
@@ -107,6 +121,9 @@ function ManageMembersModal({
                   username={member.user.username}
                   email={member.user.email}
                   role={member.role}
+                  // onUpdate={(newRole) =>
+                  //   updateMember(member.id, member.user.email, newRole)
+                  // }
                 />
               ))
             )}
