@@ -11,8 +11,17 @@ type ManageMemberProps = {
 function ManageMember({ username, email, role, onUpdate }: ManageMemberProps) {
   const [isUpdating, setIsUpdating] = useState(false);
 
-  async function handleRoleChange(e:React.ChangeEvent<HTMLSelectElement>){
-    
+  async function handleRoleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const newRole = e.target.value as "VIEWER" | "EDITOR";
+
+    if (newRole === role) return;
+
+    try {
+      setIsUpdating(true);
+      await onUpdate(newRole);
+    } finally {
+      setIsUpdating(false);
+    }
   }
 
   return (
@@ -26,8 +35,10 @@ function ManageMember({ username, email, role, onUpdate }: ManageMemberProps) {
         <select
           className="memberRoleSelect"
           name="role"
-          defaultValue={role}
+          value={role}
           aria-label={`Change ${username}'s permission`}
+          disabled={isUpdating}
+          onChange={handleRoleChange}
         >
           <option value="EDITOR">Editor</option>
           <option value="VIEWER">Viewer</option>
@@ -38,6 +49,7 @@ function ManageMember({ username, email, role, onUpdate }: ManageMemberProps) {
           className="memberRemoveButton"
           aria-label={`Remove ${username}`}
           title="Remove access"
+          disabled={isUpdating}
         >
           <Trash size={15} strokeWidth={1.8} />
         </button>

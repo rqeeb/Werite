@@ -46,11 +46,35 @@ function ManageMembersModal({
   }
 
   async function updateMember(
-    newRole: "EDITOR" | "VIEWER",
-    email: string,
     memberId: string,
+    email: string,
+    newRole: "EDITOR" | "VIEWER",
   ) {
     if (!documentId) return;
+
+    try {
+      await axios.post(
+        `http://localhost:2021/api/document/${documentId}/members`,
+        {
+          email,
+          role: newRole,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      setMembers((p) =>
+        p.map((member) =>
+          member.id === memberId ? { ...member, role: newRole } : member,
+        ),
+      );
+
+      toast.success("Permission updated");
+    } catch (error) {
+      console.log(error);
+      toast.error("Couldn't update permission");
+    }
   }
 
   useEffect(() => {
@@ -121,9 +145,9 @@ function ManageMembersModal({
                   username={member.user.username}
                   email={member.user.email}
                   role={member.role}
-                  // onUpdate={(newRole) =>
-                  //   updateMember(member.id, member.user.email, newRole)
-                  // }
+                  onUpdate={(newRole) =>
+                    updateMember(member.id, member.user.email, newRole)
+                  }
                 />
               ))
             )}
