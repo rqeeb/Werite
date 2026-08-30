@@ -384,4 +384,67 @@ router.get("/:id/members", authMiddleware, async (req, res) => {
     });
   }
 });
+
+router.get("/:id/members/:memberId", authMiddleware, async (req, res) => {
+  if (!req.userId) {
+    return res.status(401).json({
+      error: "User not authenticated",
+    });
+  }
+
+  const { id: documentId, memberId } = req.params;
+
+  if (typeof documentId !== "string") {
+    return res.status(401).json({
+      error: "Invalid document ID type",
+    });
+  }
+  if (typeof memberId !== "string") {
+    return res.status(401).json({
+      error: "Invalid member ID type",
+    });
+  }
+
+  try {
+    const document = await prisma.document.findFirst({
+      where: {
+        id: documentId,
+        ownerId: req.userId,
+      },
+    });
+    if (!document) {
+      return res.status(403).json({
+        error: "Only the owner can remove member",
+      });
+    }
+
+    const membership = await prisma.documentMember.findFirst({
+      where: {
+        id: memberId,
+        documentId,
+      },
+    });
+
+    if (!membership) {
+      return res.status(404).json({
+        error: "Member not found",
+      });
+    }
+
+    await prisma.documentMember.delete({
+      where: {
+        id: membership.id,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Member removed",
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+});
 export default router;
