@@ -77,6 +77,27 @@ function ManageMembersModal({
     }
   }
 
+  async function removeMember(memberId: string) {
+    if (!documentId) return;
+    try {
+      await axios.delete(
+        `http://localhost:2021/api/document/${documentId}/members/${memberId}`,
+        {
+          withCredentials: true,
+        },
+      );
+
+      setMembers((previousMembers) =>
+        previousMembers.filter((member) => member.id !== memberId),
+      );
+
+      toast.success("Member removed");
+    } catch (err) {
+      console.log(err);
+      toast.error("Couldn't remove member");
+    }
+  }
+
   useEffect(() => {
     setMembersLoading(true);
     if (!user || !documentId) {
@@ -148,6 +169,7 @@ function ManageMembersModal({
                   onUpdate={(newRole) =>
                     updateMember(member.id, member.user.email, newRole)
                   }
+                  onRemove={()=>removeMember(member.id)}
                 />
               ))
             )}

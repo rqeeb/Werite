@@ -6,10 +6,18 @@ type ManageMemberProps = {
   email: string;
   role: "VIEWER" | "EDITOR";
   onUpdate: (newRole: "VIEWER" | "EDITOR") => Promise<void>;
+  onRemove: () => Promise<void>;
 };
 
-function ManageMember({ username, email, role, onUpdate }: ManageMemberProps) {
+function ManageMember({
+  username,
+  email,
+  role,
+  onUpdate,
+  onRemove,
+}: ManageMemberProps) {
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   async function handleRoleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newRole = e.target.value as "VIEWER" | "EDITOR";
@@ -22,6 +30,21 @@ function ManageMember({ username, email, role, onUpdate }: ManageMemberProps) {
     } finally {
       setIsUpdating(false);
     }
+  }
+
+  async function handleRemove() {
+    setIsDeleting(true);
+    const confirmed = window.confirm(
+      `Remove ${username}'s access to this document?`,
+    );
+
+    if (!confirmed) {
+      setIsDeleting(false);
+      return;
+    }
+
+    await onRemove();
+    setIsDeleting(false);
   }
 
   return (
@@ -49,9 +72,14 @@ function ManageMember({ username, email, role, onUpdate }: ManageMemberProps) {
           className="memberRemoveButton"
           aria-label={`Remove ${username}`}
           title="Remove access"
-          disabled={isUpdating}
+          disabled={isUpdating || isDeleting}
+          onClick={handleRemove}
         >
-          <Trash size={15} strokeWidth={1.8} />
+          {isDeleting ? (
+            <span className="deleteSpinner" />
+          ) : (
+            <Trash size={15} strokeWidth={1.8} />
+          )}
         </button>
       </div>
     </div>

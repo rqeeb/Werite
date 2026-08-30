@@ -552,3 +552,14 @@
   color: #1f2937;
   background: white;
 }
+
+.deleteSpinner {
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid rgba(128, 128, 128, 0.3);
+  border-top-color: #aaa;
+  border-radius: 50%;
+
+  animation: spin 0.65s linear infinite;
+}

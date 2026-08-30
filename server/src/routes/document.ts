@@ -385,7 +385,7 @@ router.get("/:id/members", authMiddleware, async (req, res) => {
   }
 });
 
-router.get("/:id/members/:memberId", authMiddleware, async (req, res) => {
+router.delete("/:id/members/:memberId", authMiddleware, async (req, res) => {
   if (!req.userId) {
     return res.status(401).json({
       error: "User not authenticated",
