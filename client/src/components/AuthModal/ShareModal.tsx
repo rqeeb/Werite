@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import "./modal.css";
 import { useState } from "react";
-import axios from "axios";
+import {api} from "../../lib/api";
 import { toast } from "react-toastify";
 
 type SignupModalProps = {
@@ -60,8 +60,8 @@ function ShareModal({
 
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        `http://localhost:2021/api/document/${documentId}/members`,
+      const response = await api.post(
+        `/api/document/${documentId}/members`,
         {
           email,
           role,

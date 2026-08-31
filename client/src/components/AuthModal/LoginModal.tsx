@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import "./modal.css";
 import { useState } from "react";
-import axios from "axios";
+import { api } from "../../lib/api";
 import { toast } from "react-toastify";
 
 type User = {
@@ -66,8 +66,8 @@ function LoginModal({
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:2021/auth/login",
+      const response = await api.post(
+        "/auth/login",
         {
           email: email.trim(),
           password,

@@ -1,7 +1,7 @@
 import { ArrowLeft, User, X } from "lucide-react";
 import "./modal.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import {api} from "../../lib/api";
 import { toast } from "react-toastify";
 import ManageUser from "./ManageMember";
 
@@ -53,8 +53,8 @@ function ManageMembersModal({
     if (!documentId) return;
 
     try {
-      await axios.post(
-        `http://localhost:2021/api/document/${documentId}/members`,
+      await api.post(
+        `/api/document/${documentId}/members`,
         {
           email,
           role: newRole,
@@ -80,8 +80,8 @@ function ManageMembersModal({
   async function removeMember(memberId: string) {
     if (!documentId) return;
     try {
-      await axios.delete(
-        `http://localhost:2021/api/document/${documentId}/members/${memberId}`,
+      await api.delete(
+        `/api/document/${documentId}/members/${memberId}`,
         {
           withCredentials: true,
         },
@@ -108,8 +108,8 @@ function ManageMembersModal({
 
     async function fetchMembers() {
       try {
-        const fetchedMembs = await axios.get(
-          `http://localhost:2021/api/document/${documentId}/members`,
+        const fetchedMembs = await api.get(
+          `/api/document/${documentId}/members`,
           {
             withCredentials: true,
           },
@@ -169,7 +169,7 @@ function ManageMembersModal({
                   onUpdate={(newRole) =>
                     updateMember(member.id, member.user.email, newRole)
                   }
-                  onRemove={()=>removeMember(member.id)}
+                  onRemove={() => removeMember(member.id)}
                 />
               ))
             )}

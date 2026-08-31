@@ -7,7 +7,7 @@ import SignupModal from "./components/AuthModal/SignupModal";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShareModal from "./components/AuthModal/ShareModal";
-import axios from "axios";
+import { api } from "./lib/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import ManageUsersModal from "./components/AuthModal/ManageMemberModal";
@@ -67,7 +67,7 @@ export function App() {
     async function checkAuth() {
       try {
         // setCheckAuthLoading(true);
-        const response = await axios.get("http://localhost:2021/auth/me", {
+        const response = await api.get("/auth/me", {
           withCredentials: true,
         });
 
@@ -100,8 +100,8 @@ export function App() {
     setIsSaving("saving");
     const timeout = setTimeout(async () => {
       try {
-        await axios.patch(
-          `http://localhost:2021/api/document/${documentId}`,
+        await api.patch(
+          `/api/document/${documentId}`,
           {
             title: heading,
             content: paragraph,
@@ -129,8 +129,8 @@ export function App() {
     async function loadDocument() {
       try {
         setIsDocumentLoading(true);
-        const response = await axios.get(
-          `http://localhost:2021/api/document/${documentId}`,
+        const response = await api.get(
+          `/api/document/${documentId}`,
           {
             withCredentials: true,
           },
@@ -159,8 +159,8 @@ export function App() {
 
     async function createDocument() {
       try {
-        const response = await axios.post(
-          "http://localhost:2021/api/document",
+        const response = await api.post(
+          "/api/document",
           {
             title: heading,
             content: paragraph,

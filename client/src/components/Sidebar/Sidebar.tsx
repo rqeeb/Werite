@@ -2,7 +2,7 @@ import { Library, Plus, Search } from "lucide-react";
 import "./Sidebar.css";
 import { SidebarDocument } from "./SidebarDocument";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import {api} from "../../lib/api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -57,8 +57,8 @@ export function Sidebar({
       try {
         setDocumentsLoading(true);
 
-        const fetchedDocs = await axios.get(
-          "http://localhost:2021/api/document",
+        const fetchedDocs = await api.get(
+          "/api/document",
           {
             withCredentials: true,
           },
@@ -86,7 +86,7 @@ export function Sidebar({
 
   async function onDelete(id: string) {
     try {
-      await axios.delete(`http://localhost:2021/api/document/${id}`, {
+      await api.delete(`/api/document/${id}`, {
         withCredentials: true,
       });
 
