@@ -48,7 +48,7 @@ export function SidebarDocument({
         {title.trim() || "Untitled"}
       </button>
 
-      {isOwner && (
+      {/* {isOwner && (
         <button
           type="button"
           className={`deleteDocumentButton ${isDeleteLoading ? "loading" : ""} user`}
@@ -57,7 +57,7 @@ export function SidebarDocument({
         >
           <Users size={15} />
         </button>
-      )}
+      )} */}
 
       {isOwner && (
         <button
@@ -75,11 +75,11 @@ export function SidebarDocument({
         </button>
       )}
 
-      {/* {!isOwner && (
+      {!isOwner && (
         <span className={`sharedLabel  ${isDark ? "light" : "dark"}`}>
           Shared
         </span>
-      )} */}
+      )}
     </div>
   );
 }

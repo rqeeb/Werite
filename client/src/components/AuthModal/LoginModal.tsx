@@ -87,7 +87,7 @@ function LoginModal({
   }
 
   return (
-    <div className="modalBackdrop">
+    <div className="modalBackdrop" onClick={onClose}>
       <div
         className={`loginModal ${isDark ? "dark" : "light"}`}
         onClick={(e) => e.stopPropagation()}

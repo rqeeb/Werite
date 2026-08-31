@@ -70,7 +70,7 @@ function SignupModal({ onClose, isDark, switchTab }: SignupModalProps) {
   }
 
   return (
-    <div className="modalBackdrop">
+    <div className="modalBackdrop" onClick={onClose}>
       <div
         className={`loginModal ${isDark ? "dark" : "light"}`}
         onClick={(e) => e.stopPropagation()}
