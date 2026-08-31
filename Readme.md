@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <img src="./client/Assets/logo.svg" alt="Werite logo" width="36" height="36" valign="middle" />
+    <img src="./assets/logo.svg" alt="Werite logo" width="36" height="36" valign="middle" />
     Werite
   </h1>
 
@@ -30,8 +30,8 @@ When you need to collaborate, create an account and share documents with other p
 
 ## Screenshots
 
-![Werite editor in dark mode](./client/Assets/image.png)
-![Werite editor in light mode](./client/Assets/image2.png)
+![Werite editor in dark mode](./assets/image.png)
+![Werite editor in light mode](./assets/image2.png)
 
 ## Built With
 
