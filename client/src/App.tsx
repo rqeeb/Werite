@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { TextArea } from "./components/TextArea";
 import "./index.css";
@@ -46,6 +46,8 @@ export function App() {
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
   const [canEdit, setCanEdit] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
+  const [loadedDocumentId, setLoadedDocumentId] = useState<string | null>(null);
+  const loadRequestId = useRef(0);
 
   useEffect(() => {
     document.body.style.backgroundColor = isDark
@@ -89,7 +91,13 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (!documentId || !user || isDocumentLoading || !canEdit) {
+    if (
+      !documentId ||
+      !user ||
+      isDocumentLoading ||
+      !canEdit ||
+      loadedDocumentId !== documentId
+    ) {
       return;
     }
 
@@ -118,23 +126,36 @@ export function App() {
     }, 800);
 
     return () => clearTimeout(timeout);
-  }, [heading, paragraph, documentId, user, isDocumentLoading, canEdit]);
+  }, [
+    heading,
+    paragraph,
+    documentId,
+    user,
+    isDocumentLoading,
+    canEdit,
+    loadedDocumentId,
+  ]);
 
   useEffect(() => {
     // console.log("new load start")
     if (!documentId || !user) {
+      setLoadedDocumentId(null);
       return;
     }
 
     async function loadDocument() {
+      const requestId = ++loadRequestId.current;
+
+      setIsDocumentLoading(true);
+      setLoadedDocumentId(null);
+
+      setCanEdit(false);
+      setIsOwner(false);
+
       try {
-        setIsDocumentLoading(true);
-        const response = await api.get(
-          `/api/document/${documentId}`,
-          {
-            withCredentials: true,
-          },
-        );
+        const response = await api.get(`/api/document/${documentId}`);
+
+        if (requestId !== loadRequestId.current) return;
 
         setCanEdit(response.data.canEdit);
         setIsOwner(response.data.isOwner);
@@ -142,10 +163,14 @@ export function App() {
         // console.log(response.data.canEdit);
         setHeading(response.data.document.title);
         setParagraph(response.data.document.content);
+        setLoadedDocumentId(documentId!);
       } catch (error) {
         console.log(error);
+        toast.error("Couldn't load document");
       } finally {
-        setIsDocumentLoading(false);
+        if (requestId === loadRequestId.current) {
+          setIsDocumentLoading(false);
+        }
       }
     }
 
