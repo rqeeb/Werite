@@ -1,8 +1,14 @@
-# Werite
+<div align="center">
+  <h1>
+    <img src="./client/Assets/logo.svg" alt="Werite logo" width="36" height="36" valign="middle" />
+    Werite
+  </h1>
 
-> A minimal, collaborative space for notes, ideas, and drafts.
+  <p>A minimal, collaborative space for notes, ideas, and drafts.</p>
 
-[Open Werite](https://werite.app)
+<a href="https://werite.app"><strong>Open Werite »</strong></a>
+
+</div>
 
 ## About
 
@@ -24,8 +30,8 @@ When you need to collaborate, create an account and share documents with other p
 
 ## Screenshots
 
-![Werite editor in dark mode](./assets/screenshots/image.png)
-![Werite editor in light mode](./assets/screenshots/image2.png)
+![Werite editor in dark mode](./client/Assets/image.png)
+![Werite editor in light mode](./client/Assets/image2.png)
 
 ## Built With
 
@@ -50,24 +56,17 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Visit [werite.app](https://werite.app) to try the current version
 
-
 [React.dev]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://react.dev/
-
 [TypeScript.dev]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
-
 [Bun.dev]: https://img.shields.io/badge/Bun-000000?style=for-the-badge&logo=bun&logoColor=white
 [Bun-url]: https://bun.sh/
-
 [Express.dev]: https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white
 [Express-url]: https://expressjs.com/
-
 [Prisma.dev]: https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white
 [Prisma-url]: https://www.prisma.io/
-
 [PostgreSQL.dev]: https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white
 [PostgreSQL-url]: https://www.postgresql.org/
-
 [Lucide.dev]: https://img.shields.io/badge/Lucide-000000?style=for-the-badge&logo=lucide&logoColor=white
 [Lucide-url]: https://lucide.dev/
