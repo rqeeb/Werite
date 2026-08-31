@@ -24,6 +24,11 @@ export function SidebarDocument({
     try {
       setIsDeleteLoading(true);
 
+      const confirmed = window.confirm(
+        "Delete this document permanently? This cannot be undone."
+      )
+      if(!confirmed) return;
+
       await onDelete();
     } catch (e) {
       console.log(e);
@@ -70,11 +75,11 @@ export function SidebarDocument({
         </button>
       )}
 
-      {!isOwner && (
+      {/* {!isOwner && (
         <span className={`sharedLabel  ${isDark ? "light" : "dark"}`}>
           Shared
         </span>
-      )}
+      )} */}
     </div>
   );
 }
