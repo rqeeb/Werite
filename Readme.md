@@ -12,7 +12,7 @@
 
 ## About
 
-Werite is a minemal document editor built for writing without the clutter. You can start writing without an account; your anonymous document is saved locally in your browser.
+Werite is a minimal document editor built for writing without the clutter. You can start writing without an account; your anonymous document is saved locally in your browser.
 
 When you need to collaborate, create an account and share documents with other people. Owners can invite members, choose whether they can edit or only view, change their role later, or remove their access.
 
