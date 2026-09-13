@@ -1,7 +1,7 @@
 <div align="center">
   <h1>
     <img src="./assets/logo.svg" alt="Werite logo" width="36" height="36" valign="middle" />
-    Werite
+    Werite [Beta 0.1]
   </h1>
 
   <p>A minimal, collaborative space for notes, ideas, and drafts.</p>
